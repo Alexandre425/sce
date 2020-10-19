@@ -285,17 +285,15 @@ void main(void)
 
 		NOP();
 		c = tsttc();
-		//        hc = (c / 10);
-		//        lc = (c % 10);
 		LCDcmd(0x80);
 		LCDstr("Temp");
+		LCDcmd(0x85);
+		sprintf(buf, "Clock %02d", counter);
+		LCDstr(buf);
 		LCDcmd(0xc0);
-		//        LCDchar(hc + 48);LCDchar(lc + 48);LCDchar(' ');LCDchar('C');
 		sprintf(buf, "%02d C", c);
 		LCDstr(buf);
 		LCDcmd(0x81);
-		//    LCDchar('A');
-		//    LCDcmd(0x81);
 		c1 = LCDrecv(0);
 		c2 = LCDrecv(LCD_RS);
 		LCDcmd(0xc8);
