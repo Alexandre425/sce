@@ -1,0 +1,1 @@
+ build/free/production/Labs/Lab01_HelloWorld/HelloWorld.d  build/free/production/Labs/Lab01_HelloWorld/HelloWorld.p1:  Labs/Lab01_HelloWorld/HelloWorld.c Labs/Lab01_HelloWorld/../../labs.h Labs/Lab01_HelloWorld/../../mcc_generated_files/pin_manager.h
