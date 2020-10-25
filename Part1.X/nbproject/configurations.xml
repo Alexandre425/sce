@@ -23,6 +23,16 @@
       <logicalFolder name="f1" displayName="Timers" projectFiles="true">
         <itemPath>timers/wdt.h</itemPath>
       </logicalFolder>
+      <logicalFolder name="f2" displayName="peripherals" projectFiles="true">
+        <logicalFolder name="f1" displayName="New Folder 1" projectFiles="true">
+        </logicalFolder>
+        <itemPath>peripherals/lcd.h</itemPath>
+        <itemPath>peripherals/lcd.c</itemPath>
+        <itemPath>peripherals/temp_sensor.h</itemPath>
+      </logicalFolder>
+      <logicalFolder name="f1" displayName="timers" projectFiles="true">
+        <itemPath>timers/wdt.h</itemPath>
+      </logicalFolder>
     </logicalFolder>
     <logicalFolder name="LinkerScript"
                    displayName="Linker Files"
@@ -46,6 +56,11 @@
         <itemPath>mcc_generated_files/i2c1_driver.c</itemPath>
         <itemPath>mcc_generated_files/interrupt_manager.c</itemPath>
         <itemPath>mcc_generated_files/adcc.c</itemPath>
+      </logicalFolder>
+      <logicalFolder name="f2" displayName="peripherals" projectFiles="true">
+        <itemPath>peripherals/temp_sensor.c</itemPath>
+      </logicalFolder>
+      <logicalFolder name="f1" displayName="timers" projectFiles="true">
       </logicalFolder>
       <itemPath>main.c</itemPath>
     </logicalFolder>
@@ -71,7 +86,7 @@
         <platformTool>PKOBSKDEPlatformTool</platformTool>
         <languageToolchain>XC8</languageToolchain>
         <languageToolchainVersion>2.30</languageToolchainVersion>
-        <platform>3</platform>
+        <platform>2</platform>
       </toolsSet>
       <packs>
         <pack name="PIC16F1xxxx_DFP" vendor="Microchip" version="1.4.119"/>
