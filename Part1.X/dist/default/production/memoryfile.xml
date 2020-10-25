@@ -1,6 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project>
+<<<<<<< HEAD
   <executable name="dist/default/production/Part1.X.production.hex">
+=======
+  <executable name="dist/default/production\Part1.X.production.hex">
+>>>>>>> c04e9aa6cdac962789ab27ebea65de052400b592
     <memory name="program">
       <units>words</units>
       <length>8192</length>

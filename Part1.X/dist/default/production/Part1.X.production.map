@@ -2,10 +2,17 @@ Microchip MPLAB XC8 Compiler V2.30
 
 Linker command line:
 
+<<<<<<< HEAD
 -W-3 --edf=/opt/microchip/xc8/v2.30/pic/dat/en_msgs.txt -cn \
   -h+dist/default/production/Part1.X.production.sym \
   --cmf=dist/default/production/Part1.X.production.cmf -z -Q16F18875 \
   -o/tmp/xcXOCgNKk --defsym=__MPLAB_BUILD=1 \
+=======
+-W-3 --edf=C:\Program Files\Microchip\xc8\v2.30\pic\dat\en_msgs.txt -cn \
+  -h+dist/default/production\Part1.X.production.sym \
+  --cmf=dist/default/production\Part1.X.production.cmf -z -Q16F18875 \
+  -oC:\Users\rafae\AppData\Local\Temp\snv8x2 --defsym=__MPLAB_BUILD=1 \
+>>>>>>> c04e9aa6cdac962789ab27ebea65de052400b592
   -Mdist/default/production/Part1.X.production.map -E1 -ver=XC8 Compiler \
   --acfsm=1493 -ASTACK=02032h-023EFh -pstack=STACK -ACODE=00h-07FFhx4 \
   -ASTRCODE=00h-01FFFh -ASTRING=00h-0FFhx32 -ACONST=00h-0FFhx32 \
@@ -31,8 +38,14 @@ Linker command line:
   -AIDLOC=08000h-08003h -DIDLOC=2 -AEEDATA=00h-0FFh/0F000h \
   -peeprom_data=EEDATA -DEEDATA=2 -DCODE=2 -DSTRCODE=2 -DSTRING=2 -DCONST=2 \
   -DENTRY=2 -preset_vec=00h,intentry=04h,init,end_init -ppowerup=CODE \
+<<<<<<< HEAD
   -pcinit=CODE -pfunctab=ENTRY -k /tmp/xcXHGFIFo.o \
   dist/default/production/Part1.X.production.o 
+=======
+  -pcinit=CODE -pfunctab=ENTRY -k \
+  C:\Users\rafae\AppData\Local\Temp\snv8xm.o \
+  dist/default/production\Part1.X.production.o 
+>>>>>>> c04e9aa6cdac962789ab27ebea65de052400b592
 
 Object code version is 3.11
 
@@ -41,11 +54,19 @@ Machine type is 16F18875
 
 
                 Name                               Link     Load   Length Selector   Space Scale
+<<<<<<< HEAD
 /tmp/xcXHGFIFo.o
                 end_init                             1C       1C        2        8       0
                 reset_vec                             0        0        2        0       0
                 config                             8007     8007        5        0       4
 dist/default/production/Part1.X.production.o
+=======
+C:\Users\rafae\AppData\Local\Temp\snv8xm.o
+                end_init                             1C       1C        2        8       0
+                reset_vec                             0        0        2        0       0
+                config                             8007     8007        5        0       4
+dist/default/production\Part1.X.production.o
+>>>>>>> c04e9aa6cdac962789ab27ebea65de052400b592
                 cinit                                1E       1E        9        8       0
                 intentry                              4        4       18        8       0
                 config                             8007     8007        5        0       4
@@ -275,6 +296,7 @@ TOTAL           Name                               Link     Load   Length     Sp
 
 SEGMENTS        Name                           Load    Length   Top    Selector   Space  Class     Delta
 
+<<<<<<< HEAD
                 text7                          000FE2  00000C  000FEE      1FC4       0  CODE        2
                 stringtext3                    001000  00002B  00102B      2000       0  STRCODE     2
                 text8                          000FD8  00000A  000FE2      1FB0       0  CODE        2
@@ -288,6 +310,21 @@ SEGMENTS        Name                           Load    Length   Top    Selector 
                 cstackBANK0                    000020  000032  000052        20       1  BANK0       1
                 cstackCOMMON                   000070  00000E  00007E        70       1  COMMON      1
                 intentry                       000004  0007E4  0007E8         8       0  CODE        2
+=======
+                reset_vec                      000000  000002  000002         0       0  CODE        2
+                intentry                       000004  0007E4  0007E8         8       0  CODE        2
+                cstackBANK0                    000020  000032  000052        20       1  BANK0       1
+                cstackCOMMON                   000070  00000E  00007E        70       1  COMMON      1
+                stringtext2                    0007E8  000019  000801       FD0       0  STRCODE     2
+                text18                         000FB8  000007  000FBF      1F70       0  CODE        2
+                text13                         000FBF  000008  000FC7      1F7E       0  CODE        2
+                text9                          000FC7  000008  000FCF      1F8E       0  CODE        2
+                text11                         000FCF  000009  000FD8      1F9E       0  CODE        2
+                text8                          000FD8  00000A  000FE2      1FB0       0  CODE        2
+                text7                          000FE2  00000C  000FEE      1FC4       0  CODE        2
+                text3                          000FEE  000012  001000      1FDC       0  CODE        2
+                stringtext3                    001000  00002B  00102B      2000       0  STRCODE     2
+>>>>>>> c04e9aa6cdac962789ab27ebea65de052400b592
 
 
 UNUSED ADDRESS RANGES
@@ -768,7 +805,11 @@ _i2c1_driver_busCollisionISR         bssBANK0     00050
 _i2c1_driver_i2cISR                  bssBANK0     0004E
 _i2c1_driver_open                    text7        00FE2
 _isdigit                             text3        00FEE
+<<<<<<< HEAD
 _isdigit$1693                        cstackCOMMON 00070
+=======
+_isdigit$1516                        cstackCOMMON 00070
+>>>>>>> c04e9aa6cdac962789ab27ebea65de052400b592
 _main                                maintext     00544
 _sprintf                             text2        00027
 _tsttc                               text1        00384
@@ -807,7 +848,11 @@ FUNCTION INFORMATION:
 
  *************** function _main *****************
  Defined at:
+<<<<<<< HEAD
 		line 13 in file "main.c"
+=======
+		line 195 in file "main.c"
+>>>>>>> c04e9aa6cdac962789ab27ebea65de052400b592
  Parameters:    Size  Location     Type
 		None
  Auto vars:     Size  Location     Type
@@ -849,7 +894,11 @@ Total ram usage:       26 bytes
 
  *************** function _tsttc *****************
  Defined at:
+<<<<<<< HEAD
 		line 6 in file "peripherals/temp_sensor.c"
+=======
+		line 52 in file "main.c"
+>>>>>>> c04e9aa6cdac962789ab27ebea65de052400b592
  Parameters:    Size  Location     Type
 		None
  Auto vars:     Size  Location     Type
@@ -880,7 +929,11 @@ Total ram usage:        2 bytes
 
  *************** function _sprintf *****************
  Defined at:
+<<<<<<< HEAD
 		line 505 in file "/opt/microchip/xc8/v2.30/pic/sources/c90/common/doprnt.c"
+=======
+		line 505 in file "C:\Program Files\Microchip\xc8\v2.30\pic\sources\c90\common\doprnt.c"
+>>>>>>> c04e9aa6cdac962789ab27ebea65de052400b592
  Parameters:    Size  Location     Type
   sp              1    wreg     PTR unsigned char 
 		 -> main@buf(17), 
@@ -928,7 +981,11 @@ Total ram usage:       20 bytes
 
  *************** function _isdigit *****************
  Defined at:
+<<<<<<< HEAD
 		line 8 in file "/opt/microchip/xc8/v2.30/pic/sources/c90/common/isdigit.c"
+=======
+		line 8 in file "C:\Program Files\Microchip\xc8\v2.30\pic\sources\c90\common\isdigit.c"
+>>>>>>> c04e9aa6cdac962789ab27ebea65de052400b592
  Parameters:    Size  Location     Type
   c               1    wreg     unsigned char 
  Auto vars:     Size  Location     Type
@@ -958,7 +1015,11 @@ Total ram usage:        2 bytes
 
  *************** function ___wmul *****************
  Defined at:
+<<<<<<< HEAD
 		line 15 in file "/opt/microchip/xc8/v2.30/pic/sources/c90/common/Umul16.c"
+=======
+		line 15 in file "C:\Program Files\Microchip\xc8\v2.30\pic\sources\c90\common\Umul16.c"
+>>>>>>> c04e9aa6cdac962789ab27ebea65de052400b592
  Parameters:    Size  Location     Type
   multiplier      2    0[COMMON] unsigned int 
   multiplicand    2    2[COMMON] unsigned int 
@@ -989,7 +1050,11 @@ Total ram usage:        6 bytes
 
  *************** function ___lwmod *****************
  Defined at:
+<<<<<<< HEAD
 		line 5 in file "/opt/microchip/xc8/v2.30/pic/sources/c90/common/lwmod.c"
+=======
+		line 5 in file "C:\Program Files\Microchip\xc8\v2.30\pic\sources\c90\common\lwmod.c"
+>>>>>>> c04e9aa6cdac962789ab27ebea65de052400b592
  Parameters:    Size  Location     Type
   divisor         2    8[COMMON] unsigned int 
   dividend        2   10[COMMON] unsigned int 
@@ -1020,7 +1085,11 @@ Total ram usage:        6 bytes
 
  *************** function ___lwdiv *****************
  Defined at:
+<<<<<<< HEAD
 		line 5 in file "/opt/microchip/xc8/v2.30/pic/sources/c90/common/lwdiv.c"
+=======
+		line 5 in file "C:\Program Files\Microchip\xc8\v2.30\pic\sources\c90\common\lwdiv.c"
+>>>>>>> c04e9aa6cdac962789ab27ebea65de052400b592
  Parameters:    Size  Location     Type
   divisor         2    0[COMMON] unsigned int 
   dividend        2    2[COMMON] unsigned int 
@@ -1204,7 +1273,11 @@ Total ram usage:        0 bytes
 
  *************** function _LCDstr *****************
  Defined at:
+<<<<<<< HEAD
 		line 136 in file "peripherals/lcd.c"
+=======
+		line 182 in file "main.c"
+>>>>>>> c04e9aa6cdac962789ab27ebea65de052400b592
  Parameters:    Size  Location     Type
   p               2    9[COMMON] PTR unsigned char 
 		 -> main@buf(17), STR_1(5), 
@@ -1235,7 +1308,11 @@ Total ram usage:        6 bytes
 
  *************** function _LCDchar *****************
  Defined at:
+<<<<<<< HEAD
 		line 131 in file "peripherals/lcd.c"
+=======
+		line 177 in file "main.c"
+>>>>>>> c04e9aa6cdac962789ab27ebea65de052400b592
  Parameters:    Size  Location     Type
   c               1    wreg     unsigned char 
  Auto vars:     Size  Location     Type
@@ -1265,7 +1342,11 @@ Total ram usage:        1 bytes
 
  *************** function _LCDrecv *****************
  Defined at:
+<<<<<<< HEAD
 		line 16 in file "peripherals/lcd.c"
+=======
+		line 95 in file "main.c"
+>>>>>>> c04e9aa6cdac962789ab27ebea65de052400b592
  Parameters:    Size  Location     Type
   mode            1    wreg     unsigned char 
  Auto vars:     Size  Location     Type
@@ -1323,14 +1404,23 @@ Total ram usage:        1 bytes
  This function calls:
 		Nothing
  This function is called by:
+<<<<<<< HEAD
 		_LCDrecv
 		_tsttc
+=======
+		_tsttc
+		_LCDrecv
+>>>>>>> c04e9aa6cdac962789ab27ebea65de052400b592
  This function uses a non-reentrant model
 
 
  *************** function _LCDinit *****************
  Defined at:
+<<<<<<< HEAD
 		line 95 in file "peripherals/lcd.c"
+=======
+		line 149 in file "main.c"
+>>>>>>> c04e9aa6cdac962789ab27ebea65de052400b592
  Parameters:    Size  Location     Type
 		None
  Auto vars:     Size  Location     Type
@@ -1361,7 +1451,11 @@ Total ram usage:        1 bytes
 
  *************** function _LCDsend *****************
  Defined at:
+<<<<<<< HEAD
 		line 5 in file "peripherals/lcd.c"
+=======
+		line 87 in file "main.c"
+>>>>>>> c04e9aa6cdac962789ab27ebea65de052400b592
  Parameters:    Size  Location     Type
   c               1    wreg     unsigned char 
  Auto vars:     Size  Location     Type
@@ -1391,7 +1485,11 @@ Total ram usage:        2 bytes
 
  *************** function _LCDcmd *****************
  Defined at:
+<<<<<<< HEAD
 		line 126 in file "peripherals/lcd.c"
+=======
+		line 172 in file "main.c"
+>>>>>>> c04e9aa6cdac962789ab27ebea65de052400b592
  Parameters:    Size  Location     Type
   c               1    wreg     unsigned char 
  Auto vars:     Size  Location     Type
@@ -1421,7 +1519,11 @@ Total ram usage:        1 bytes
 
  *************** function _LCDsend2x4 *****************
  Defined at:
+<<<<<<< HEAD
 		line 64 in file "peripherals/lcd.c"
+=======
+		line 126 in file "main.c"
+>>>>>>> c04e9aa6cdac962789ab27ebea65de052400b592
  Parameters:    Size  Location     Type
   c               1    wreg     unsigned char 
   mode            1    2[COMMON] unsigned char 
@@ -1480,10 +1582,17 @@ Total ram usage:        2 bytes
  This function calls:
 		Nothing
  This function is called by:
+<<<<<<< HEAD
 		_LCDsend
 		_LCDrecv
 		_LCDsend2x4
 		_tsttc
+=======
+		_tsttc
+		_LCDsend
+		_LCDrecv
+		_LCDsend2x4
+>>>>>>> c04e9aa6cdac962789ab27ebea65de052400b592
  This function uses a non-reentrant model
 
 
@@ -1520,6 +1629,7 @@ Total ram usage:        0 bytes
 MODULE INFORMATION
 
 Module		Function		Class		Link	Load	Size
+<<<<<<< HEAD
 /opt/microchip/xc8/v2.30/pic/sources/c90/common/lwmod.c
 		___lwmod       		CODE           	0760	0000	52
 
@@ -1529,12 +1639,19 @@ Module		Function		Class		Link	Load	Size
 		___wmul        		CODE           	0794	0000	31
 
 /opt/microchip/xc8/v2.30/pic/sources/c90/common/Umul16.c estimated size: 31
+=======
+C:\Program Files\Microchip\xc8\v2.30\pic\sources\c90\common\lwmod.c
+		___lwmod       		CODE           	0760	0000	52
+
+C:\Program Files\Microchip\xc8\v2.30\pic\sources\c90\common\lwmod.c estimated size: 52
+>>>>>>> c04e9aa6cdac962789ab27ebea65de052400b592
 
 mcc_generated_files/interrupt_manager.c
 		_INTERRUPT_InterruptManager		CODE           	0004	0000	24
 
 mcc_generated_files/interrupt_manager.c estimated size: 24
 
+<<<<<<< HEAD
 peripherals/lcd.c
 		_LCDinit       		CODE           	05EA	0000	113
 		_LCDsend       		CODE           	06A6	0000	67
@@ -1546,17 +1663,28 @@ peripherals/lcd.c
 
 peripherals/lcd.c estimated size: 727
 
+=======
+>>>>>>> c04e9aa6cdac962789ab27ebea65de052400b592
 mcc_generated_files/pin_manager.c
 		_PIN_MANAGER_Initialize		CODE           	0725	0000	59
 
 mcc_generated_files/pin_manager.c estimated size: 59
 
+<<<<<<< HEAD
+=======
+C:\Program Files\Microchip\xc8\v2.30\pic\sources\c90\common\lwdiv.c
+		___lwdiv       		CODE           	06E9	0000	60
+
+C:\Program Files\Microchip\xc8\v2.30\pic\sources\c90\common\lwdiv.c estimated size: 60
+
+>>>>>>> c04e9aa6cdac962789ab27ebea65de052400b592
 I2C/i2c.c
 		_ReadI2C       		CODE           	07CE	0000	26
 		_WriteI2C      		CODE           	065B	0000	75
 
 I2C/i2c.c estimated size: 101
 
+<<<<<<< HEAD
 /opt/microchip/xc8/v2.30/pic/sources/c90/common/isdigit.c
 		_isdigit       		CODE           	0FEE	0000	18
 
@@ -1566,6 +1694,17 @@ I2C/i2c.c estimated size: 101
 		___lwdiv       		CODE           	06E9	0000	60
 
 /opt/microchip/xc8/v2.30/pic/sources/c90/common/lwdiv.c estimated size: 60
+=======
+C:\Program Files\Microchip\xc8\v2.30\pic\sources\c90\common\isdigit.c
+		_isdigit       		CODE           	0FEE	0000	18
+
+C:\Program Files\Microchip\xc8\v2.30\pic\sources\c90\common\isdigit.c estimated size: 18
+
+C:\Program Files\Microchip\xc8\v2.30\pic\sources\c90\common\doprnt.c
+		_sprintf       		CODE           	0027	0000	535
+
+C:\Program Files\Microchip\xc8\v2.30\pic\sources\c90\common\doprnt.c estimated size: 535
+>>>>>>> c04e9aa6cdac962789ab27ebea65de052400b592
 
 shared
 		_dpowers       		STRCODE        	100B	0000	10
@@ -1574,6 +1713,14 @@ shared
 
 shared estimated size: 23
 
+<<<<<<< HEAD
+=======
+C:\Program Files\Microchip\xc8\v2.30\pic\sources\c90\common\Umul16.c
+		___wmul        		CODE           	0794	0000	31
+
+C:\Program Files\Microchip\xc8\v2.30\pic\sources\c90\common\Umul16.c estimated size: 31
+
+>>>>>>> c04e9aa6cdac962789ab27ebea65de052400b592
 mcc_generated_files/mcc.c
 		_PMD_Initialize		CODE           	0FC7	0000	8
 		_OSCILLATOR_Initialize		CODE           	0FCF	0000	9
@@ -1586,6 +1733,7 @@ mcc_generated_files/i2c1_driver.c
 
 mcc_generated_files/i2c1_driver.c estimated size: 12
 
+<<<<<<< HEAD
 peripherals/temp_sensor.c
 		_tsttc         		CODE           	0384	0000	269
 
@@ -1600,4 +1748,18 @@ main.c
 		_main          		CODE           	0544	0000	166
 
 main.c estimated size: 166
+=======
+main.c
+		_LCDinit       		CODE           	05EA	0000	113
+		_LCDsend       		CODE           	06A6	0000	67
+		_LCDsend2x4    		CODE           	0491	0000	179
+		_main          		CODE           	0544	0000	166
+		_LCDstr        		CODE           	07B3	0000	27
+		_LCDchar       		CODE           	0FBF	0000	8
+		_LCDrecv       		CODE           	023E	0000	326
+		_tsttc         		CODE           	0384	0000	269
+		_LCDcmd        		CODE           	0FB8	0000	7
+
+main.c estimated size: 1162
+>>>>>>> c04e9aa6cdac962789ab27ebea65de052400b592
 

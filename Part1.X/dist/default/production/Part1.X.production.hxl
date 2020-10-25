@@ -6,7 +6,11 @@
   2056h - 1000Dh
   10018h - 1003Fh
   
+<<<<<<< HEAD
  dist/default/production/Part1.X.production.hex ranges:
+=======
+ dist/default/production\Part1.X.production.hex ranges:
+>>>>>>> c04e9aa6cdac962789ab27ebea65de052400b592
   0h - 3h
   8h - 1001h
   1F70h - 2055h
@@ -23,7 +27,11 @@
   T = Trailing code
   & = Find & replace opcode
   X = Find & delete opcode
+<<<<<<< HEAD
   1 = dist/default/production/Part1.X.production.hex
+=======
+  1 = dist/default/production\Part1.X.production.hex
+>>>>>>> c04e9aa6cdac962789ab27ebea65de052400b592
 00000000: 1111----11111111111111111111111111111111111111111111111111111111
 00000040: 1111111111111111111111111111111111111111111111111111111111111111
 00000080: 1111111111111111111111111111111111111111111111111111111111111111

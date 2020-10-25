@@ -3,6 +3,7 @@
 [d edition pro ]
 [d chip 16F18875 ]
 [d frameptr 6 ]
+<<<<<<< HEAD
 "505 /opt/microchip/xc8/v2.30/pic/sources/c90/common/doprnt.c
 [v _sprintf sprintf `(i  1 e 2 0 ]
 "8 /opt/microchip/xc8/v2.30/pic/sources/c90/common/isdigit.c
@@ -32,11 +33,59 @@
 "52 /home/alexandre/Desktop/ist/sce/Part1.X/mcc_generated_files/interrupt_manager.c
 [v _INTERRUPT_InterruptManager INTERRUPT_InterruptManager `II(v  1 e 1 0 ]
 "50 /home/alexandre/Desktop/ist/sce/Part1.X/mcc_generated_files/mcc.c
+=======
+"505 C:\Program Files\Microchip\xc8\v2.30\pic\sources\c90\common\doprnt.c
+[v _sprintf sprintf `(i  1 e 2 0 ]
+"8 C:\Program Files\Microchip\xc8\v2.30\pic\sources\c90\common\isdigit.c
+[v _isdigit isdigit `(b  1 e 0 0 ]
+"5 C:\Program Files\Microchip\xc8\v2.30\pic\sources\c90\common\lwdiv.c
+[v ___lwdiv __lwdiv `(ui  1 e 2 0 ]
+"5 C:\Program Files\Microchip\xc8\v2.30\pic\sources\c90\common\lwmod.c
+[v ___lwmod __lwmod `(ui  1 e 2 0 ]
+"10 C:\Program Files\Microchip\xc8\v2.30\pic\sources\c90\common\sprcadd.c
+[v ___fladd __fladd `(d  1 e 4 0 ]
+"15 C:\Program Files\Microchip\xc8\v2.30\pic\sources\c90\common\Umul16.c
+[v ___wmul __wmul `(ui  1 e 2 0 ]
+"4 C:\Program Files\Microchip\xc8\v2.30\pic\sources\c90\common\Umul8_16.c
+[v __Umul8_16 _Umul8_16 `(ui  1 e 2 0 ]
+"6 C:\Program Files\Microchip\xc8\v2.30\pic\sources\c90\pic\__eeprom.c
+[v ___eecpymem __eecpymem `(v  1 e 1 0 ]
+"39
+[v ___memcpyee __memcpyee `(v  1 e 1 0 ]
+"32 C:\Users\rafae\Documents\GitHub\sce\Part1.X\I2C/i2c.c
+[v _ReadI2C ReadI2C `(uc  1 e 1 0 ]
+"47
+[v _WriteI2C WriteI2C `(c  1 e 1 0 ]
+"52 C:\Users\rafae\Documents\GitHub\sce\Part1.X\main.c
+[v _tsttc tsttc `(uc  1 e 1 0 ]
+"87
+[v _LCDsend LCDsend `(v  1 e 1 0 ]
+"95
+[v _LCDrecv LCDrecv `(uc  1 e 1 0 ]
+"126
+[v _LCDsend2x4 LCDsend2x4 `(v  1 e 1 0 ]
+"149
+[v _LCDinit LCDinit `(v  1 e 1 0 ]
+"172
+[v _LCDcmd LCDcmd `(v  1 e 1 0 ]
+"177
+[v _LCDchar LCDchar `(v  1 e 1 0 ]
+"182
+[v _LCDstr LCDstr `(v  1 e 1 0 ]
+"195
+[v _main main `(v  1 e 1 0 ]
+"83 C:\Users\rafae\Documents\GitHub\sce\Part1.X\mcc_generated_files/i2c1_driver.c
+[v _i2c1_driver_open i2c1_driver_open `(b  1 e 0 0 ]
+"52 C:\Users\rafae\Documents\GitHub\sce\Part1.X\mcc_generated_files/interrupt_manager.c
+[v _INTERRUPT_InterruptManager INTERRUPT_InterruptManager `II(v  1 e 1 0 ]
+"50 C:\Users\rafae\Documents\GitHub\sce\Part1.X\mcc_generated_files/mcc.c
+>>>>>>> c04e9aa6cdac962789ab27ebea65de052400b592
 [v _SYSTEM_Initialize SYSTEM_Initialize `(v  1 e 1 0 ]
 "57
 [v _OSCILLATOR_Initialize OSCILLATOR_Initialize `(v  1 e 1 0 ]
 "71
 [v _PMD_Initialize PMD_Initialize `(v  1 e 1 0 ]
+<<<<<<< HEAD
 "57 /home/alexandre/Desktop/ist/sce/Part1.X/mcc_generated_files/pin_manager.c
 [v _PIN_MANAGER_Initialize PIN_MANAGER_Initialize `(v  1 e 1 0 ]
 "5 /home/alexandre/Desktop/ist/sce/Part1.X/peripherals/lcd.c
@@ -55,12 +104,20 @@
 [v _LCDstr LCDstr `(v  1 e 1 0 ]
 "6 /home/alexandre/Desktop/ist/sce/Part1.X/peripherals/temp_sensor.c
 [v _tsttc tsttc `(uc  1 e 1 0 ]
+=======
+"57 C:\Users\rafae\Documents\GitHub\sce\Part1.X\mcc_generated_files/pin_manager.c
+[v _PIN_MANAGER_Initialize PIN_MANAGER_Initialize `(v  1 e 1 0 ]
+>>>>>>> c04e9aa6cdac962789ab27ebea65de052400b592
 [s S753 . 1 `uc 1 INTEDG 1 0 :1:0 
 `uc 1 . 1 0 :5:1 
 `uc 1 PEIE 1 0 :1:6 
 `uc 1 GIE 1 0 :1:7 
 ]
+<<<<<<< HEAD
 "364 /opt/microchip/mplabx/v5.40/packs/Microchip/PIC16F1xxxx_DFP/1.4.119/xc8/pic/include/proc/pic16f18875.h
+=======
+"364 C:/Program Files (x86)/Microchip/MPLABX/v5.40/packs/Microchip/PIC16F1xxxx_DFP/1.4.119/xc8\pic\include\proc\pic16f18875.h
+>>>>>>> c04e9aa6cdac962789ab27ebea65de052400b592
 [u S758 . 1 `S753 1 . 1 0 ]
 [v _INTCONbits INTCONbits `VES758  1 e 1 @11 ]
 "670
@@ -69,7 +126,11 @@
 [v _TRISB TRISB `VEuc  1 e 1 @18 ]
 "794
 [v _TRISC TRISC `VEuc  1 e 1 @19 ]
+<<<<<<< HEAD
 [s S803 . 1 `uc 1 TRISC0 1 0 :1:0 
+=======
+[s S954 . 1 `uc 1 TRISC0 1 0 :1:0 
+>>>>>>> c04e9aa6cdac962789ab27ebea65de052400b592
 `uc 1 TRISC1 1 0 :1:1 
 `uc 1 TRISC2 1 0 :1:2 
 `uc 1 TRISC3 1 0 :1:3 
@@ -79,8 +140,13 @@
 `uc 1 TRISC7 1 0 :1:7 
 ]
 "811
+<<<<<<< HEAD
 [u S812 . 1 `S803 1 . 1 0 ]
 [v _TRISCbits TRISCbits `VES812  1 e 1 @19 ]
+=======
+[u S963 . 1 `S954 1 . 1 0 ]
+[v _TRISCbits TRISCbits `VES963  1 e 1 @19 ]
+>>>>>>> c04e9aa6cdac962789ab27ebea65de052400b592
 "856
 [v _TRISD TRISD `VEuc  1 e 1 @20 ]
 "918
@@ -352,6 +418,7 @@
 [v _WPUC3 WPUC3 `VEb  1 e 0 @31355 ]
 "44903
 [v _WPUC4 WPUC4 `VEb  1 e 0 @31356 ]
+<<<<<<< HEAD
 "358 /opt/microchip/xc8/v2.30/pic/sources/c90/common/doprnt.c
 [v _dpowers dpowers `DC[5]ui  1 s 10 dpowers ]
 "366
@@ -383,6 +450,39 @@
 "48
 } 0
 "505 /opt/microchip/xc8/v2.30/pic/sources/c90/common/doprnt.c
+=======
+"358 C:\Program Files\Microchip\xc8\v2.30\pic\sources\c90\common\doprnt.c
+[v _dpowers dpowers `DC[5]ui  1 s 10 dpowers ]
+"366
+[v _hexpowers hexpowers `DC[4]ui  1 s 8 hexpowers ]
+"77 C:\Users\rafae\Documents\GitHub\sce\Part1.X\mcc_generated_files/i2c1_driver.h
+[v _i2c1_driver_busCollisionISR i2c1_driver_busCollisionISR `*.37(v  1 e 2 0 ]
+"78
+[v _i2c1_driver_i2cISR i2c1_driver_i2cISR `*.37(v  1 e 2 0 ]
+"195 C:\Users\rafae\Documents\GitHub\sce\Part1.X\main.c
+[v _main main `(v  1 e 1 0 ]
+{
+"202
+[v main@buf buf `[17]uc  1 a 17 24 ]
+"203
+[v main@counter counter `ui  1 a 2 44 ]
+"201
+[v main@c2 c2 `uc  1 a 1 43 ]
+"200
+[v main@c1 c1 `uc  1 a 1 42 ]
+"197
+[v main@c c `uc  1 a 1 41 ]
+"259
+} 0
+"52
+[v _tsttc tsttc `(uc  1 e 1 0 ]
+{
+"54
+[v tsttc@value value `uc  1 a 1 3 ]
+"79
+} 0
+"505 C:\Program Files\Microchip\xc8\v2.30\pic\sources\c90\common\doprnt.c
+>>>>>>> c04e9aa6cdac962789ab27ebea65de052400b592
 [v _sprintf sprintf `(i  1 e 2 0 ]
 {
 [v sprintf@sp sp `*.4uc  1 a 1 wreg ]
@@ -407,7 +507,11 @@
 [v sprintf@sp sp `*.4uc  1 a 1 18 ]
 "1567
 } 0
+<<<<<<< HEAD
 "8 /opt/microchip/xc8/v2.30/pic/sources/c90/common/isdigit.c
+=======
+"8 C:\Program Files\Microchip\xc8\v2.30\pic\sources\c90\common\isdigit.c
+>>>>>>> c04e9aa6cdac962789ab27ebea65de052400b592
 [v _isdigit isdigit `(b  1 e 0 0 ]
 {
 [v isdigit@c c `uc  1 a 1 wreg ]
@@ -416,7 +520,11 @@
 [v isdigit@c c `uc  1 a 1 1 ]
 "15
 } 0
+<<<<<<< HEAD
 "15 /opt/microchip/xc8/v2.30/pic/sources/c90/common/Umul16.c
+=======
+"15 C:\Program Files\Microchip\xc8\v2.30\pic\sources\c90\common\Umul16.c
+>>>>>>> c04e9aa6cdac962789ab27ebea65de052400b592
 [v ___wmul __wmul `(ui  1 e 2 0 ]
 {
 "17
@@ -426,7 +534,11 @@
 [v ___wmul@multiplicand multiplicand `ui  1 p 2 2 ]
 "53
 } 0
+<<<<<<< HEAD
 "5 /opt/microchip/xc8/v2.30/pic/sources/c90/common/lwmod.c
+=======
+"5 C:\Program Files\Microchip\xc8\v2.30\pic\sources\c90\common\lwmod.c
+>>>>>>> c04e9aa6cdac962789ab27ebea65de052400b592
 [v ___lwmod __lwmod `(ui  1 e 2 0 ]
 {
 "10
@@ -436,7 +548,11 @@
 [v ___lwmod@dividend dividend `ui  1 p 2 10 ]
 "25
 } 0
+<<<<<<< HEAD
 "5 /opt/microchip/xc8/v2.30/pic/sources/c90/common/lwdiv.c
+=======
+"5 C:\Program Files\Microchip\xc8\v2.30\pic\sources\c90\common\lwdiv.c
+>>>>>>> c04e9aa6cdac962789ab27ebea65de052400b592
 [v ___lwdiv __lwdiv `(ui  1 e 2 0 ]
 {
 "10
@@ -448,12 +564,20 @@
 [v ___lwdiv@dividend dividend `ui  1 p 2 2 ]
 "30
 } 0
+<<<<<<< HEAD
 "83 /home/alexandre/Desktop/ist/sce/Part1.X/mcc_generated_files/i2c1_driver.c
+=======
+"83 C:\Users\rafae\Documents\GitHub\sce\Part1.X\mcc_generated_files/i2c1_driver.c
+>>>>>>> c04e9aa6cdac962789ab27ebea65de052400b592
 [v _i2c1_driver_open i2c1_driver_open `(b  1 e 0 0 ]
 {
 "95
 } 0
+<<<<<<< HEAD
 "50 /home/alexandre/Desktop/ist/sce/Part1.X/mcc_generated_files/mcc.c
+=======
+"50 C:\Users\rafae\Documents\GitHub\sce\Part1.X\mcc_generated_files/mcc.c
+>>>>>>> c04e9aa6cdac962789ab27ebea65de052400b592
 [v _SYSTEM_Initialize SYSTEM_Initialize `(v  1 e 1 0 ]
 {
 "55
@@ -463,16 +587,25 @@
 {
 "85
 } 0
+<<<<<<< HEAD
 "57 /home/alexandre/Desktop/ist/sce/Part1.X/mcc_generated_files/pin_manager.c
+=======
+"57 C:\Users\rafae\Documents\GitHub\sce\Part1.X\mcc_generated_files/pin_manager.c
+>>>>>>> c04e9aa6cdac962789ab27ebea65de052400b592
 [v _PIN_MANAGER_Initialize PIN_MANAGER_Initialize `(v  1 e 1 0 ]
 {
 "124
 } 0
+<<<<<<< HEAD
 "57 /home/alexandre/Desktop/ist/sce/Part1.X/mcc_generated_files/mcc.c
+=======
+"57 C:\Users\rafae\Documents\GitHub\sce\Part1.X\mcc_generated_files/mcc.c
+>>>>>>> c04e9aa6cdac962789ab27ebea65de052400b592
 [v _OSCILLATOR_Initialize OSCILLATOR_Initialize `(v  1 e 1 0 ]
 {
 "69
 } 0
+<<<<<<< HEAD
 "136 /home/alexandre/Desktop/ist/sce/Part1.X/peripherals/lcd.c
 [v _LCDstr LCDstr `(v  1 e 1 0 ]
 {
@@ -483,10 +616,23 @@
 "142
 } 0
 "131
+=======
+"182 C:\Users\rafae\Documents\GitHub\sce\Part1.X\main.c
+[v _LCDstr LCDstr `(v  1 e 1 0 ]
+{
+"184
+[v LCDstr@c c `uc  1 a 1 0 ]
+"182
+[v LCDstr@p p `*.26uc  1 p 2 9 ]
+"187
+} 0
+"177
+>>>>>>> c04e9aa6cdac962789ab27ebea65de052400b592
 [v _LCDchar LCDchar `(v  1 e 1 0 ]
 {
 [v LCDchar@c c `uc  1 a 1 wreg ]
 [v LCDchar@c c `uc  1 a 1 wreg ]
+<<<<<<< HEAD
 "133
 [v LCDchar@c c `uc  1 a 1 8 ]
 "134
@@ -505,28 +651,64 @@
 "62
 } 0
 "32 /home/alexandre/Desktop/ist/sce/Part1.X/I2C/i2c.c
+=======
+"179
+[v LCDchar@c c `uc  1 a 1 8 ]
+"180
+} 0
+"95
+[v _LCDrecv LCDrecv `(uc  1 e 1 0 ]
+{
+[v LCDrecv@mode mode `uc  1 a 1 wreg ]
+"98
+[v LCDrecv@lc lc `uc  1 a 1 5 ]
+"97
+[v LCDrecv@hc hc `uc  1 a 1 4 ]
+"95
+[v LCDrecv@mode mode `uc  1 a 1 wreg ]
+[v LCDrecv@mode mode `uc  1 a 1 6 ]
+"124
+} 0
+"32 C:\Users\rafae\Documents\GitHub\sce\Part1.X\I2C/i2c.c
+>>>>>>> c04e9aa6cdac962789ab27ebea65de052400b592
 [v _ReadI2C ReadI2C `(uc  1 e 1 0 ]
 {
 "38
 } 0
+<<<<<<< HEAD
 "95 /home/alexandre/Desktop/ist/sce/Part1.X/peripherals/lcd.c
 [v _LCDinit LCDinit `(v  1 e 1 0 ]
 {
 "124
 } 0
 "5
+=======
+"149 C:\Users\rafae\Documents\GitHub\sce\Part1.X\main.c
+[v _LCDinit LCDinit `(v  1 e 1 0 ]
+{
+"170
+} 0
+"87
+>>>>>>> c04e9aa6cdac962789ab27ebea65de052400b592
 [v _LCDsend LCDsend `(v  1 e 1 0 ]
 {
 [v LCDsend@c c `uc  1 a 1 wreg ]
 [v LCDsend@c c `uc  1 a 1 wreg ]
 [v LCDsend@c c `uc  1 a 1 3 ]
+<<<<<<< HEAD
 "15
 } 0
 "126
+=======
+"94
+} 0
+"172
+>>>>>>> c04e9aa6cdac962789ab27ebea65de052400b592
 [v _LCDcmd LCDcmd `(v  1 e 1 0 ]
 {
 [v LCDcmd@c c `uc  1 a 1 wreg ]
 [v LCDcmd@c c `uc  1 a 1 wreg ]
+<<<<<<< HEAD
 "128
 [v LCDcmd@c c `uc  1 a 1 8 ]
 "129
@@ -547,6 +729,28 @@
 "93
 } 0
 "47 /home/alexandre/Desktop/ist/sce/Part1.X/I2C/i2c.c
+=======
+"174
+[v LCDcmd@c c `uc  1 a 1 8 ]
+"175
+} 0
+"126
+[v _LCDsend2x4 LCDsend2x4 `(v  1 e 1 0 ]
+{
+[v LCDsend2x4@c c `uc  1 a 1 wreg ]
+"129
+[v LCDsend2x4@lc lc `uc  1 a 1 7 ]
+"128
+[v LCDsend2x4@hc hc `uc  1 a 1 6 ]
+"126
+[v LCDsend2x4@c c `uc  1 a 1 wreg ]
+[v LCDsend2x4@mode mode `uc  1 p 1 2 ]
+"131
+[v LCDsend2x4@c c `uc  1 a 1 5 ]
+"147
+} 0
+"47 C:\Users\rafae\Documents\GitHub\sce\Part1.X\I2C/i2c.c
+>>>>>>> c04e9aa6cdac962789ab27ebea65de052400b592
 [v _WriteI2C WriteI2C `(c  1 e 1 0 ]
 {
 [v WriteI2C@data_out data_out `uc  1 a 1 wreg ]
@@ -555,7 +759,11 @@
 [v WriteI2C@data_out data_out `uc  1 a 1 1 ]
 "78
 } 0
+<<<<<<< HEAD
 "52 /home/alexandre/Desktop/ist/sce/Part1.X/mcc_generated_files/interrupt_manager.c
+=======
+"52 C:\Users\rafae\Documents\GitHub\sce\Part1.X\mcc_generated_files/interrupt_manager.c
+>>>>>>> c04e9aa6cdac962789ab27ebea65de052400b592
 [v _INTERRUPT_InterruptManager INTERRUPT_InterruptManager `II(v  1 e 1 0 ]
 {
 "74
