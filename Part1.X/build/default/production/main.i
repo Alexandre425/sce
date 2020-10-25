@@ -1,17 +1,17 @@
 
 # 1 "main.c"
 
-# 18 "C:/Program Files (x86)/Microchip/MPLABX/v5.40/packs/Microchip/PIC16F1xxxx_DFP/1.4.119/xc8\pic\include\xc.h"
+# 18 "/opt/microchip/mplabx/v5.40/packs/Microchip/PIC16F1xxxx_DFP/1.4.119/xc8/pic/include/xc.h"
 extern const char __xc8_OPTIM_SPEED;
 
 extern double __fpnormalize(double);
 
 
-# 13 "C:\Program Files\Microchip\xc8\v2.30\pic\include\c90\xc8debug.h"
+# 13 "/opt/microchip/xc8/v2.30/pic/include/c90/xc8debug.h"
 #pragma intrinsic(__builtin_software_breakpoint)
 extern void __builtin_software_breakpoint(void);
 
-# 52 "C:/Program Files (x86)/Microchip/MPLABX/v5.40/packs/Microchip/PIC16F1xxxx_DFP/1.4.119/xc8\pic\include\proc\pic16f18875.h"
+# 52 "/opt/microchip/mplabx/v5.40/packs/Microchip/PIC16F1xxxx_DFP/1.4.119/xc8/pic/include/proc/pic16f18875.h"
 extern volatile unsigned char INDF0 __at(0x000);
 
 asm("INDF0 equ 00h");
@@ -21006,7 +21006,7 @@ extern volatile __bit nWRITE1 __at(0xC7A);
 extern volatile __bit nWRITE2 __at(0xCCA);
 
 
-# 30 "C:/Program Files (x86)/Microchip/MPLABX/v5.40/packs/Microchip/PIC16F1xxxx_DFP/1.4.119/xc8\pic\include\pic.h"
+# 30 "/opt/microchip/mplabx/v5.40/packs/Microchip/PIC16F1xxxx_DFP/1.4.119/xc8/pic/include/pic.h"
 #pragma intrinsic(__nop)
 extern void __nop(void);
 
@@ -21017,12 +21017,12 @@ __attribute__((__unsupported__("The " "FLASH_WRITE" " macro function is no longe
 
 __attribute__((__unsupported__("The " "FLASH_ERASE" " macro function is no longer supported. Please use the MPLAB X MCC."))) void __flash_erase(unsigned short addr);
 
-# 114 "C:/Program Files (x86)/Microchip/MPLABX/v5.40/packs/Microchip/PIC16F1xxxx_DFP/1.4.119/xc8\pic\include\eeprom_routines.h"
+# 114 "/opt/microchip/mplabx/v5.40/packs/Microchip/PIC16F1xxxx_DFP/1.4.119/xc8/pic/include/eeprom_routines.h"
 extern void eeprom_write(unsigned char addr, unsigned char value);
 extern unsigned char eeprom_read(unsigned char addr);
 
 
-# 91 "C:/Program Files (x86)/Microchip/MPLABX/v5.40/packs/Microchip/PIC16F1xxxx_DFP/1.4.119/xc8\pic\include\pic.h"
+# 91 "/opt/microchip/mplabx/v5.40/packs/Microchip/PIC16F1xxxx_DFP/1.4.119/xc8/pic/include/pic.h"
 #pragma intrinsic(_delay)
 extern __nonreentrant void _delay(unsigned long);
 #pragma intrinsic(_delaywdt)
@@ -21042,7 +21042,7 @@ void PIN_MANAGER_Initialize (void);
 # 124
 void PIN_MANAGER_IOC(void);
 
-# 13 "C:\Program Files\Microchip\xc8\v2.30\pic\include\c90\stdint.h"
+# 13 "/opt/microchip/xc8/v2.30/pic/include/c90/stdint.h"
 typedef signed char int8_t;
 
 # 20
@@ -21128,13 +21128,13 @@ typedef int16_t intptr_t;
 
 typedef uint16_t uintptr_t;
 
-# 15 "C:\Program Files\Microchip\xc8\v2.30\pic\include\c90\stdbool.h"
+# 15 "/opt/microchip/xc8/v2.30/pic/include/c90/stdbool.h"
 typedef unsigned char bool;
 
-# 4 "C:/Program Files (x86)/Microchip/MPLABX/v5.40/packs/Microchip/PIC16F1xxxx_DFP/1.4.119/xc8\pic\include\__size_t.h"
+# 4 "/opt/microchip/mplabx/v5.40/packs/Microchip/PIC16F1xxxx_DFP/1.4.119/xc8/pic/include/__size_t.h"
 typedef unsigned size_t;
 
-# 7 "C:\Program Files\Microchip\xc8\v2.30\pic\include\c90\stdarg.h"
+# 7 "/opt/microchip/xc8/v2.30/pic/include/c90/stdarg.h"
 typedef void * va_list[1];
 
 #pragma intrinsic(__va_start)
@@ -21143,17 +21143,17 @@ extern void * __va_start(void);
 #pragma intrinsic(__va_arg)
 extern void * __va_arg(void *, ...);
 
-# 43 "C:\Program Files\Microchip\xc8\v2.30\pic\include\c90\stdio.h"
+# 43 "/opt/microchip/xc8/v2.30/pic/include/c90/stdio.h"
 struct __prbuf
 {
 char * ptr;
 void (* func)(char);
 };
 
-# 29 "C:\Program Files\Microchip\xc8\v2.30\pic\include\c90\errno.h"
+# 29 "/opt/microchip/xc8/v2.30/pic/include/c90/errno.h"
 extern int errno;
 
-# 12 "C:\Program Files\Microchip\xc8\v2.30\pic\include\c90\conio.h"
+# 12 "/opt/microchip/xc8/v2.30/pic/include/c90/conio.h"
 extern void init_uart(void);
 
 extern char getch(void);
@@ -21167,7 +21167,7 @@ extern __bit kbhit(void);
 extern char * cgets(char *);
 extern void cputs(const char *);
 
-# 88 "C:\Program Files\Microchip\xc8\v2.30\pic\include\c90\stdio.h"
+# 88 "/opt/microchip/xc8/v2.30/pic/include/c90/stdio.h"
 extern int cprintf(char *, ...);
 #pragma printf_check(cprintf)
 
@@ -21194,7 +21194,7 @@ extern int vsscanf(const char *, const char *, va_list) __attribute__((unsupport
 extern int sprintf(char *, const char *, ...);
 extern int printf(const char *, ...);
 
-# 15 "C:\Program Files\Microchip\xc8\v2.30\pic\include\c90\stdbool.h"
+# 15 "/opt/microchip/xc8/v2.30/pic/include/c90/stdbool.h"
 typedef unsigned char bool;
 
 # 33 "mcc_generated_files/i2c1_driver.h"
@@ -21268,145 +21268,20 @@ signed char WriteI2C( unsigned char data_out );
 
 signed char getsI2C( unsigned char *rdptr, unsigned char length );
 
-# 52 "main.c"
-unsigned char tsttc (void)
-{
-unsigned char value;
-do{
-while ((SSP1CON2 & 0x1F) | (SSP1STATbits.R_W));
-SSP1CON2bits.SEN=1;while(SSP1CON2bits.SEN); while ((SSP1CON2 & 0x1F) | (SSP1STATbits.R_W));
+# 21 "peripherals/lcd.h"
+void LCDsend(unsigned char c);
+unsigned char LCDrecv(unsigned char mode);
+void LCDsend2x4(unsigned char c, unsigned char mode);
+void LCDcmd(unsigned char c);
+void LCDchar(unsigned char c);
+void LCDstr(unsigned char *p);
+int LCDbusy();
+void LCDinit(void);
 
-WriteI2C(0x9a | 0x00); while ((SSP1CON2 & 0x1F) | (SSP1STATbits.R_W));
-WriteI2C(0x01); while ((SSP1CON2 & 0x1F) | (SSP1STATbits.R_W));
-SSP1CON2bits.RSEN=1;while(SSP1CON2bits.RSEN); while ((SSP1CON2 & 0x1F) | (SSP1STATbits.R_W));
-WriteI2C(0x9a | 0x01); while ((SSP1CON2 & 0x1F) | (SSP1STATbits.R_W));
-value = ReadI2C(); while ((SSP1CON2 & 0x1F) | (SSP1STATbits.R_W));
-SSP1CON2bits.ACKDT=1;SSP1CON2bits.ACKEN=1;while(SSP1CON2bits.ACKEN); while ((SSP1CON2 & 0x1F) | (SSP1STATbits.R_W));
-SSP1CON2bits.PEN = 1;while(SSP1CON2bits.PEN);
-} while (!(value & 0x40));
+# 15 "peripherals/temp_sensor.h"
+unsigned char tsttc(void);
 
-while ((SSP1CON2 & 0x1F) | (SSP1STATbits.R_W));
-SSP1CON2bits.SEN=1;while(SSP1CON2bits.SEN); while ((SSP1CON2 & 0x1F) | (SSP1STATbits.R_W));
-WriteI2C(0x9a | 0x00); while ((SSP1CON2 & 0x1F) | (SSP1STATbits.R_W));
-WriteI2C(0x00); while ((SSP1CON2 & 0x1F) | (SSP1STATbits.R_W));
-SSP1CON2bits.RSEN=1;while(SSP1CON2bits.RSEN); while ((SSP1CON2 & 0x1F) | (SSP1STATbits.R_W));
-WriteI2C(0x9a | 0x01); while ((SSP1CON2 & 0x1F) | (SSP1STATbits.R_W));
-value = ReadI2C(); while ((SSP1CON2 & 0x1F) | (SSP1STATbits.R_W));
-SSP1CON2bits.ACKDT=1;SSP1CON2bits.ACKEN=1;while(SSP1CON2bits.ACKEN); while ((SSP1CON2 & 0x1F) | (SSP1STATbits.R_W));
-SSP1CON2bits.PEN = 1;while(SSP1CON2bits.PEN);
-
-return value;
-}
-
-# 87
-void LCDsend(unsigned char c)
-{
-while ((SSP1CON2 & 0x1F) | (SSP1STATbits.R_W));
-SSP1CON2bits.SEN=1;while(SSP1CON2bits.SEN); while ((SSP1CON2 & 0x1F) | (SSP1STATbits.R_W));
-WriteI2C(0x4e | 0x00); while ((SSP1CON2 & 0x1F) | (SSP1STATbits.R_W));
-WriteI2C(c); while ((SSP1CON2 & 0x1F) | (SSP1STATbits.R_W));
-SSP1CON2bits.PEN = 1;while(SSP1CON2bits.PEN);
-}
-unsigned char LCDrecv(unsigned char mode)
-{
-unsigned char hc;
-unsigned char lc;
-
-while ((SSP1CON2 & 0x1F) | (SSP1STATbits.R_W));
-SSP1CON2bits.SEN=1;while(SSP1CON2bits.SEN); while ((SSP1CON2 & 0x1F) | (SSP1STATbits.R_W));
-WriteI2C(0x4e | 0x00); while ((SSP1CON2 & 0x1F) | (SSP1STATbits.R_W));
-WriteI2C(0xf0 | 0x08 | 0x02 | mode); while ((SSP1CON2 & 0x1F) | (SSP1STATbits.R_W));
-WriteI2C(0xf0 | 0x08 | 0x04 | 0x02 | mode); while ((SSP1CON2 & 0x1F) | (SSP1STATbits.R_W));
-_delay((unsigned long)((1)*(1000000/4000000.0)));
-SSP1CON2bits.RSEN=1;while(SSP1CON2bits.RSEN); while ((SSP1CON2 & 0x1F) | (SSP1STATbits.R_W));
-WriteI2C(0x4e | 0x01); while ((SSP1CON2 & 0x1F) | (SSP1STATbits.R_W));
-hc = ReadI2C(); while ((SSP1CON2 & 0x1F) | (SSP1STATbits.R_W));
-SSP1CON2bits.ACKDT=1;SSP1CON2bits.ACKEN=1;while(SSP1CON2bits.ACKEN);
-SSP1CON2bits.RSEN=1;while(SSP1CON2bits.RSEN); while ((SSP1CON2 & 0x1F) | (SSP1STATbits.R_W));
-WriteI2C(0x4e | 0x00); while ((SSP1CON2 & 0x1F) | (SSP1STATbits.R_W));
-WriteI2C(0xf0 | 0x08 | 0x02 | mode); while ((SSP1CON2 & 0x1F) | (SSP1STATbits.R_W));
-WriteI2C(0xf0 | 0x08 | 0x04 | 0x02 | mode); while ((SSP1CON2 & 0x1F) | (SSP1STATbits.R_W));
-_delay((unsigned long)((1)*(1000000/4000000.0)));
-SSP1CON2bits.RSEN=1;while(SSP1CON2bits.RSEN); while ((SSP1CON2 & 0x1F) | (SSP1STATbits.R_W));
-WriteI2C(0x4e | 0x01); while ((SSP1CON2 & 0x1F) | (SSP1STATbits.R_W));
-lc = ReadI2C(); while ((SSP1CON2 & 0x1F) | (SSP1STATbits.R_W));
-SSP1CON2bits.ACKDT=1;SSP1CON2bits.ACKEN=1;while(SSP1CON2bits.ACKEN);
-SSP1CON2bits.RSEN=1;while(SSP1CON2bits.RSEN); while ((SSP1CON2 & 0x1F) | (SSP1STATbits.R_W));
-WriteI2C(0x4e | 0x00); while ((SSP1CON2 & 0x1F) | (SSP1STATbits.R_W));
-WriteI2C(0xf0 | 0x08 | 0x02 | mode); while ((SSP1CON2 & 0x1F) | (SSP1STATbits.R_W));
-SSP1CON2bits.PEN = 1;while(SSP1CON2bits.PEN);
-return ((hc&0xf0) | ((lc>>4)&0x0f));
-}
-
-void LCDsend2x4(unsigned char c, unsigned char mode)
-{
-unsigned char hc;
-unsigned char lc;
-
-hc = c & 0xf0;
-lc = (c << 4) & 0xf0;
-
-while ((SSP1CON2 & 0x1F) | (SSP1STATbits.R_W));
-SSP1CON2bits.SEN=1;while(SSP1CON2bits.SEN); while ((SSP1CON2 & 0x1F) | (SSP1STATbits.R_W));
-WriteI2C(0x4e | 0x00); while ((SSP1CON2 & 0x1F) | (SSP1STATbits.R_W));
-WriteI2C(hc | 0x08 | mode); while ((SSP1CON2 & 0x1F) | (SSP1STATbits.R_W));
-WriteI2C(hc | 0x08 | 0x04 | mode); while ((SSP1CON2 & 0x1F) | (SSP1STATbits.R_W));
-_delay((unsigned long)((1)*(1000000/4000000.0)));
-WriteI2C(hc | 0x08 | mode); while ((SSP1CON2 & 0x1F) | (SSP1STATbits.R_W));
-WriteI2C(lc | 0x08 | mode); while ((SSP1CON2 & 0x1F) | (SSP1STATbits.R_W));
-WriteI2C(lc | 0x08 | 0x04 | mode); while ((SSP1CON2 & 0x1F) | (SSP1STATbits.R_W));
-_delay((unsigned long)((1)*(1000000/4000000.0)));
-WriteI2C(lc | 0x08 | mode); while ((SSP1CON2 & 0x1F) | (SSP1STATbits.R_W));
-SSP1CON2bits.PEN = 1;while(SSP1CON2bits.PEN);
-_delay((unsigned long)((50)*(1000000/4000000.0)));
-}
-
-void LCDinit(void)
-{
-_delay((unsigned long)((50)*(1000000/4000.0)));
-LCDsend(0x30);
-LCDsend(0x34); _delay((unsigned long)((500)*(1000000/4000000.0))); LCDsend(0x30);
-_delay((unsigned long)((5)*(1000000/4000.0)));
-LCDsend(0x30);
-LCDsend(0x34); _delay((unsigned long)((500)*(1000000/4000000.0))); LCDsend(0x30);
-_delay((unsigned long)((100)*(1000000/4000000.0)));
-LCDsend(0x30);
-LCDsend(0x34); _delay((unsigned long)((500)*(1000000/4000000.0))); LCDsend(0x30);
-_delay((unsigned long)((100)*(1000000/4000000.0)));
-LCDsend(0x20);
-LCDsend(0x24); _delay((unsigned long)((500)*(1000000/4000000.0))); LCDsend(0x20);
-_delay((unsigned long)((5)*(1000000/4000.0)));
-
-LCDsend2x4(0x28, 0);
-LCDsend2x4(0x06, 0);
-LCDsend2x4(0x0f, 0);
-LCDsend2x4(0x01, 0);
-_delay((unsigned long)((2)*(1000000/4000.0)));
-}
-
-void LCDcmd(unsigned char c)
-{
-LCDsend2x4(c, 0);
-}
-
-void LCDchar(unsigned char c)
-{
-LCDsend2x4(c, 0x01);
-}
-
-void LCDstr(unsigned char *p)
-{
-unsigned char c;
-
-while((c = *p++)) LCDchar(c);
-}
-
-int LCDbusy()
-{
-if(LCDrecv(0) & 0x80) return 1;
-return 0;
-}
-
+# 13 "main.c"
 void main(void)
 {
 unsigned char c;
@@ -21420,7 +21295,7 @@ unsigned int counter = 0;
 
 SYSTEM_Initialize();
 
-# 223
+# 41
 i2c1_driver_open();
 TRISCbits.TRISC3 = 1;
 TRISCbits.TRISC4 = 1;
@@ -21439,7 +21314,7 @@ c = tsttc();
 LCDcmd(0x80);
 LCDstr("Temp");
 LCDcmd(0x85);
-sprintf( buf,"Clock %02d", counter );
+sprintf(buf, "Clock %02d", counter);
 LCDstr(buf);
 LCDcmd(0xc0);
 

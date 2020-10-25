@@ -1,10 +1,3 @@
-/* 
- * File:   wdt.h
- * Author: alexandre
- *
- * Created on October 25, 2020, 3:52 PM
- */
-
 #ifndef WDT_H
 #define	WDT_H
 
