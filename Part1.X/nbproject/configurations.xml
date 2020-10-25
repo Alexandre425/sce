@@ -4,6 +4,9 @@
     <logicalFolder name="HeaderFiles"
                    displayName="Header Files"
                    projectFiles="true">
+      <logicalFolder name="f2" displayName="Buttons" projectFiles="true">
+        <itemPath>button/button.h</itemPath>
+      </logicalFolder>
       <logicalFolder name="I2C" displayName="I2C" projectFiles="true">
         <itemPath>I2C/i2c.h</itemPath>
       </logicalFolder>
@@ -16,6 +19,9 @@
         <itemPath>mcc_generated_files/i2c1_driver.h</itemPath>
         <itemPath>mcc_generated_files/interrupt_manager.h</itemPath>
       </logicalFolder>
+      <logicalFolder name="f1" displayName="Timers" projectFiles="true">
+        <itemPath>timers/wdt.h</itemPath>
+      </logicalFolder>
     </logicalFolder>
     <logicalFolder name="LinkerScript"
                    displayName="Linker Files"
@@ -27,6 +33,9 @@
       <logicalFolder name="I2C" displayName="I2C" projectFiles="true">
         <itemPath>I2C/i2c.c</itemPath>
       </logicalFolder>
+      <logicalFolder name="f1" displayName="Interface" projectFiles="true">
+        <itemPath>Periferals/basic_interface.c</itemPath>
+      </logicalFolder>
       <logicalFolder name="MCC Generated Files"
                      displayName="MCC Generated Files"
                      projectFiles="true">
@@ -37,7 +46,6 @@
         <itemPath>mcc_generated_files/interrupt_manager.c</itemPath>
       </logicalFolder>
       <itemPath>main.c</itemPath>
-      <itemPath>Periferals/basic_interface.c</itemPath>
     </logicalFolder>
     <logicalFolder name="ExternalFiles"
                    displayName="Important Files"
@@ -45,10 +53,10 @@
       <itemPath>Makefile</itemPath>
       <itemPath>MyConfig.mc3</itemPath>
     </logicalFolder>
-    <itemPath>timers/wdt.h</itemPath>
   </logicalFolder>
   <sourceRootList>
     <Elem>I2C</Elem>
+    <Elem>timers</Elem>
   </sourceRootList>
   <projectmakefile>Makefile</projectmakefile>
   <confs>
@@ -169,6 +177,7 @@
         <property key="ToolFirmwareFilePath"
                   value="Press to browse for a specific firmware version"/>
         <property key="ToolFirmwareOption.UseLatestFirmware" value="true"/>
+        <property key="firmware.download.all" value="false"/>
         <property key="memories.configurationmemory" value="true"/>
         <property key="memories.dataflash" value="true"/>
         <property key="memories.eeprom" value="true"/>

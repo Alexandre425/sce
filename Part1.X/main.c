@@ -44,6 +44,8 @@
 #include "mcc_generated_files/mcc.h"
 #include "I2C/i2c.h"
 #include "timers/wdt.h"
+#include "button/button.h"
+#include "mcc_generated_files/pin_manager.h"
 //#include "stdio.h"
 
 /*
@@ -230,32 +232,56 @@ void main(void)
 
     while (1)
     {
+        SWITCH_S1_Toggle();
+        if(SWITCH_S1_PORT){
+            LED_D2_Toggle();
+            LED_D3_Toggle();
+            LED_D4_Toggle();
+            LED_D5_Toggle();
+        } else {
+            LEDs_SetLow();
+        }
         // Add your application code
-                
+
         NOP();
-	c = tsttc();
-	//        hc = (c / 10);
-	//        lc = (c % 10);
-    LCDcmd(0x80);
-    LCDstr("Temp");
-    LCDcmd(0x85);
-    sprintf( buf,"Clock %02d", counter );
-    LCDstr(buf);
-    LCDcmd(0xc0);
-	//        LCDchar(hc + 48);LCDchar(lc + 48);LCDchar(' ');LCDchar('C');
-	sprintf(buf, "%02d C", c);
-	LCDstr(buf);
-    LCDcmd(0x81);
-//    LCDchar('A');
-//    LCDcmd(0x81);
-	c1 = LCDrecv(0);
-	c2 = LCDrecv(LCD_RS);
-    LCDcmd(0xc8);
-	sprintf(buf, "%02x %02x", c1, c2);
-	LCDstr(buf);
-    NOP();
-    __delay_ms(3000);
-    counter = counter + 3;
+        c = tsttc();
+        //        hc = (c / 10);
+        //        lc = (c % 10);
+        LCDcmd(0x80);
+        LCDstr("Temp");
+        LCDcmd(0x85);
+        sprintf( buf,"Clock %02d", counter );
+        LCDstr(buf);
+        LCDcmd(0xc0);
+        //LCDchar(hc + 48);LCDchar(lc + 48);LCDchar(' ');LCDchar('C');
+        sprintf(buf, "%02d C", c);
+        LCDstr(buf);
+        LCDcmd(0xc5);
+        sprintf(buf, "%d", SWITCH_S1_PORT);
+        LCDstr(buf);
+        LCDcmd(0x81);
+        //LCDchar('A');
+        //LCDcmd(0x81);
+        c1 = LCDrecv(0);
+        c2 = LCDrecv(LCD_RS);
+        LCDcmd(0xc8);
+        sprintf(buf, "%02x %02x", c1, c2);
+        LCDstr(buf);
+        NOP();
+        __delay_ms(3000);
+        counter = counter + 3;
+    }
+}
+
+void checkButtonS1(void) {
+    if (btnState == NOT_PRESSED) {
+        if (SWITCH_S1_PORT == LOW) {
+            __delay_ms(100);
+            btnState = PRESSED;
+        }
+    } else if (SWITCH_S1_PORT == HIGH) {
+        btnState = NOT_PRESSED;
+//        switchEvent = 1;
     }
 }
 /**

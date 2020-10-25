@@ -21036,10 +21036,10 @@ extern __bank0 unsigned char __resetbits;
 extern __bank0 __bit __powerdown;
 extern __bank0 __bit __timeout;
 
-# 112 "mcc_generated_files/pin_manager.h"
+# 232 "mcc_generated_files/pin_manager.h"
 void PIN_MANAGER_Initialize (void);
 
-# 124
+# 244
 void PIN_MANAGER_IOC(void);
 
 # 13 "C:\Program Files\Microchip\xc8\v2.30\pic\include\c90\stdint.h"
@@ -21268,7 +21268,10 @@ signed char WriteI2C( unsigned char data_out );
 
 signed char getsI2C( unsigned char *rdptr, unsigned char length );
 
-# 52 "main.c"
+# 16 "button/button.h"
+uint8_t btnState = 0;
+
+# 55 "main.c"
 unsigned char tsttc (void)
 {
 unsigned char value;
@@ -21298,7 +21301,7 @@ SSP1CON2bits.PEN = 1;while(SSP1CON2bits.PEN);
 return value;
 }
 
-# 87
+# 90
 void LCDsend(unsigned char c)
 {
 while ((SSP1CON2 & 0x1F) | (SSP1STATbits.R_W));
@@ -21420,7 +21423,7 @@ unsigned int counter = 0;
 
 SYSTEM_Initialize();
 
-# 223
+# 226
 i2c1_driver_open();
 TRISCbits.TRISC3 = 1;
 TRISCbits.TRISC4 = 1;
@@ -21430,6 +21433,15 @@ LCDinit();
 
 while (1)
 {
+do { LATBbits.LATB4 = ~LATBbits.LATB4; } while(0);
+if(PORTBbits.RB4){
+do { LATAbits.LATA4 = ~LATAbits.LATA4; } while(0);
+do { LATAbits.LATA5 = ~LATAbits.LATA5; } while(0);
+do { LATAbits.LATA6 = ~LATAbits.LATA6; } while(0);
+do { LATAbits.LATA7 = ~LATAbits.LATA7; } while(0);
+} else {
+do { LATA = 0; } while(0);
+}
 
 
 __nop();
@@ -21445,6 +21457,9 @@ LCDcmd(0xc0);
 
 sprintf(buf, "%02d C", c);
 LCDstr(buf);
+LCDcmd(0xc5);
+sprintf(buf, "%d", PORTBbits.RB4);
+LCDstr(buf);
 LCDcmd(0x81);
 
 
@@ -21456,6 +21471,18 @@ LCDstr(buf);
 __nop();
 _delay((unsigned long)((3000)*(1000000/4000.0)));
 counter = counter + 3;
+}
+}
+
+void checkButtonS1(void) {
+if (btnState == 0) {
+if (PORTBbits.RB4 == 0) {
+_delay((unsigned long)((100)*(1000000/4000.0)));
+btnState = 1;
+}
+} else if (PORTBbits.RB4 == 1) {
+btnState = 0;
+
 }
 }
 

@@ -13854,8 +13854,8 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;xc8\pic\include\pic.h: 137: extern __bank0 unsigned char __resetbits;
 [; ;xc8\pic\include\pic.h: 138: extern __bank0 __bit __powerdown;
 [; ;xc8\pic\include\pic.h: 139: extern __bank0 __bit __timeout;
-[; ;pin_manager.h: 112: void PIN_MANAGER_Initialize (void);
-[; ;pin_manager.h: 124: void PIN_MANAGER_IOC(void);
+[; ;pin_manager.h: 232: void PIN_MANAGER_Initialize (void);
+[; ;pin_manager.h: 244: void PIN_MANAGER_IOC(void);
 [; ;stdbool.h: 15: typedef unsigned char bool;
 [; ;stdbool.h: 15: typedef unsigned char bool;
 [; ;i2c1_driver.h: 33: typedef void (*interruptHandler)(void);

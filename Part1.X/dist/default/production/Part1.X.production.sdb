@@ -25,23 +25,23 @@
 [v _ReadI2C ReadI2C `(uc  1 e 1 0 ]
 "47
 [v _WriteI2C WriteI2C `(c  1 e 1 0 ]
-"52 C:\Users\rafae\Documents\GitHub\sce\Part1.X\main.c
+"55 C:\Users\rafae\Documents\GitHub\sce\Part1.X\main.c
 [v _tsttc tsttc `(uc  1 e 1 0 ]
-"87
+"90
 [v _LCDsend LCDsend `(v  1 e 1 0 ]
-"95
+"98
 [v _LCDrecv LCDrecv `(uc  1 e 1 0 ]
-"126
+"129
 [v _LCDsend2x4 LCDsend2x4 `(v  1 e 1 0 ]
-"149
+"152
 [v _LCDinit LCDinit `(v  1 e 1 0 ]
-"172
+"175
 [v _LCDcmd LCDcmd `(v  1 e 1 0 ]
-"177
+"180
 [v _LCDchar LCDchar `(v  1 e 1 0 ]
-"182
+"185
 [v _LCDstr LCDstr `(v  1 e 1 0 ]
-"195
+"198
 [v _main main `(v  1 e 1 0 ]
 "83 C:\Users\rafae\Documents\GitHub\sce\Part1.X\mcc_generated_files/i2c1_driver.c
 [v _i2c1_driver_open i2c1_driver_open `(b  1 e 0 0 ]
@@ -55,6 +55,8 @@
 [v _PMD_Initialize PMD_Initialize `(v  1 e 1 0 ]
 "57 C:\Users\rafae\Documents\GitHub\sce\Part1.X\mcc_generated_files/pin_manager.c
 [v _PIN_MANAGER_Initialize PIN_MANAGER_Initialize `(v  1 e 1 0 ]
+"16 C:\Users\rafae\Documents\GitHub\sce\Part1.X\button/button.h
+[v _btnState btnState `uc  1 e 1 0 ]
 [s S753 . 1 `uc 1 INTEDG 1 0 :1:0 
 `uc 1 . 1 0 :5:1 
 `uc 1 PEIE 1 0 :1:6 
@@ -63,6 +65,18 @@
 "364 C:/Program Files (x86)/Microchip/MPLABX/v5.40/packs/Microchip/PIC16F1xxxx_DFP/1.4.119/xc8\pic\include\proc\pic16f18875.h
 [u S758 . 1 `S753 1 . 1 0 ]
 [v _INTCONbits INTCONbits `VES758  1 e 1 @11 ]
+[s S998 . 1 `uc 1 RB0 1 0 :1:0 
+`uc 1 RB1 1 0 :1:1 
+`uc 1 RB2 1 0 :1:2 
+`uc 1 RB3 1 0 :1:3 
+`uc 1 RB4 1 0 :1:4 
+`uc 1 RB5 1 0 :1:5 
+`uc 1 RB6 1 0 :1:6 
+`uc 1 RB7 1 0 :1:7 
+]
+"463
+[u S1007 . 1 `S998 1 . 1 0 ]
+[v _PORTBbits PORTBbits `VES1007  1 e 1 @13 ]
 "670
 [v _TRISA TRISA `VEuc  1 e 1 @17 ]
 "732
@@ -87,8 +101,32 @@
 [v _TRISE TRISE `VEuc  1 e 1 @21 ]
 "950
 [v _LATA LATA `VEuc  1 e 1 @22 ]
+[s S1019 . 1 `uc 1 LATA0 1 0 :1:0 
+`uc 1 LATA1 1 0 :1:1 
+`uc 1 LATA2 1 0 :1:2 
+`uc 1 LATA3 1 0 :1:3 
+`uc 1 LATA4 1 0 :1:4 
+`uc 1 LATA5 1 0 :1:5 
+`uc 1 LATA6 1 0 :1:6 
+`uc 1 LATA7 1 0 :1:7 
+]
+"967
+[u S1028 . 1 `S1019 1 . 1 0 ]
+[v _LATAbits LATAbits `VES1028  1 e 1 @22 ]
 "1012
 [v _LATB LATB `VEuc  1 e 1 @23 ]
+[s S977 . 1 `uc 1 LATB0 1 0 :1:0 
+`uc 1 LATB1 1 0 :1:1 
+`uc 1 LATB2 1 0 :1:2 
+`uc 1 LATB3 1 0 :1:3 
+`uc 1 LATB4 1 0 :1:4 
+`uc 1 LATB5 1 0 :1:5 
+`uc 1 LATB6 1 0 :1:6 
+`uc 1 LATB7 1 0 :1:7 
+]
+"1029
+[u S986 . 1 `S977 1 . 1 0 ]
+[v _LATBbits LATBbits `VES986  1 e 1 @23 ]
 "1074
 [v _LATC LATC `VEuc  1 e 1 @24 ]
 "1136
@@ -360,27 +398,27 @@
 [v _i2c1_driver_busCollisionISR i2c1_driver_busCollisionISR `*.37(v  1 e 2 0 ]
 "78
 [v _i2c1_driver_i2cISR i2c1_driver_i2cISR `*.37(v  1 e 2 0 ]
-"195 C:\Users\rafae\Documents\GitHub\sce\Part1.X\main.c
+"198 C:\Users\rafae\Documents\GitHub\sce\Part1.X\main.c
 [v _main main `(v  1 e 1 0 ]
 {
-"202
+"205
 [v main@buf buf `[17]uc  1 a 17 24 ]
-"203
+"206
 [v main@counter counter `ui  1 a 2 44 ]
-"201
+"204
 [v main@c2 c2 `uc  1 a 1 43 ]
-"200
+"203
 [v main@c1 c1 `uc  1 a 1 42 ]
-"197
+"200
 [v main@c c `uc  1 a 1 41 ]
-"259
+"274
 } 0
-"52
+"55
 [v _tsttc tsttc `(uc  1 e 1 0 ]
 {
-"54
+"57
 [v tsttc@value value `uc  1 a 1 3 ]
-"79
+"82
 } 0
 "505 C:\Program Files\Microchip\xc8\v2.30\pic\sources\c90\common\doprnt.c
 [v _sprintf sprintf `(i  1 e 2 0 ]
@@ -473,78 +511,78 @@
 {
 "69
 } 0
-"182 C:\Users\rafae\Documents\GitHub\sce\Part1.X\main.c
+"185 C:\Users\rafae\Documents\GitHub\sce\Part1.X\main.c
 [v _LCDstr LCDstr `(v  1 e 1 0 ]
 {
-"184
-[v LCDstr@c c `uc  1 a 1 0 ]
-"182
-[v LCDstr@p p `*.26uc  1 p 2 9 ]
 "187
+[v LCDstr@c c `uc  1 a 1 0 ]
+"185
+[v LCDstr@p p `*.26uc  1 p 2 9 ]
+"190
 } 0
-"177
+"180
 [v _LCDchar LCDchar `(v  1 e 1 0 ]
 {
 [v LCDchar@c c `uc  1 a 1 wreg ]
 [v LCDchar@c c `uc  1 a 1 wreg ]
-"179
+"182
 [v LCDchar@c c `uc  1 a 1 8 ]
-"180
+"183
 } 0
-"95
+"98
 [v _LCDrecv LCDrecv `(uc  1 e 1 0 ]
 {
 [v LCDrecv@mode mode `uc  1 a 1 wreg ]
-"98
+"101
 [v LCDrecv@lc lc `uc  1 a 1 5 ]
-"97
+"100
 [v LCDrecv@hc hc `uc  1 a 1 4 ]
-"95
+"98
 [v LCDrecv@mode mode `uc  1 a 1 wreg ]
 [v LCDrecv@mode mode `uc  1 a 1 6 ]
-"124
+"127
 } 0
 "32 C:\Users\rafae\Documents\GitHub\sce\Part1.X\I2C/i2c.c
 [v _ReadI2C ReadI2C `(uc  1 e 1 0 ]
 {
 "38
 } 0
-"149 C:\Users\rafae\Documents\GitHub\sce\Part1.X\main.c
+"152 C:\Users\rafae\Documents\GitHub\sce\Part1.X\main.c
 [v _LCDinit LCDinit `(v  1 e 1 0 ]
 {
-"170
+"173
 } 0
-"87
+"90
 [v _LCDsend LCDsend `(v  1 e 1 0 ]
 {
 [v LCDsend@c c `uc  1 a 1 wreg ]
 [v LCDsend@c c `uc  1 a 1 wreg ]
 [v LCDsend@c c `uc  1 a 1 3 ]
-"94
+"97
 } 0
-"172
+"175
 [v _LCDcmd LCDcmd `(v  1 e 1 0 ]
 {
 [v LCDcmd@c c `uc  1 a 1 wreg ]
 [v LCDcmd@c c `uc  1 a 1 wreg ]
-"174
+"177
 [v LCDcmd@c c `uc  1 a 1 8 ]
-"175
+"178
 } 0
-"126
+"129
 [v _LCDsend2x4 LCDsend2x4 `(v  1 e 1 0 ]
 {
 [v LCDsend2x4@c c `uc  1 a 1 wreg ]
-"129
+"132
 [v LCDsend2x4@lc lc `uc  1 a 1 7 ]
-"128
+"131
 [v LCDsend2x4@hc hc `uc  1 a 1 6 ]
-"126
+"129
 [v LCDsend2x4@c c `uc  1 a 1 wreg ]
 [v LCDsend2x4@mode mode `uc  1 p 1 2 ]
-"131
+"134
 [v LCDsend2x4@c c `uc  1 a 1 5 ]
-"147
+"150
 } 0
 "47 C:\Users\rafae\Documents\GitHub\sce\Part1.X\I2C/i2c.c
 [v _WriteI2C WriteI2C `(c  1 e 1 0 ]
