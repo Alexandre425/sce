@@ -43,6 +43,7 @@
 
 #include "mcc_generated_files/mcc.h"
 #include "I2C/i2c.h"
+#include "timers/wdt.h"
 //#include "stdio.h"
 
 /*
