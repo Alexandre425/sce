@@ -3,7 +3,7 @@
 [d edition pro ]
 [d chip 16F18875 ]
 [d frameptr 6 ]
-"72 C:\Users\rafae\Desktop\Universidade\4º ano\1º Semestre\Sistemas Computacionais Embebidos\Labs\PIC16F18875_Demo.X\Labs/Lab04_AnalogToDigitalConversion/ADC.c
+"72 C:\Users\rafae\Documents\GitHub\sce\Examples.X\Labs/Lab04_AnalogToDigitalConversion/ADC.c
 [e E12090 . `uc
 POT_CHANNEL 0
 channel_VSS 60
@@ -11,7 +11,7 @@ channel_Temp 61
 channel_DAC1 62
 channel_FVR_buf1 63
 ]
-"76 C:\Users\rafae\Desktop\Universidade\4º ano\1º Semestre\Sistemas Computacionais Embebidos\Labs\PIC16F18875_Demo.X\Labs/Lab05_VariableSpeedRotate/VSR.c
+"76 C:\Users\rafae\Documents\GitHub\sce\Examples.X\Labs/Lab05_VariableSpeedRotate/VSR.c
 [e E12090 . `uc
 POT_CHANNEL 0
 channel_VSS 60
@@ -19,7 +19,7 @@ channel_Temp 61
 channel_DAC1 62
 channel_FVR_buf1 63
 ]
-"80 C:\Users\rafae\Desktop\Universidade\4º ano\1º Semestre\Sistemas Computacionais Embebidos\Labs\PIC16F18875_Demo.X\Labs/Lab06_PulseWidthModulation/PWM.c
+"80 C:\Users\rafae\Documents\GitHub\sce\Examples.X\Labs/Lab06_PulseWidthModulation/PWM.c
 [e E12090 . `uc
 POT_CHANNEL 0
 channel_VSS 60
@@ -27,7 +27,7 @@ channel_Temp 61
 channel_DAC1 62
 channel_FVR_buf1 63
 ]
-"77 C:\Users\rafae\Desktop\Universidade\4º ano\1º Semestre\Sistemas Computacionais Embebidos\Labs\PIC16F18875_Demo.X\Labs/Lab10_EEPROM/EEPROM.c
+"77 C:\Users\rafae\Documents\GitHub\sce\Examples.X\Labs/Lab10_EEPROM/EEPROM.c
 [e E12090 . `uc
 POT_CHANNEL 0
 channel_VSS 60
@@ -35,7 +35,7 @@ channel_Temp 61
 channel_DAC1 62
 channel_FVR_buf1 63
 ]
-"89 C:\Users\rafae\Desktop\Universidade\4º ano\1º Semestre\Sistemas Computacionais Embebidos\Labs\PIC16F18875_Demo.X\mcc_generated_files/tmr2.c
+"89 C:\Users\rafae\Documents\GitHub\sce\Examples.X\mcc_generated_files/tmr2.c
 [e E12085 . `uc
 TMR2_ROP_STARTS_TMRON 0
 TMR2_ROP_STARTS_TMRON_ERSHIGH 1
@@ -80,7 +80,7 @@ TMR2_CLC2_OUT 15
 TMR2_CLC3_OUT 16
 TMR2_CLC4_OUT 17
 ]
-"105 C:\Users\rafae\Desktop\Universidade\4º ano\1º Semestre\Sistemas Computacionais Embebidos\Labs\PIC16F18875_Demo.X\mcc_generated_files/adcc.c
+"105 C:\Users\rafae\Documents\GitHub\sce\Examples.X\mcc_generated_files/adcc.c
 [e E12086 . `uc
 POT_CHANNEL 0
 channel_VSS 60
@@ -96,45 +96,45 @@ channel_FVR_buf1 63
 [v ___eecpymem __eecpymem `(v  1 e 1 0 ]
 "39
 [v ___memcpyee __memcpyee `(v  1 e 1 0 ]
-"57 C:\Users\rafae\Desktop\Universidade\4º ano\1º Semestre\Sistemas Computacionais Embebidos\Labs\PIC16F18875_Demo.X\Labs/Lab01_HelloWorld/HelloWorld.c
+"57 C:\Users\rafae\Documents\GitHub\sce\Examples.X\Labs/Lab01_HelloWorld/HelloWorld.c
 [v _HelloWorld HelloWorld `(v  1 e 1 0 ]
-"67 C:\Users\rafae\Desktop\Universidade\4º ano\1º Semestre\Sistemas Computacionais Embebidos\Labs\PIC16F18875_Demo.X\Labs/Lab02_Blink/Blink.c
+"67 C:\Users\rafae\Documents\GitHub\sce\Examples.X\Labs/Lab02_Blink/Blink.c
 [v _Blink Blink `(v  1 e 1 0 ]
-"62 C:\Users\rafae\Desktop\Universidade\4º ano\1º Semestre\Sistemas Computacionais Embebidos\Labs\PIC16F18875_Demo.X\Labs/Lab03_Rotate/Rotate.c
+"62 C:\Users\rafae\Documents\GitHub\sce\Examples.X\Labs/Lab03_Rotate/Rotate.c
 [v _Rotate Rotate `(v  1 e 1 0 ]
-"62 C:\Users\rafae\Desktop\Universidade\4º ano\1º Semestre\Sistemas Computacionais Embebidos\Labs\PIC16F18875_Demo.X\Labs/Lab04_AnalogToDigitalConversion/ADC.c
+"62 C:\Users\rafae\Documents\GitHub\sce\Examples.X\Labs/Lab04_AnalogToDigitalConversion/ADC.c
 [v _ADC ADC `(v  1 e 1 0 ]
-"63 C:\Users\rafae\Desktop\Universidade\4º ano\1º Semestre\Sistemas Computacionais Embebidos\Labs\PIC16F18875_Demo.X\Labs/Lab05_VariableSpeedRotate/VSR.c
+"63 C:\Users\rafae\Documents\GitHub\sce\Examples.X\Labs/Lab05_VariableSpeedRotate/VSR.c
 [v _VSR VSR `(v  1 e 1 0 ]
-"70 C:\Users\rafae\Desktop\Universidade\4º ano\1º Semestre\Sistemas Computacionais Embebidos\Labs\PIC16F18875_Demo.X\Labs/Lab06_PulseWidthModulation/PWM.c
+"70 C:\Users\rafae\Documents\GitHub\sce\Examples.X\Labs/Lab06_PulseWidthModulation/PWM.c
 [v _PWM PWM `(v  1 e 1 0 ]
 "91
 [v _PWM_Output_D5_Enable PWM_Output_D5_Enable `(v  1 e 1 0 ]
 "104
 [v _PWM_Output_D5_Disable PWM_Output_D5_Disable `(v  1 e 1 0 ]
-"62 C:\Users\rafae\Desktop\Universidade\4º ano\1º Semestre\Sistemas Computacionais Embebidos\Labs\PIC16F18875_Demo.X\Labs/Lab07_Timers/Timer1.c
+"62 C:\Users\rafae\Documents\GitHub\sce\Examples.X\Labs/Lab07_Timers/Timer1.c
 [v _Timer1 Timer1 `(v  1 e 1 0 ]
-"68 C:\Users\rafae\Desktop\Universidade\4º ano\1º Semestre\Sistemas Computacionais Embebidos\Labs\PIC16F18875_Demo.X\Labs/Lab08_Interrupts/Interrupt.c
+"68 C:\Users\rafae\Documents\GitHub\sce\Examples.X\Labs/Lab08_Interrupts/Interrupt.c
 [v _Interrupt Interrupt `(v  1 e 1 0 ]
 "99
 [v _LAB_ISR LAB_ISR `(v  1 e 1 0 ]
-"62 C:\Users\rafae\Desktop\Universidade\4º ano\1º Semestre\Sistemas Computacionais Embebidos\Labs\PIC16F18875_Demo.X\Labs/Lab09_SleepWakeup/SleepWakeUp.c
+"62 C:\Users\rafae\Documents\GitHub\sce\Examples.X\Labs/Lab09_SleepWakeup/SleepWakeUp.c
 [v _SleepWakeUp SleepWakeUp `(v  1 e 1 0 ]
-"66 C:\Users\rafae\Desktop\Universidade\4º ano\1º Semestre\Sistemas Computacionais Embebidos\Labs\PIC16F18875_Demo.X\Labs/Lab10_EEPROM/EEPROM.c
+"66 C:\Users\rafae\Documents\GitHub\sce\Examples.X\Labs/Lab10_EEPROM/EEPROM.c
 [v _EEPROM EEPROM `(v  1 e 1 0 ]
-"52 C:\Users\rafae\Desktop\Universidade\4º ano\1º Semestre\Sistemas Computacionais Embebidos\Labs\PIC16F18875_Demo.X\main.c
+"52 C:\Users\rafae\Documents\GitHub\sce\Examples.X\main.c
 [v _main main `(v  1 e 1 0 ]
 "79
 [v _checkButtonS1 checkButtonS1 `(v  1 e 1 0 ]
 "91
 [v _nextLab nextLab `(v  1 e 1 0 ]
-"63 C:\Users\rafae\Desktop\Universidade\4º ano\1º Semestre\Sistemas Computacionais Embebidos\Labs\PIC16F18875_Demo.X\mcc_generated_files/adcc.c
+"63 C:\Users\rafae\Documents\GitHub\sce\Examples.X\mcc_generated_files/adcc.c
 [v _ADCC_Initialize ADCC_Initialize `(v  1 e 1 0 ]
 "128
 [v _ADCC_GetSingleConversion ADCC_GetSingleConversion `(ui  1 e 2 0 ]
-"52 C:\Users\rafae\Desktop\Universidade\4º ano\1º Semestre\Sistemas Computacionais Embebidos\Labs\PIC16F18875_Demo.X\mcc_generated_files/interrupt_manager.c
+"52 C:\Users\rafae\Documents\GitHub\sce\Examples.X\mcc_generated_files/interrupt_manager.c
 [v _INTERRUPT_InterruptManager INTERRUPT_InterruptManager `II(v  1 e 1 0 ]
-"50 C:\Users\rafae\Desktop\Universidade\4º ano\1º Semestre\Sistemas Computacionais Embebidos\Labs\PIC16F18875_Demo.X\mcc_generated_files/mcc.c
+"50 C:\Users\rafae\Documents\GitHub\sce\Examples.X\mcc_generated_files/mcc.c
 [v _SYSTEM_Initialize SYSTEM_Initialize `(v  1 e 1 0 ]
 "63
 [v _OSCILLATOR_Initialize OSCILLATOR_Initialize `(v  1 e 1 0 ]
@@ -142,7 +142,7 @@ channel_FVR_buf1 63
 [v _PMD_Initialize PMD_Initialize `(v  1 e 1 0 ]
 "94
 [v _WWDT_Initialize WWDT_Initialize `(v  1 e 1 0 ]
-"58 C:\Users\rafae\Desktop\Universidade\4º ano\1º Semestre\Sistemas Computacionais Embebidos\Labs\PIC16F18875_Demo.X\mcc_generated_files/memory.c
+"58 C:\Users\rafae\Documents\GitHub\sce\Examples.X\mcc_generated_files/memory.c
 [v _FLASH_ReadWord FLASH_ReadWord `(ui  1 e 2 0 ]
 "95
 [v _FLASH_WriteBlock FLASH_WriteBlock `(c  1 e 1 0 ]
@@ -152,13 +152,13 @@ channel_FVR_buf1 63
 [v _DATAEE_WriteByte DATAEE_WriteByte `(v  1 e 1 0 ]
 "204
 [v _DATAEE_ReadByte DATAEE_ReadByte `(uc  1 e 1 0 ]
-"57 C:\Users\rafae\Desktop\Universidade\4º ano\1º Semestre\Sistemas Computacionais Embebidos\Labs\PIC16F18875_Demo.X\mcc_generated_files/pin_manager.c
+"57 C:\Users\rafae\Documents\GitHub\sce\Examples.X\mcc_generated_files/pin_manager.c
 [v _PIN_MANAGER_Initialize PIN_MANAGER_Initialize `(v  1 e 1 0 ]
-"58 C:\Users\rafae\Desktop\Universidade\4º ano\1º Semestre\Sistemas Computacionais Embebidos\Labs\PIC16F18875_Demo.X\mcc_generated_files/pwm6.c
+"58 C:\Users\rafae\Documents\GitHub\sce\Examples.X\mcc_generated_files/pwm6.c
 [v _PWM6_Initialize PWM6_Initialize `(v  1 e 1 0 ]
 "74
 [v _PWM6_LoadDutyValue PWM6_LoadDutyValue `(v  1 e 1 0 ]
-"61 C:\Users\rafae\Desktop\Universidade\4º ano\1º Semestre\Sistemas Computacionais Embebidos\Labs\PIC16F18875_Demo.X\mcc_generated_files/tmr0.c
+"61 C:\Users\rafae\Documents\GitHub\sce\Examples.X\mcc_generated_files/tmr0.c
 [v _TMR0_Initialize TMR0_Initialize `(v  1 e 1 0 ]
 "121
 [v _TMR0_ISR TMR0_ISR `(v  1 e 1 0 ]
@@ -166,7 +166,7 @@ channel_FVR_buf1 63
 [v _TMR0_SetInterruptHandler TMR0_SetInterruptHandler `(v  1 e 1 0 ]
 "138
 [v _TMR0_DefaultInterruptHandler TMR0_DefaultInterruptHandler `(v  1 e 1 0 ]
-"63 C:\Users\rafae\Desktop\Universidade\4º ano\1º Semestre\Sistemas Computacionais Embebidos\Labs\PIC16F18875_Demo.X\mcc_generated_files/tmr1.c
+"63 C:\Users\rafae\Documents\GitHub\sce\Examples.X\mcc_generated_files/tmr1.c
 [v _TMR1_Initialize TMR1_Initialize `(v  1 e 1 0 ]
 "92
 [v _TMR1_StartTimer TMR1_StartTimer `(v  1 e 1 0 ]
@@ -178,7 +178,7 @@ channel_FVR_buf1 63
 [v _TMR1_Reload TMR1_Reload `(v  1 e 1 0 ]
 "157
 [v _TMR1_HasOverflowOccured TMR1_HasOverflowOccured `(uc  1 e 1 0 ]
-"62 C:\Users\rafae\Desktop\Universidade\4º ano\1º Semestre\Sistemas Computacionais Embebidos\Labs\PIC16F18875_Demo.X\mcc_generated_files/tmr2.c
+"62 C:\Users\rafae\Documents\GitHub\sce\Examples.X\mcc_generated_files/tmr2.c
 [v _TMR2_Initialize TMR2_Initialize `(v  1 e 1 0 ]
 "100
 [v _TMR2_Start TMR2_Start `(v  1 e 1 0 ]
@@ -722,7 +722,7 @@ channel_FVR_buf1 63
 [v _TMR0IE TMR0IE `VEb  1 e 0 @14517 ]
 "44252
 [v _TMR1IF TMR1IF `VEb  1 e 0 @14464 ]
-"71 C:\Users\rafae\Desktop\Universidade\4º ano\1º Semestre\Sistemas Computacionais Embebidos\Labs\PIC16F18875_Demo.X\labs.h
+"71 C:\Users\rafae\Documents\GitHub\sce\Examples.X\labs.h
 [v _labNumber labNumber `uc  1 e 1 0 ]
 "72
 [v _switchEvent switchEvent `uc  1 e 1 0 ]
@@ -730,27 +730,27 @@ channel_FVR_buf1 63
 [v _labState labState `uc  1 e 1 0 ]
 "74
 [v _btnState btnState `uc  1 e 1 0 ]
-"62 C:\Users\rafae\Desktop\Universidade\4º ano\1º Semestre\Sistemas Computacionais Embebidos\Labs\PIC16F18875_Demo.X\Labs/Lab02_Blink/Blink.c
+"62 C:\Users\rafae\Documents\GitHub\sce\Examples.X\Labs/Lab02_Blink/Blink.c
 [v _flagCounter flagCounter `uc  1 e 1 0 ]
-"57 C:\Users\rafae\Desktop\Universidade\4º ano\1º Semestre\Sistemas Computacionais Embebidos\Labs\PIC16F18875_Demo.X\Labs/Lab04_AnalogToDigitalConversion/ADC.c
+"57 C:\Users\rafae\Documents\GitHub\sce\Examples.X\Labs/Lab04_AnalogToDigitalConversion/ADC.c
 [v _adcResult adcResult `uc  1 s 1 adcResult ]
-"57 C:\Users\rafae\Desktop\Universidade\4º ano\1º Semestre\Sistemas Computacionais Embebidos\Labs\PIC16F18875_Demo.X\Labs/Lab05_VariableSpeedRotate/VSR.c
+"57 C:\Users\rafae\Documents\GitHub\sce\Examples.X\Labs/Lab05_VariableSpeedRotate/VSR.c
 [v _delay delay `uc  1 s 1 delay ]
 "58
 [v _rotateReg@VSR$F151 rotateReg `uc  1 s 1 rotateReg ]
-"65 C:\Users\rafae\Desktop\Universidade\4º ano\1º Semestre\Sistemas Computacionais Embebidos\Labs\PIC16F18875_Demo.X\Labs/Lab06_PulseWidthModulation/PWM.c
+"65 C:\Users\rafae\Documents\GitHub\sce\Examples.X\Labs/Lab06_PulseWidthModulation/PWM.c
 [v _adcResult@PWM$F195 adcResult `ui  1 s 2 adcResult ]
-"63 C:\Users\rafae\Desktop\Universidade\4º ano\1º Semestre\Sistemas Computacionais Embebidos\Labs\PIC16F18875_Demo.X\Labs/Lab08_Interrupts/Interrupt.c
+"63 C:\Users\rafae\Documents\GitHub\sce\Examples.X\Labs/Lab08_Interrupts/Interrupt.c
 [v _rotateReg rotateReg `uc  1 e 1 0 ]
-"59 C:\Users\rafae\Desktop\Universidade\4º ano\1º Semestre\Sistemas Computacionais Embebidos\Labs\PIC16F18875_Demo.X\Labs/Lab10_EEPROM/EEPROM.c
+"59 C:\Users\rafae\Documents\GitHub\sce\Examples.X\Labs/Lab10_EEPROM/EEPROM.c
 [v _adcResult@EEPROM$F347 adcResult `uc  1 s 1 adcResult ]
 "60
 [v _ledDisplay ledDisplay `uc  1 s 1 ledDisplay ]
-"59 C:\Users\rafae\Desktop\Universidade\4º ano\1º Semestre\Sistemas Computacionais Embebidos\Labs\PIC16F18875_Demo.X\mcc_generated_files/tmr0.c
+"59 C:\Users\rafae\Documents\GitHub\sce\Examples.X\mcc_generated_files/tmr0.c
 [v _TMR0_InterruptHandler TMR0_InterruptHandler `*.37(v  1 e 2 0 ]
-"57 C:\Users\rafae\Desktop\Universidade\4º ano\1º Semestre\Sistemas Computacionais Embebidos\Labs\PIC16F18875_Demo.X\mcc_generated_files/tmr1.c
+"57 C:\Users\rafae\Documents\GitHub\sce\Examples.X\mcc_generated_files/tmr1.c
 [v _timer1ReloadVal timer1ReloadVal `VEui  1 e 2 0 ]
-"52 C:\Users\rafae\Desktop\Universidade\4º ano\1º Semestre\Sistemas Computacionais Embebidos\Labs\PIC16F18875_Demo.X\main.c
+"52 C:\Users\rafae\Documents\GitHub\sce\Examples.X\main.c
 [v _main main `(v  1 e 1 0 ]
 {
 "77
@@ -765,22 +765,22 @@ channel_FVR_buf1 63
 {
 "89
 } 0
-"63 C:\Users\rafae\Desktop\Universidade\4º ano\1º Semestre\Sistemas Computacionais Embebidos\Labs\PIC16F18875_Demo.X\Labs/Lab05_VariableSpeedRotate/VSR.c
+"63 C:\Users\rafae\Documents\GitHub\sce\Examples.X\Labs/Lab05_VariableSpeedRotate/VSR.c
 [v _VSR VSR `(v  1 e 1 0 ]
 {
 "98
 } 0
-"62 C:\Users\rafae\Desktop\Universidade\4º ano\1º Semestre\Sistemas Computacionais Embebidos\Labs\PIC16F18875_Demo.X\Labs/Lab07_Timers/Timer1.c
+"62 C:\Users\rafae\Documents\GitHub\sce\Examples.X\Labs/Lab07_Timers/Timer1.c
 [v _Timer1 Timer1 `(v  1 e 1 0 ]
 {
 "99
 } 0
-"62 C:\Users\rafae\Desktop\Universidade\4º ano\1º Semestre\Sistemas Computacionais Embebidos\Labs\PIC16F18875_Demo.X\Labs/Lab09_SleepWakeup/SleepWakeUp.c
+"62 C:\Users\rafae\Documents\GitHub\sce\Examples.X\Labs/Lab09_SleepWakeup/SleepWakeUp.c
 [v _SleepWakeUp SleepWakeUp `(v  1 e 1 0 ]
 {
 "88
 } 0
-"50 C:\Users\rafae\Desktop\Universidade\4º ano\1º Semestre\Sistemas Computacionais Embebidos\Labs\PIC16F18875_Demo.X\mcc_generated_files/mcc.c
+"50 C:\Users\rafae\Documents\GitHub\sce\Examples.X\mcc_generated_files/mcc.c
 [v _SYSTEM_Initialize SYSTEM_Initialize `(v  1 e 1 0 ]
 {
 "61
@@ -790,57 +790,57 @@ channel_FVR_buf1 63
 {
 "100
 } 0
-"62 C:\Users\rafae\Desktop\Universidade\4º ano\1º Semestre\Sistemas Computacionais Embebidos\Labs\PIC16F18875_Demo.X\mcc_generated_files/tmr2.c
+"62 C:\Users\rafae\Documents\GitHub\sce\Examples.X\mcc_generated_files/tmr2.c
 [v _TMR2_Initialize TMR2_Initialize `(v  1 e 1 0 ]
 {
 "86
 } 0
-"63 C:\Users\rafae\Desktop\Universidade\4º ano\1º Semestre\Sistemas Computacionais Embebidos\Labs\PIC16F18875_Demo.X\mcc_generated_files/tmr1.c
+"63 C:\Users\rafae\Documents\GitHub\sce\Examples.X\mcc_generated_files/tmr1.c
 [v _TMR1_Initialize TMR1_Initialize `(v  1 e 1 0 ]
 {
 "90
 } 0
-"61 C:\Users\rafae\Desktop\Universidade\4º ano\1º Semestre\Sistemas Computacionais Embebidos\Labs\PIC16F18875_Demo.X\mcc_generated_files/tmr0.c
+"61 C:\Users\rafae\Documents\GitHub\sce\Examples.X\mcc_generated_files/tmr0.c
 [v _TMR0_Initialize TMR0_Initialize `(v  1 e 1 0 ]
 {
 "85
 } 0
-"58 C:\Users\rafae\Desktop\Universidade\4º ano\1º Semestre\Sistemas Computacionais Embebidos\Labs\PIC16F18875_Demo.X\mcc_generated_files/pwm6.c
+"58 C:\Users\rafae\Documents\GitHub\sce\Examples.X\mcc_generated_files/pwm6.c
 [v _PWM6_Initialize PWM6_Initialize `(v  1 e 1 0 ]
 {
 "72
 } 0
-"77 C:\Users\rafae\Desktop\Universidade\4º ano\1º Semestre\Sistemas Computacionais Embebidos\Labs\PIC16F18875_Demo.X\mcc_generated_files/mcc.c
+"77 C:\Users\rafae\Documents\GitHub\sce\Examples.X\mcc_generated_files/mcc.c
 [v _PMD_Initialize PMD_Initialize `(v  1 e 1 0 ]
 {
 "91
 } 0
-"57 C:\Users\rafae\Desktop\Universidade\4º ano\1º Semestre\Sistemas Computacionais Embebidos\Labs\PIC16F18875_Demo.X\mcc_generated_files/pin_manager.c
+"57 C:\Users\rafae\Documents\GitHub\sce\Examples.X\mcc_generated_files/pin_manager.c
 [v _PIN_MANAGER_Initialize PIN_MANAGER_Initialize `(v  1 e 1 0 ]
 {
 "110
 } 0
-"63 C:\Users\rafae\Desktop\Universidade\4º ano\1º Semestre\Sistemas Computacionais Embebidos\Labs\PIC16F18875_Demo.X\mcc_generated_files/mcc.c
+"63 C:\Users\rafae\Documents\GitHub\sce\Examples.X\mcc_generated_files/mcc.c
 [v _OSCILLATOR_Initialize OSCILLATOR_Initialize `(v  1 e 1 0 ]
 {
 "75
 } 0
-"63 C:\Users\rafae\Desktop\Universidade\4º ano\1º Semestre\Sistemas Computacionais Embebidos\Labs\PIC16F18875_Demo.X\mcc_generated_files/adcc.c
+"63 C:\Users\rafae\Documents\GitHub\sce\Examples.X\mcc_generated_files/adcc.c
 [v _ADCC_Initialize ADCC_Initialize `(v  1 e 1 0 ]
 {
 "102
 } 0
-"62 C:\Users\rafae\Desktop\Universidade\4º ano\1º Semestre\Sistemas Computacionais Embebidos\Labs\PIC16F18875_Demo.X\Labs/Lab03_Rotate/Rotate.c
+"62 C:\Users\rafae\Documents\GitHub\sce\Examples.X\Labs/Lab03_Rotate/Rotate.c
 [v _Rotate Rotate `(v  1 e 1 0 ]
 {
 "91
 } 0
-"70 C:\Users\rafae\Desktop\Universidade\4º ano\1º Semestre\Sistemas Computacionais Embebidos\Labs\PIC16F18875_Demo.X\Labs/Lab06_PulseWidthModulation/PWM.c
+"70 C:\Users\rafae\Documents\GitHub\sce\Examples.X\Labs/Lab06_PulseWidthModulation/PWM.c
 [v _PWM PWM `(v  1 e 1 0 ]
 {
 "89
 } 0
-"117 C:\Users\rafae\Desktop\Universidade\4º ano\1º Semestre\Sistemas Computacionais Embebidos\Labs\PIC16F18875_Demo.X\mcc_generated_files/tmr2.c
+"117 C:\Users\rafae\Documents\GitHub\sce\Examples.X\mcc_generated_files/tmr2.c
 [v _TMR2_StopTimer TMR2_StopTimer `(v  1 e 1 0 ]
 {
 "120
@@ -860,7 +860,7 @@ channel_FVR_buf1 63
 {
 "104
 } 0
-"91 C:\Users\rafae\Desktop\Universidade\4º ano\1º Semestre\Sistemas Computacionais Embebidos\Labs\PIC16F18875_Demo.X\Labs/Lab06_PulseWidthModulation/PWM.c
+"91 C:\Users\rafae\Documents\GitHub\sce\Examples.X\Labs/Lab06_PulseWidthModulation/PWM.c
 [v _PWM_Output_D5_Enable PWM_Output_D5_Enable `(v  1 e 1 0 ]
 {
 "102
@@ -870,34 +870,34 @@ channel_FVR_buf1 63
 {
 "113
 } 0
-"74 C:\Users\rafae\Desktop\Universidade\4º ano\1º Semestre\Sistemas Computacionais Embebidos\Labs\PIC16F18875_Demo.X\mcc_generated_files/pwm6.c
+"74 C:\Users\rafae\Documents\GitHub\sce\Examples.X\mcc_generated_files/pwm6.c
 [v _PWM6_LoadDutyValue PWM6_LoadDutyValue `(v  1 e 1 0 ]
 {
 [v PWM6_LoadDutyValue@dutyValue dutyValue `ui  1 p 2 1 ]
 "81
 } 0
-"68 C:\Users\rafae\Desktop\Universidade\4º ano\1º Semestre\Sistemas Computacionais Embebidos\Labs\PIC16F18875_Demo.X\Labs/Lab08_Interrupts/Interrupt.c
+"68 C:\Users\rafae\Documents\GitHub\sce\Examples.X\Labs/Lab08_Interrupts/Interrupt.c
 [v _Interrupt Interrupt `(v  1 e 1 0 ]
 {
 "97
 } 0
-"134 C:\Users\rafae\Desktop\Universidade\4º ano\1º Semestre\Sistemas Computacionais Embebidos\Labs\PIC16F18875_Demo.X\mcc_generated_files/tmr0.c
+"134 C:\Users\rafae\Documents\GitHub\sce\Examples.X\mcc_generated_files/tmr0.c
 [v _TMR0_SetInterruptHandler TMR0_SetInterruptHandler `(v  1 e 1 0 ]
 {
 [v TMR0_SetInterruptHandler@InterruptHandler InterruptHandler `*.37(v  1 p 2 1 ]
 "136
 } 0
-"57 C:\Users\rafae\Desktop\Universidade\4º ano\1º Semestre\Sistemas Computacionais Embebidos\Labs\PIC16F18875_Demo.X\Labs/Lab01_HelloWorld/HelloWorld.c
+"57 C:\Users\rafae\Documents\GitHub\sce\Examples.X\Labs/Lab01_HelloWorld/HelloWorld.c
 [v _HelloWorld HelloWorld `(v  1 e 1 0 ]
 {
 "71
 } 0
-"66 C:\Users\rafae\Desktop\Universidade\4º ano\1º Semestre\Sistemas Computacionais Embebidos\Labs\PIC16F18875_Demo.X\Labs/Lab10_EEPROM/EEPROM.c
+"66 C:\Users\rafae\Documents\GitHub\sce\Examples.X\Labs/Lab10_EEPROM/EEPROM.c
 [v _EEPROM EEPROM `(v  1 e 1 0 ]
 {
 "91
 } 0
-"182 C:\Users\rafae\Desktop\Universidade\4º ano\1º Semestre\Sistemas Computacionais Embebidos\Labs\PIC16F18875_Demo.X\mcc_generated_files/memory.c
+"182 C:\Users\rafae\Documents\GitHub\sce\Examples.X\mcc_generated_files/memory.c
 [v _DATAEE_WriteByte DATAEE_WriteByte `(v  1 e 1 0 ]
 {
 "184
@@ -913,12 +913,12 @@ channel_FVR_buf1 63
 [v DATAEE_ReadByte@bAdd bAdd `ui  1 p 2 1 ]
 "214
 } 0
-"67 C:\Users\rafae\Desktop\Universidade\4º ano\1º Semestre\Sistemas Computacionais Embebidos\Labs\PIC16F18875_Demo.X\Labs/Lab02_Blink/Blink.c
+"67 C:\Users\rafae\Documents\GitHub\sce\Examples.X\Labs/Lab02_Blink/Blink.c
 [v _Blink Blink `(v  1 e 1 0 ]
 {
 "91
 } 0
-"98 C:\Users\rafae\Desktop\Universidade\4º ano\1º Semestre\Sistemas Computacionais Embebidos\Labs\PIC16F18875_Demo.X\mcc_generated_files/tmr1.c
+"98 C:\Users\rafae\Documents\GitHub\sce\Examples.X\mcc_generated_files/tmr1.c
 [v _TMR1_StopTimer TMR1_StopTimer `(v  1 e 1 0 ]
 {
 "102
@@ -944,12 +944,12 @@ channel_FVR_buf1 63
 {
 "161
 } 0
-"62 C:\Users\rafae\Desktop\Universidade\4º ano\1º Semestre\Sistemas Computacionais Embebidos\Labs\PIC16F18875_Demo.X\Labs/Lab04_AnalogToDigitalConversion/ADC.c
+"62 C:\Users\rafae\Documents\GitHub\sce\Examples.X\Labs/Lab04_AnalogToDigitalConversion/ADC.c
 [v _ADC ADC `(v  1 e 1 0 ]
 {
 "81
 } 0
-"128 C:\Users\rafae\Desktop\Universidade\4º ano\1º Semestre\Sistemas Computacionais Embebidos\Labs\PIC16F18875_Demo.X\mcc_generated_files/adcc.c
+"128 C:\Users\rafae\Documents\GitHub\sce\Examples.X\mcc_generated_files/adcc.c
 [v _ADCC_GetSingleConversion ADCC_GetSingleConversion `(ui  1 e 2 0 ]
 {
 [v ADCC_GetSingleConversion@channel channel `E12086  1 a 1 wreg ]
@@ -958,22 +958,22 @@ channel_FVR_buf1 63
 [v ADCC_GetSingleConversion@channel channel `E12086  1 a 1 4 ]
 "154
 } 0
-"52 C:\Users\rafae\Desktop\Universidade\4º ano\1º Semestre\Sistemas Computacionais Embebidos\Labs\PIC16F18875_Demo.X\mcc_generated_files/interrupt_manager.c
+"52 C:\Users\rafae\Documents\GitHub\sce\Examples.X\mcc_generated_files/interrupt_manager.c
 [v _INTERRUPT_InterruptManager INTERRUPT_InterruptManager `II(v  1 e 1 0 ]
 {
 "63
 } 0
-"121 C:\Users\rafae\Desktop\Universidade\4º ano\1º Semestre\Sistemas Computacionais Embebidos\Labs\PIC16F18875_Demo.X\mcc_generated_files/tmr0.c
+"121 C:\Users\rafae\Documents\GitHub\sce\Examples.X\mcc_generated_files/tmr0.c
 [v _TMR0_ISR TMR0_ISR `(v  1 e 1 0 ]
 {
 "131
 } 0
-"99 C:\Users\rafae\Desktop\Universidade\4º ano\1º Semestre\Sistemas Computacionais Embebidos\Labs\PIC16F18875_Demo.X\Labs/Lab08_Interrupts/Interrupt.c
+"99 C:\Users\rafae\Documents\GitHub\sce\Examples.X\Labs/Lab08_Interrupts/Interrupt.c
 [v _LAB_ISR LAB_ISR `(v  1 e 1 0 ]
 {
 "109
 } 0
-"138 C:\Users\rafae\Desktop\Universidade\4º ano\1º Semestre\Sistemas Computacionais Embebidos\Labs\PIC16F18875_Demo.X\mcc_generated_files/tmr0.c
+"138 C:\Users\rafae\Documents\GitHub\sce\Examples.X\mcc_generated_files/tmr0.c
 [v _TMR0_DefaultInterruptHandler TMR0_DefaultInterruptHandler `(v  1 e 1 0 ]
 {
 "141

@@ -442,7 +442,7 @@ text13 1F7E 1F8D CODE 1F7E 0
 text18 1F70 1F7D CODE 1F70 0
 %locals
 dist/default/production\Examples_LCD.X.production.o
-C:\Users\rafae\AppData\Local\Temp\solcx.s
+C:\Users\rafae\AppData\Local\Temp\spccx.s
 8045 1E 0 CODE 0
 8048 1E 0 CODE 0
 8063 1E 0 CODE 0

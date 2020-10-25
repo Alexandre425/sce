@@ -5,7 +5,7 @@ Linker command line:
 -W-3 --edf=C:\Program Files\Microchip\xc8\v2.30\pic\dat\en_msgs.txt -cn \
   -h+dist/default/production\Examples_LCD.X.production.sym \
   --cmf=dist/default/production\Examples_LCD.X.production.cmf -z -Q16F18875 \
-  -oC:\Users\rafae\AppData\Local\Temp\solcx2 --defsym=__MPLAB_BUILD=1 \
+  -oC:\Users\rafae\AppData\Local\Temp\spccx2 --defsym=__MPLAB_BUILD=1 \
   -Mdist/default/production/Examples_LCD.X.production.map -E1 \
   -ver=XC8 Compiler --acfsm=1493 -ASTACK=02032h-023EFh -pstack=STACK \
   -ACODE=00h-07FFhx4 -ASTRCODE=00h-01FFFh -ASTRING=00h-0FFhx32 \
@@ -32,7 +32,7 @@ Linker command line:
   -peeprom_data=EEDATA -DEEDATA=2 -DCODE=2 -DSTRCODE=2 -DSTRING=2 -DCONST=2 \
   -DENTRY=2 -preset_vec=00h,intentry=04h,init,end_init -ppowerup=CODE \
   -pcinit=CODE -pfunctab=ENTRY -k \
-  C:\Users\rafae\AppData\Local\Temp\solcxm.o \
+  C:\Users\rafae\AppData\Local\Temp\spccxm.o \
   dist/default/production\Examples_LCD.X.production.o 
 
 Object code version is 3.11
@@ -42,7 +42,7 @@ Machine type is 16F18875
 
 
                 Name                               Link     Load   Length Selector   Space Scale
-C:\Users\rafae\AppData\Local\Temp\solcxm.o
+C:\Users\rafae\AppData\Local\Temp\spccxm.o
                 end_init                             1C       1C        2        8       0
                 reset_vec                             0        0        2        0       0
                 config                             8007     8007        5        0       4

@@ -195,6 +195,18 @@ int LCDbusy()
     return 0;
 }
 
+void checkButtonS1(void) {
+    if (btnState == NOT_PRESSED) {
+        if (SWITCH_S1_PORT == LOW) {
+            __delay_ms(100);
+            btnState = PRESSED;
+        }
+    } else if (SWITCH_S1_PORT == HIGH) {
+        btnState = NOT_PRESSED;
+//        switchEvent = 1;
+    }
+}
+
 void main(void)
 {
     unsigned char c;
@@ -232,18 +244,17 @@ void main(void)
 
     while (1)
     {
-        SWITCH_S1_Toggle();
-        if(SWITCH_S1_PORT){
-            LED_D2_Toggle();
-            LED_D3_Toggle();
-            LED_D4_Toggle();
-            LED_D5_Toggle();
+        NOP();
+        if(SWITCH_S1_GetValue()){
+            LED_D2_SetHigh();
+            LED_D3_SetHigh();
+            LED_D4_SetHigh();
+            LED_D5_SetHigh();
         } else {
             LEDs_SetLow();
         }
         // Add your application code
 
-        NOP();
         c = tsttc();
         //        hc = (c / 10);
         //        lc = (c % 10);
@@ -256,34 +267,18 @@ void main(void)
         //LCDchar(hc + 48);LCDchar(lc + 48);LCDchar(' ');LCDchar('C');
         sprintf(buf, "%02d C", c);
         LCDstr(buf);
-        LCDcmd(0xc5);
-        sprintf(buf, "%d", SWITCH_S1_PORT);
-        LCDstr(buf);
         LCDcmd(0x81);
-        //LCDchar('A');
-        //LCDcmd(0x81);
         c1 = LCDrecv(0);
         c2 = LCDrecv(LCD_RS);
         LCDcmd(0xc8);
-        sprintf(buf, "%02x %02x", c1, c2);
+        sprintf(buf, "%x", SWITCH_S1_GetValue());
         LCDstr(buf);
         NOP();
-        __delay_ms(3000);
-        counter = counter + 3;
+        __delay_ms(2000);
+        counter = counter + 2;
     }
 }
 
-void checkButtonS1(void) {
-    if (btnState == NOT_PRESSED) {
-        if (SWITCH_S1_PORT == LOW) {
-            __delay_ms(100);
-            btnState = PRESSED;
-        }
-    } else if (SWITCH_S1_PORT == HIGH) {
-        btnState = NOT_PRESSED;
-//        switchEvent = 1;
-    }
-}
 /**
  End of File
 */

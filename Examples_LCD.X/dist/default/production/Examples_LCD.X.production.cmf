@@ -11,10 +11,6 @@
 # All addresses and the length are given in unqualified hexadecimal
 # in delta units.  Any other numeric values are decimal.
 %PSECTS
-$C:\Users\rafae\AppData\Local\Temp\solcxm.o
-reset_vec CODE 0 0 0 2 2
-end_init CODE 0 1C 1C 2 2
-config CONFIG 4 8007 8007 5 2
 $dist/default/production\Examples_LCD.X.production.o
 cinit CODE 0 1E 1E 9 2
 text1 CODE 0 384 384 10D 2
@@ -48,6 +44,10 @@ stringtext5 STRCODE 0 101F 101F 7 2
 stringtext6 STRCODE 0 1026 1026 5 2
 intentry CODE 0 4 4 18 2
 bssBANK0 BANK0 1 4E 4E 4 1
+config CONFIG 4 8007 8007 5 2
+$C:\Users\rafae\AppData\Local\Temp\spccxm.o
+reset_vec CODE 0 0 0 2 2
+end_init CODE 0 1C 1C 2 2
 config CONFIG 4 8007 8007 5 2
 # %UNUSED Section
 # This section enumerates the unused ranges of each CLASS. Each entry
@@ -146,17 +146,17 @@ STRING 102B-1FFF 2
 # All other numeric values are in decimal.
 %LINETAB
 $dist/default/production\Examples_LCD.X.production.o
-1E cinit CODE >8045:C:\Users\rafae\AppData\Local\Temp\solcx.s
-1E cinit CODE >8048:C:\Users\rafae\AppData\Local\Temp\solcx.s
-1E cinit CODE >8063:C:\Users\rafae\AppData\Local\Temp\solcx.s
-1F cinit CODE >8064:C:\Users\rafae\AppData\Local\Temp\solcx.s
-20 cinit CODE >8065:C:\Users\rafae\AppData\Local\Temp\solcx.s
-21 cinit CODE >8066:C:\Users\rafae\AppData\Local\Temp\solcx.s
-22 cinit CODE >8067:C:\Users\rafae\AppData\Local\Temp\solcx.s
-23 cinit CODE >8073:C:\Users\rafae\AppData\Local\Temp\solcx.s
-23 cinit CODE >8075:C:\Users\rafae\AppData\Local\Temp\solcx.s
-24 cinit CODE >8076:C:\Users\rafae\AppData\Local\Temp\solcx.s
-25 cinit CODE >8077:C:\Users\rafae\AppData\Local\Temp\solcx.s
+1E cinit CODE >8045:C:\Users\rafae\AppData\Local\Temp\spccx.s
+1E cinit CODE >8048:C:\Users\rafae\AppData\Local\Temp\spccx.s
+1E cinit CODE >8063:C:\Users\rafae\AppData\Local\Temp\spccx.s
+1F cinit CODE >8064:C:\Users\rafae\AppData\Local\Temp\spccx.s
+20 cinit CODE >8065:C:\Users\rafae\AppData\Local\Temp\spccx.s
+21 cinit CODE >8066:C:\Users\rafae\AppData\Local\Temp\spccx.s
+22 cinit CODE >8067:C:\Users\rafae\AppData\Local\Temp\spccx.s
+23 cinit CODE >8073:C:\Users\rafae\AppData\Local\Temp\spccx.s
+23 cinit CODE >8075:C:\Users\rafae\AppData\Local\Temp\spccx.s
+24 cinit CODE >8076:C:\Users\rafae\AppData\Local\Temp\spccx.s
+25 cinit CODE >8077:C:\Users\rafae\AppData\Local\Temp\spccx.s
 4 intentry CODE >52:C:\Users\rafae\Documents\GitHub\sce\Examples_LCD.X\mcc_generated_files/interrupt_manager.c
 6 intentry CODE >55:C:\Users\rafae\Documents\GitHub\sce\Examples_LCD.X\mcc_generated_files/interrupt_manager.c
 A intentry CODE >57:C:\Users\rafae\Documents\GitHub\sce\Examples_LCD.X\mcc_generated_files/interrupt_manager.c
@@ -519,10 +519,10 @@ _WPUB F44 0 ABS 0 - dist/default/production\Examples_LCD.X.production.o
 _WPUC F4F 0 ABS 0 - dist/default/production\Examples_LCD.X.production.o
 _WPUD F5A 0 ABS 0 - dist/default/production\Examples_LCD.X.production.o
 _WPUE F65 0 ABS 0 - dist/default/production\Examples_LCD.X.production.o
-___sp 0 0 STACK 2 stack C:\Users\rafae\AppData\Local\Temp\solcxm.o
+___sp 0 0 STACK 2 stack C:\Users\rafae\AppData\Local\Temp\spccxm.o
 _main A88 0 CODE 0 maintext dist/default/production\Examples_LCD.X.production.o
 btemp 7E 0 ABS 0 - dist/default/production\Examples_LCD.X.production.o
-start 38 0 CODE 0 init C:\Users\rafae\AppData\Local\Temp\solcxm.o
+start 38 0 CODE 0 init C:\Users\rafae\AppData\Local\Temp\spccxm.o
 __size_of_main 0 0 ABS 0 - dist/default/production\Examples_LCD.X.production.o
 __size_of___lwdiv 0 0 ABS 0 - dist/default/production\Examples_LCD.X.production.o
 __size_of___lwmod 0 0 ABS 0 - dist/default/production\Examples_LCD.X.production.o
@@ -535,12 +535,12 @@ __size_of_LCDrecv 0 0 ABS 0 - dist/default/production\Examples_LCD.X.production.
 __size_of_LCDsend 0 0 ABS 0 - dist/default/production\Examples_LCD.X.production.o
 __Hpowerup 0 0 CODE 0 powerup -
 __size_of_SYSTEM_Initialize 0 0 ABS 0 - dist/default/production\Examples_LCD.X.production.o
-intlevel0 0 0 ENTRY 0 functab C:\Users\rafae\AppData\Local\Temp\solcxm.o
-intlevel1 0 0 ENTRY 0 functab C:\Users\rafae\AppData\Local\Temp\solcxm.o
-intlevel2 0 0 ENTRY 0 functab C:\Users\rafae\AppData\Local\Temp\solcxm.o
-intlevel3 0 0 ENTRY 0 functab C:\Users\rafae\AppData\Local\Temp\solcxm.o
-intlevel4 0 0 ENTRY 0 functab C:\Users\rafae\AppData\Local\Temp\solcxm.o
-intlevel5 0 0 ENTRY 0 functab C:\Users\rafae\AppData\Local\Temp\solcxm.o
+intlevel0 0 0 ENTRY 0 functab C:\Users\rafae\AppData\Local\Temp\spccxm.o
+intlevel1 0 0 ENTRY 0 functab C:\Users\rafae\AppData\Local\Temp\spccxm.o
+intlevel2 0 0 ENTRY 0 functab C:\Users\rafae\AppData\Local\Temp\spccxm.o
+intlevel3 0 0 ENTRY 0 functab C:\Users\rafae\AppData\Local\Temp\spccxm.o
+intlevel4 0 0 ENTRY 0 functab C:\Users\rafae\AppData\Local\Temp\spccxm.o
+intlevel5 0 0 ENTRY 0 functab C:\Users\rafae\AppData\Local\Temp\spccxm.o
 _i2c1_driver_open 1FC4 0 CODE 0 text7 dist/default/production\Examples_LCD.X.production.o
 wtemp0 7E 0 ABS 0 - dist/default/production\Examples_LCD.X.production.o
 __Hfunctab 0 0 ENTRY 0 functab -
@@ -564,8 +564,8 @@ ___lwmod@divisor 78 0 COMMON 1 cstackCOMMON dist/default/production\Examples_LCD
 __end_of___lwdiv E4A 0 CODE 0 text6 dist/default/production\Examples_LCD.X.production.o
 __end_of___lwmod F28 0 CODE 0 text5 dist/default/production\Examples_LCD.X.production.o
 __size_of_isdigit 0 0 ABS 0 - dist/default/production\Examples_LCD.X.production.o
-___stackhi 23EF 0 ABS 0 - C:\Users\rafae\AppData\Local\Temp\solcxm.o
-___stacklo 2032 0 ABS 0 - C:\Users\rafae\AppData\Local\Temp\solcxm.o
+___stackhi 23EF 0 ABS 0 - C:\Users\rafae\AppData\Local\Temp\spccxm.o
+___stacklo 2032 0 ABS 0 - C:\Users\rafae\AppData\Local\Temp\spccxm.o
 __end_of_LCDchar 1F8E 0 CODE 0 text13 dist/default/production\Examples_LCD.X.production.o
 __end_of_LCDinit CB6 0 CODE 0 text16 dist/default/production\Examples_LCD.X.production.o
 __end_of_LCDrecv 708 0 CODE 0 text14 dist/default/production\Examples_LCD.X.production.o
@@ -600,7 +600,7 @@ LCDsend2x4@c 75 0 COMMON 1 cstackCOMMON dist/default/production\Examples_LCD.X.p
 __size_of_LCDcmd 0 0 ABS 0 - dist/default/production\Examples_LCD.X.production.o
 __size_of_LCDstr 0 0 ABS 0 - dist/default/production\Examples_LCD.X.production.o
 __end_of_ReadI2C FD0 0 CODE 0 text15 dist/default/production\Examples_LCD.X.production.o
-___int_sp 0 0 STACK 2 stack C:\Users\rafae\AppData\Local\Temp\solcxm.o
+___int_sp 0 0 STACK 2 stack C:\Users\rafae\AppData\Local\Temp\spccxm.o
 __Hbank0 0 0 ABS 0 bank0 -
 __Hbank1 0 0 ABS 0 bank1 -
 __Hbank2 0 0 ABS 0 bank2 -
@@ -755,7 +755,7 @@ sprintf@idx 2A 0 BANK0 1 cstackBANK0 dist/default/production\Examples_LCD.X.prod
 sprintf@val 2D 0 BANK0 1 cstackBANK0 dist/default/production\Examples_LCD.X.production.o
 _SYSTEM_Initialize 1FB0 0 CODE 0 text8 dist/default/production\Examples_LCD.X.production.o
 __Lintentry 8 0 CODE 0 intentry -
-reset_vec 0 0 CODE 0 reset_vec C:\Users\rafae\AppData\Local\Temp\solcxm.o
+reset_vec 0 0 CODE 0 reset_vec C:\Users\rafae\AppData\Local\Temp\spccxm.o
 __size_of___wmul 0 0 ABS 0 - dist/default/production\Examples_LCD.X.production.o
 __LbssBANK0 0 0 ABS 0 bssBANK0 -
 __Lstringtext1 0 0 ABS 0 stringtext1 -
