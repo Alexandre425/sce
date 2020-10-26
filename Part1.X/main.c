@@ -1,16 +1,18 @@
 #include "mcc_generated_files/mcc.h"
+#include "mcc_generated_files/tmr1.h"
 #include "I2C/i2c.h"
-#include "timers/wdt.h"
 #include "button/button.h"
 #include "mcc_generated_files/pin_manager.h"
 #include "peripherals/lcd.h"
 #include "peripherals/temp_sensor.h"
 
-//#include "stdio.h"
 
-/*
-                         Main application
- */
+uint8_t counter = 0;
+
+void* timerInterrupt(void)
+{
+    counter++;
+}
 
 void checkButtonS1(void) {
     if (btnState == NOT_PRESSED) {
@@ -32,7 +34,6 @@ void main(void)
     unsigned char c1;
     unsigned char c2;
     unsigned char buf[17];
-    unsigned int counter = 0;
     
     // initialize the device
     SYSTEM_Initialize();
@@ -41,10 +42,12 @@ void main(void)
     // Use the following macros to:
 
     // Enable the Global Interrupts
-    //INTERRUPT_GlobalInterruptEnable();
+    INTERRUPT_GlobalInterruptEnable();
+    TMR1_SetInterruptHandler(timerInterrupt);
+    IOCBF4_SetInterruptHandler(timerInterrupt);
 
     // Enable the Peripheral Interrupts
-    //INTERRUPT_PeripheralInterruptEnable();
+    INTERRUPT_PeripheralInterruptEnable();
 
     // Disable the Global Interrupts
     //INTERRUPT_GlobalInterruptDisable();
@@ -58,6 +61,7 @@ void main(void)
     WPUC3 = 1;
     WPUC4 = 1;
     LCDinit();
+    TMR1_StartTimer();
 
     while (1)
     {
@@ -91,8 +95,7 @@ void main(void)
         sprintf(buf, "%x", SWITCH_S1_GetValue());
         LCDstr(buf);
         NOP();
-        __delay_ms(2000);
-        counter = counter + 2;
+        SLEEP();
     }
 }
 

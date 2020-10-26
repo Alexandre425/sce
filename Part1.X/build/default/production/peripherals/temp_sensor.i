@@ -21053,11 +21053,23 @@ signed char WriteI2C( unsigned char data_out );
 
 signed char getsI2C( unsigned char *rdptr, unsigned char length );
 
-# 112 "peripherals/../mcc_generated_files/pin_manager.h"
+# 252 "peripherals/../mcc_generated_files/pin_manager.h"
 void PIN_MANAGER_Initialize (void);
 
-# 124
+# 264
 void PIN_MANAGER_IOC(void);
+
+# 277
+void IOCBF4_ISR(void);
+
+# 300
+void IOCBF4_SetInterruptHandler(void (* InterruptHandler)(void));
+
+# 324
+extern void (*IOCBF4_InterruptHandler)(void);
+
+# 348
+void IOCBF4_DefaultInterruptHandler(void);
 
 # 13 "/opt/microchip/xc8/v2.30/pic/include/c90/stdint.h"
 typedef signed char int8_t;
@@ -21262,14 +21274,171 @@ inline void i2c1_driver_setI2cISR(interruptHandler handler);
 void (*i2c1_driver_busCollisionISR)(void);
 void (*i2c1_driver_i2cISR)(void);
 
-# 70 "peripherals/../mcc_generated_files/mcc.h"
+# 15 "/opt/microchip/xc8/v2.30/pic/include/c90/stdbool.h"
+typedef unsigned char bool;
+
+# 72 "peripherals/../mcc_generated_files/adcc.h"
+typedef uint16_t adc_result_t;
+
+# 89
+typedef enum
+{
+POT_CHANNEL = 0x0,
+channel_VSS = 0x3C,
+channel_Temp = 0x3D,
+channel_DAC1 = 0x3E,
+channel_FVR_buf1 = 0x3F
+} adcc_channel_t;
+
+# 130
+void ADCC_Initialize(void);
+
+# 159
+void ADCC_StartConversion(adcc_channel_t channel);
+
+# 189
+bool ADCC_IsConversionDone();
+
+# 221
+adc_result_t ADCC_GetConversionResult(void);
+
+# 252
+adc_result_t ADCC_GetSingleConversion(adcc_channel_t channel);
+
+# 277
+void ADCC_StopConversion(void);
+
+# 304
+void ADCC_SetStopOnInterrupt(void);
+
+# 329
+void ADCC_DischargeSampleCapacitor(void);
+
+# 355
+void ADCC_LoadAcquisitionRegister(uint8_t);
+
+# 381
+void ADCC_SetPrechargeTime(uint8_t);
+
+# 406
+void ADCC_SetRepeatCount(uint8_t);
+
+# 434
+uint8_t ADCC_GetCurrentCountofConversions(void);
+
+# 458
+void ADCC_ClearAccumulator(void);
+
+# 483
+uint16_t ADCC_GetAccumulatorValue(void);
+
+# 511
+bool ADCC_HasAccumulatorOverflowed(void);
+
+# 536
+uint16_t ADCC_GetFilterValue(void);
+
+# 564
+uint16_t ADCC_GetPreviousResult(void);
+
+# 590
+void ADCC_DefineSetPoint(uint16_t);
+
+# 616
+void ADCC_SetUpperThreshold(uint16_t);
+
+# 642
+void ADCC_SetLowerThreshold(uint16_t);
+
+# 669
+uint16_t ADCC_GetErrorCalculation(void);
+
+# 696
+void ADCC_EnableDoubleSampling(void);
+
+# 720
+void ADCC_EnableContinuousConversion(void);
+
+# 744
+void ADCC_DisableContinuousConversion(void);
+
+# 772
+bool ADCC_HasErrorCrossedUpperThreshold(void);
+
+# 800
+bool ADCC_HasErrorCrossedLowerThreshold(void);
+
+# 827
+uint8_t ADCC_GetConversionStageStatus(void);
+
+# 15 "/opt/microchip/xc8/v2.30/pic/include/c90/stdbool.h"
+typedef unsigned char bool;
+
+# 100 "peripherals/../mcc_generated_files/tmr1.h"
+void TMR1_Initialize(void);
+
+# 129
+void TMR1_StartTimer(void);
+
+# 161
+void TMR1_StopTimer(void);
+
+# 196
+uint16_t TMR1_ReadTimer(void);
+
+# 235
+void TMR1_WriteTimer(uint16_t timerVal);
+
+# 271
+void TMR1_Reload(void);
+
+# 310
+void TMR1_StartSinglePulseAcquisition(void);
+
+# 349
+uint8_t TMR1_CheckGateValueStatus(void);
+
+# 367
+void TMR1_ISR(void);
+
+# 385
+void TMR1_SetInterruptHandler(void (* InterruptHandler)(void));
+
+# 403
+extern void (*TMR1_InterruptHandler)(void);
+
+# 421
+void TMR1_DefaultInterruptHandler(void);
+
+# 442
+void TMR1_GATE_ISR(void);
+
+# 75 "peripherals/../mcc_generated_files/mcc.h"
 void SYSTEM_Initialize(void);
 
-# 83
+# 88
 void OSCILLATOR_Initialize(void);
 
-# 96
+# 101
 void PMD_Initialize(void);
+
+# 114
+void WWDT_Initialize(void);
+
+# 127
+void WWDT_SoftEnable(void);
+
+# 139
+void WWDT_SoftDisable(void);
+
+# 152
+void WWDT_TimerClear(void);
+
+# 165
+bool WWDT_TimeOutStatusGet(void);
+
+# 179
+bool WWDT_WindowViolationStatusGet(void);
 
 # 6 "peripherals/temp_sensor.c"
 unsigned char tsttc(void)

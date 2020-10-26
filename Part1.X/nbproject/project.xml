@@ -15,7 +15,6 @@
             <make-dep-projects/>
             <sourceRootList>
                 <sourceRootElem>I2C</sourceRootElem>
-                <sourceRootElem>timers</sourceRootElem>
             </sourceRootList>
             <confList>
                 <confElem>

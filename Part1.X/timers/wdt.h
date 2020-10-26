@@ -4,9 +4,8 @@
 #ifdef	__cplusplus
 extern "C" {
 #endif
-
-#define WDTEnable()     (WDTCONbits.SWDTEN = 1)
-#define WDTDisable()    (WDTCONbits.SWDTEN = 0)
+    
+#include "../mcc_generated_files/mcc.h"
 
 #ifdef	__cplusplus
 }
