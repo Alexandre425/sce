@@ -20,6 +20,10 @@ void* timerInterrupt(void)
 void* buttonInterrupt(void)
 {
     rtcTick(&clk);
+    LED_D2_Toggle();
+    LED_D3_Toggle();
+    LED_D4_Toggle();
+    LED_D5_Toggle();
 }
 
 void checkButtonS1(void) {
@@ -53,11 +57,11 @@ void main(void)
     // Enable the Global Interrupts
     INTERRUPT_GlobalInterruptEnable();
     TMR1_SetInterruptHandler(timerInterrupt);
-    IOCBF4_SetInterruptHandler(buttonInterrupt);
 
     // Enable the Peripheral Interrupts
     INTERRUPT_PeripheralInterruptEnable();
-
+    IOCBF4_SetInterruptHandler(buttonInterrupt);
+    
     // Disable the Global Interrupts
     //INTERRUPT_GlobalInterruptDisable();
 
@@ -75,16 +79,7 @@ void main(void)
     while (1)
     {
         NOP();
-        if(SWITCH_S1_GetValue()){
-            LED_D2_SetHigh();
-            LED_D3_SetHigh();
-            LED_D4_SetHigh();
-            LED_D5_SetHigh();
-        } else {
-            LEDs_SetLow();
-        }
-        // Add your application code
-        
+       
         // Take a temperature measurement
         c = tsttc();
         // Display the LCD header
