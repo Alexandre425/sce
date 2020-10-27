@@ -21078,6 +21078,18 @@ extern void (*IOCBF4_InterruptHandler)(void);
 # 348
 void IOCBF4_DefaultInterruptHandler(void);
 
+# 361
+void IOCCF5_ISR(void);
+
+# 384
+void IOCCF5_SetInterruptHandler(void (* InterruptHandler)(void));
+
+# 408
+extern void (*IOCCF5_InterruptHandler)(void);
+
+# 432
+void IOCCF5_DefaultInterruptHandler(void);
+
 # 13 "/opt/microchip/xc8/v2.30/pic/include/c90/stdint.h"
 typedef signed char int8_t;
 

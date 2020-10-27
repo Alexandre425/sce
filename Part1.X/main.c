@@ -1,17 +1,25 @@
 #include "mcc_generated_files/mcc.h"
 #include "mcc_generated_files/tmr1.h"
 #include "I2C/i2c.h"
-#include "button/button.h"
 #include "mcc_generated_files/pin_manager.h"
+
+#include "button/button.h"
+
 #include "peripherals/lcd.h"
 #include "peripherals/temp_sensor.h"
 
+#include "timers/timers.h"
 
-uint8_t counter = 0;
+rtc_t clk;
 
 void* timerInterrupt(void)
 {
-    counter++;
+    rtcTick(&clk);
+}
+
+void* buttonInterrupt(void)
+{
+    rtcTick(&clk);
 }
 
 void checkButtonS1(void) {
@@ -34,6 +42,7 @@ void main(void)
     unsigned char c1;
     unsigned char c2;
     unsigned char buf[17];
+    clk = rtcInit();
     
     // initialize the device
     SYSTEM_Initialize();
@@ -44,7 +53,7 @@ void main(void)
     // Enable the Global Interrupts
     INTERRUPT_GlobalInterruptEnable();
     TMR1_SetInterruptHandler(timerInterrupt);
-    IOCBF4_SetInterruptHandler(timerInterrupt);
+    IOCBF4_SetInterruptHandler(buttonInterrupt);
 
     // Enable the Peripheral Interrupts
     INTERRUPT_PeripheralInterruptEnable();
@@ -75,23 +84,26 @@ void main(void)
             LEDs_SetLow();
         }
         // Add your application code
-
+        
+        // Take a temperature measurement
         c = tsttc();
-        //        hc = (c / 10);
-        //        lc = (c % 10);
+        // Display the LCD header
         LCDcmd(0x80);
         LCDstr("Temp");
-        LCDcmd(0x85);
-        sprintf( buf,"Clock %02d", counter );
-        LCDstr(buf);
+        LCDcmd(0x8b);
+        LCDstr("Time");
+        // Display the temperature and time values
         LCDcmd(0xc0);
-        //LCDchar(hc + 48);LCDchar(lc + 48);LCDchar(' ');LCDchar('C');
         sprintf(buf, "%02d C", c);
         LCDstr(buf);
+        LCDcmd(0xc8);
+        sprintf(buf, "%02d:%02d:%02d", clk.h, clk.m, clk.s);
+        LCDstr(buf);
+        
         LCDcmd(0x81);
         c1 = LCDrecv(0);
         c2 = LCDrecv(LCD_RS);
-        LCDcmd(0xc8);
+        LCDcmd(0xc6);
         sprintf(buf, "%x", SWITCH_S1_GetValue());
         LCDstr(buf);
         NOP();

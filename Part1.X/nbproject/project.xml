@@ -15,6 +15,7 @@
             <make-dep-projects/>
             <sourceRootList>
                 <sourceRootElem>I2C</sourceRootElem>
+                <sourceRootElem>peripherals</sourceRootElem>
             </sourceRootList>
             <confList>
                 <confElem>

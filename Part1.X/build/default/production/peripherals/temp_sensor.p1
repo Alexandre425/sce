@@ -1,6 +1,6 @@
 Version 3.2 HI-TECH Software Intermediate Code
-[v F12284 `(v ~T0 @X0 0 tf ]
-[v F12287 `(v ~T0 @X0 0 tf ]
+[v F12295 `(v ~T0 @X0 0 tf ]
+[v F12298 `(v ~T0 @X0 0 tf ]
 "5309 /opt/microchip/mplabx/v5.40/packs/Microchip/PIC16F1xxxx_DFP/1.4.119/xc8/pic/include/proc/pic16f18875.h
 [v _SSP1CON2 `Vuc ~T0 @X0 0 e@401 ]
 "4831
@@ -13767,6 +13767,10 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;pin_manager.h: 300: void IOCBF4_SetInterruptHandler(void (* InterruptHandler)(void));
 [; ;pin_manager.h: 324: extern void (*IOCBF4_InterruptHandler)(void);
 [; ;pin_manager.h: 348: void IOCBF4_DefaultInterruptHandler(void);
+[; ;pin_manager.h: 361: void IOCCF5_ISR(void);
+[; ;pin_manager.h: 384: void IOCCF5_SetInterruptHandler(void (* InterruptHandler)(void));
+[; ;pin_manager.h: 408: extern void (*IOCCF5_InterruptHandler)(void);
+[; ;pin_manager.h: 432: void IOCCF5_DefaultInterruptHandler(void);
 [; ;stdint.h: 13: typedef signed char int8_t;
 [; ;stdint.h: 20: typedef signed int int16_t;
 [; ;stdint.h: 28: typedef __int24 int24_t;
@@ -13864,10 +13868,10 @@ Version 3.2 HI-TECH Software Intermediate Code
 [; ;i2c1_driver.h: 75: inline void i2c1_driver_setBusCollisionISR(interruptHandler handler);
 [; ;i2c1_driver.h: 76: inline void i2c1_driver_setI2cISR(interruptHandler handler);
 "77 peripherals/../mcc_generated_files/i2c1_driver.h
-[v _i2c1_driver_busCollisionISR `*F12284 ~T0 @X0 1 e ]
+[v _i2c1_driver_busCollisionISR `*F12295 ~T0 @X0 1 e ]
 [; ;i2c1_driver.h: 77: void (*i2c1_driver_busCollisionISR)(void);
 "78
-[v _i2c1_driver_i2cISR `*F12287 ~T0 @X0 1 e ]
+[v _i2c1_driver_i2cISR `*F12298 ~T0 @X0 1 e ]
 [; ;i2c1_driver.h: 78: void (*i2c1_driver_i2cISR)(void);
 [; ;stdbool.h: 15: typedef unsigned char bool;
 [; ;adcc.h: 72: typedef uint16_t adc_result_t;
