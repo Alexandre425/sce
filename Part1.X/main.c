@@ -19,10 +19,12 @@ void* timerInterrupt(void)
 
 void* buttonInterrupt(void)
 {
-    LED_D2_Toggle();
-    LED_D3_Toggle();
-    LED_D4_Toggle();
     LED_D5_Toggle();
+}
+
+void takeMeasurement(void)
+{
+    LED_D2_Toggle();
 }
 
 void checkButtonS1(void) {
@@ -46,6 +48,7 @@ void main(void)
     unsigned char c2;
     unsigned char buf[17];
     clk = rtcInit();
+    rtcSetMeasurementFunction(&clk, takeMeasurement);
     
     // initialize the device
     SYSTEM_Initialize();
@@ -81,6 +84,11 @@ void main(void)
        
         // Take a temperature measurement
         c = tsttc();
+        // Clear the display
+        LCDcmd(0x80);
+        LCDstr("                ");
+        LCDcmd(0xc0);
+        LCDstr("                ");
         // Display the LCD header
         LCDcmd(0x80);
         LCDstr("Temp");

@@ -25,6 +25,7 @@
       <logicalFolder name="f2" displayName="timers" projectFiles="true">
         <itemPath>timers/timers.h</itemPath>
       </logicalFolder>
+      <itemPath>config.h</itemPath>
     </logicalFolder>
     <logicalFolder name="LinkerScript"
                    displayName="Linker Files"
