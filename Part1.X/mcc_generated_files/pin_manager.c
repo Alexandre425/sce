@@ -91,9 +91,9 @@ void PIN_MANAGER_Initialize(void)
     */
     WPUD = 0x00;
     WPUE = 0x00;
-    WPUB = 0x10;
+    WPUB = 0x00;
     WPUA = 0x00;
-    WPUC = 0x20;
+    WPUC = 0x00;
 
     /**
     ODx registers
@@ -120,7 +120,7 @@ void PIN_MANAGER_Initialize(void)
     //interrupt on change for group IOCBF - flag
     IOCBFbits.IOCBF4 = 0;
     //interrupt on change for group IOCBN - negative
-    IOCBNbits.IOCBN4 = 0;
+    IOCBNbits.IOCBN4 = 1;
     //interrupt on change for group IOCBP - positive
     IOCBPbits.IOCBP4 = 0;
     //interrupt on change for group IOCCF - flag
@@ -186,8 +186,7 @@ void IOCBF4_SetInterruptHandler(void (* InterruptHandler)(void)){
   Default interrupt handler for IOCBF4
 */
 void IOCBF4_DefaultInterruptHandler(void){
-    // add your IOCBF4 interrupt custom code
-    // or set custom function using IOCBF4_SetInterruptHandler()
+
 }
 
 /**

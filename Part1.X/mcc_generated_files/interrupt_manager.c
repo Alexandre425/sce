@@ -58,21 +58,21 @@ void __interrupt() INTERRUPT_InterruptManager (void)
     }
     else if(INTCONbits.PEIE == 1)
     {
-        if(PIE3bits.BCL1IE == 1 && PIR3bits.BCL1IF == 1)
-        {
-            i2c1_driver_busCollisionISR();
-        } 
-        else if(PIE3bits.SSP1IE == 1 && PIR3bits.SSP1IF == 1)
-        {
-            i2c1_driver_i2cISR();
-        } 
-        else if(PIE4bits.TMR1IE == 1 && PIR4bits.TMR1IF == 1)
+        if(PIE4bits.TMR1IE == 1 && PIR4bits.TMR1IF == 1)
         {
             TMR1_ISR();
         } 
         else if(PIE5bits.TMR1GIE == 1 && PIR5bits.TMR1GIF == 1)
         {
             TMR1_GATE_ISR();
+        } 
+        else if(PIE3bits.BCL1IE == 1 && PIR3bits.BCL1IF == 1)
+        {
+            i2c1_driver_busCollisionISR();
+        } 
+        else if(PIE3bits.SSP1IE == 1 && PIR3bits.SSP1IF == 1)
+        {
+            i2c1_driver_i2cISR();
         } 
         else
         {

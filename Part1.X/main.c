@@ -19,7 +19,6 @@ void* timerInterrupt(void)
 
 void* buttonInterrupt(void)
 {
-    rtcTick(&clk);
     LED_D2_Toggle();
     LED_D3_Toggle();
     LED_D4_Toggle();
