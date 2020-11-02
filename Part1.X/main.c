@@ -13,6 +13,8 @@
 #include "config.h"
 
 rtc_t clk;
+reg_t registers[25];
+unsigned char temp;
 adc_result_t luminosity;
 
 void* timerInterrupt(void)
@@ -25,8 +27,13 @@ void* buttonInterrupt(void)
     LED_D5_Toggle();
 }
 
-void takeMeasurement(void)
+void takeMeasurement(unsigned char nreg)
 {
+    registers[nreg].clk.h = clk.h;
+    registers[nreg].clk.m = clk.m;
+    registers[nreg].clk.s = clk.s;
+    registers[nreg].temp = temp;
+    registers[nreg].lumin = luminosity;
     LED_D2_Toggle();
 }
 
@@ -49,17 +56,6 @@ void generateAlarmString(unsigned char* alarm_buf)
     alarm_buf[4] = (alarms & ALARM_A ? 'A' : ' ');
 }
 
-void checkButtonS1(void) {
-    if (btnState == NOT_PRESSED) {
-        if (SWITCH_S1_PORT == LOW) {
-            __delay_ms(100);
-            btnState = PRESSED;
-        }
-    } else if (SWITCH_S1_PORT == HIGH) {
-        btnState = NOT_PRESSED;
-//        switchEvent = 1;
-    }
-}
 
 void main(void)
 {
@@ -122,7 +118,8 @@ void main(void)
         // Display the temperature
         LCDcmd(0xc0);
         // Take a temperature measurement
-        sprintf(buf, "%02d C", readTemp());
+        temp = readTemp();
+        sprintf(buf, "%02d C", temp);
         LCDstr(buf);
         // Display the alarms
         generateAlarmString(alarm_buf);

@@ -11,7 +11,9 @@
 #ifdef	__cplusplus
 extern "C" {
 #endif
-
+    
+#include "timers/timers.h"
+    
 #define NREG 25
 #define PMON 3
 #define TALA 5
@@ -34,6 +36,12 @@ typedef unsigned char alarm_t;
 
 alarm_t alarms;
 
+typedef struct reg
+{
+    rtc_t clk;
+    unsigned char temp;
+    unsigned char lumin;
+} reg_t;
 
 #ifdef	__cplusplus
 }

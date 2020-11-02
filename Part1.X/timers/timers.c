@@ -1,6 +1,8 @@
 #include "timers.h"
 #include "../config.h"
 
+unsigned char nreg;
+
 rtc_t rtcInit(void)
 {
     rtc_t clk;
@@ -9,6 +11,7 @@ rtc_t rtcInit(void)
     clk.s = CLKS;
     clk.meas_tmr = 0;
     clk.takeMeasurement = 0x0;
+    nreg = '0';
     return clk;
 }
 
@@ -40,7 +43,9 @@ void rtcTick(rtc_t* clk)
     if (clk->meas_tmr >= PMON)
     {
         clk->meas_tmr = 0;
-        (clk->takeMeasurement)();
+        (clk->takeMeasurement)(nreg);
+        nreg++;
+        nreg = (nreg >= 25 ? 0 : nreg);
     }
 }
 

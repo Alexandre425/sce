@@ -14,7 +14,7 @@ typedef struct rtc
     unsigned char m;
     unsigned char s;
     unsigned char meas_tmr;
-    void (*takeMeasurement)(void);
+    void (*takeMeasurement)(unsigned char);
 
 } rtc_t;
 
