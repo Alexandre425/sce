@@ -74,6 +74,10 @@ void __interrupt() INTERRUPT_InterruptManager (void)
         {
             i2c1_driver_i2cISR();
         } 
+        else if(PIE1bits.ADIE == 1 && PIR1bits.ADIF == 1)
+        {
+            ADCC_ISR();
+        } 
         else
         {
             //Unhandled Interrupt

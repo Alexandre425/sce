@@ -828,7 +828,55 @@ uint8_t ADCC_GetConversionStageStatus(void);
 
 
 
+/**
+  @Summary
+    Implements ISR
 
+  @Description
+    This routine is used to set the callback for the ADI Interrupt.
+
+  @Returns
+    None
+
+  @Param
+    Callback Function to be called
+*/
+void ADCC_SetADIInterruptHandler(void (* InterruptHandler)(void));
+
+/**
+  @Summary
+    Implements ISR
+
+  @Description
+    This routine is used to implement the ISR for the interrupt-driven
+    implementations.
+
+  @Returns
+    None
+
+  @Param
+    None
+*/
+void ADCC_ISR(void);
+
+
+/**
+  @Summary
+    Default ADCC Interrupt Handler
+
+  @Description
+    This is the default Interrupt Handler function
+
+  @Preconditions
+    Initialize  the ADCC module with interrupt before calling this isr.
+
+  @Param
+    None
+
+  @Returns
+    None
+*/
+void ADCC_DefaultInterruptHandler(void);
 #ifdef __cplusplus  // Provide C++ Compatibility
 
     }

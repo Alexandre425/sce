@@ -31,7 +31,7 @@ void takeMeasurement(void)
 
 void readLuminosity (void)
 {
-    ADCC_
+    
 }
 
 void enableAlarms (void)
