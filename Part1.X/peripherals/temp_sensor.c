@@ -50,15 +50,8 @@ unsigned char tsttc(void)
 
 unsigned char readTemp(void)
 {
-    unsigned int readint;
-    unsigned char read;
-    
+    unsigned char read;   
     read = tsttc();
     
-    sprintf(&readint, "%02d", read);
-    if (readint < 0 || readint > 50)
-    {
-        read = 'E';
-    }
-    return read;
+    return (read > 50 ? 50 : read);
 }

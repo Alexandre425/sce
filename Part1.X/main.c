@@ -31,13 +31,22 @@ void takeMeasurement(void)
 
 void readLuminosity (void)
 {
-    
+    ADCC_
 }
 
 void enableAlarms (void)
 {
     
 }
+
+void generateAlarmString(unsigned char* alarm_buf)
+{
+    alarm_buf[0] = (alarms & ALARM_C ? 'C' : ' ');
+    alarm_buf[1] = (alarms & ALARM_T ? 'T' : ' ');
+    alarm_buf[2] = (alarms & ALARM_L ? 'L' : ' ');
+    alarm_buf[4] = (alarms & ALARM_A ? 'A' : ' ');
+}
+
 void checkButtonS1(void) {
     if (btnState == NOT_PRESSED) {
         if (SWITCH_S1_PORT == LOW) {
@@ -58,9 +67,15 @@ void main(void)
     unsigned char c1;
     unsigned char c2;
     unsigned char buf[17];
+    unsigned char alarm_buf[6];
+    alarm_buf[3] = ' ';
+    alarm_buf[5] = '\0';
     clk = rtcInit();
     rtcSetMeasurementFunction(&clk, takeMeasurement);
     
+    ALAF = 1;
+    alarms = ALARM_C | ALARM_L | ALARM_A;
+
     // initialize the device
     SYSTEM_Initialize();
 
@@ -98,17 +113,20 @@ void main(void)
         LCDstr("                ");
         LCDcmd(0xc0);
         LCDstr("                ");
-        // Display the LCD header
+        // Display the ytime
         LCDcmd(0x80);
         sprintf(buf, "%02d:%02d:%02d", clk.h, clk.m, clk.s);
         LCDstr(buf);
-        LCDcmd(0x8b);
-        LCDstr("Time");
-        // Display the temperature and time values
+        // Display the temperature
         LCDcmd(0xc0);
         // Take a temperature measurement
         sprintf(buf, "%02d C", readTemp());
         LCDstr(buf);
+        // Display the alarms
+        generateAlarmString(&alarm_buf);
+        LCDcmd(0x8b);
+        LCDstr(alarm_buf);
+        // Display the luminosity
         LCDcmd(0xcd);
         sprintf(buf, "L %1d", 1);
         LCDstr(buf);
