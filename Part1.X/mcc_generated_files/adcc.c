@@ -157,9 +157,9 @@ adc_result_t ADCC_GetSingleConversion(adcc_channel_t channel)
         CLRWDT();
     }
     
-    
+    adc_result_t res = (ADRESH << 8) + ADRESL;
     // Conversion finished, return the result
-    return ((adc_result_t)((ADRESH << 8) + ADRESL));
+    return res;
 }
 
 void ADCC_StopConversion(void)

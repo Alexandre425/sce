@@ -13,6 +13,7 @@
 #include "config.h"
 
 rtc_t clk;
+adc_result_t luminosity;
 
 void* timerInterrupt(void)
 {
@@ -29,9 +30,10 @@ void takeMeasurement(void)
     LED_D2_Toggle();
 }
 
-void readLuminosity (void)
+adc_result_t readLuminosity (void)
 {
-    
+    adc_result_t res = ADCC_GetSingleConversion(POT_CHANNEL);
+    return (res >> 13);
 }
 
 void enableAlarms (void)
@@ -123,12 +125,12 @@ void main(void)
         sprintf(buf, "%02d C", readTemp());
         LCDstr(buf);
         // Display the alarms
-        generateAlarmString(&alarm_buf);
+        generateAlarmString(alarm_buf);
         LCDcmd(0x8b);
         LCDstr(alarm_buf);
         // Display the luminosity
-        LCDcmd(0xcd);
-        sprintf(buf, "L %1d", 1);
+        LCDcmd(0xc4);
+        sprintf(buf, "L %u", readLuminosity());
         LCDstr(buf);
         
         LCDcmd(0x81);
