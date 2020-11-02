@@ -4,17 +4,20 @@
 # 15 "peripherals/temp_sensor.h"
 unsigned char tsttc(void);
 
-# 18 "/opt/microchip/mplabx/v5.40/packs/Microchip/PIC16F1xxxx_DFP/1.4.119/xc8/pic/include/xc.h"
+
+unsigned char readTemp(void);
+
+# 18 "C:/Program Files (x86)/Microchip/MPLABX/v5.40/packs/Microchip/PIC16F1xxxx_DFP/1.4.119/xc8\pic\include\xc.h"
 extern const char __xc8_OPTIM_SPEED;
 
 extern double __fpnormalize(double);
 
 
-# 13 "/opt/microchip/xc8/v2.30/pic/include/c90/xc8debug.h"
+# 13 "C:\Program Files\Microchip\xc8\v2.30\pic\include\c90\xc8debug.h"
 #pragma intrinsic(__builtin_software_breakpoint)
 extern void __builtin_software_breakpoint(void);
 
-# 52 "/opt/microchip/mplabx/v5.40/packs/Microchip/PIC16F1xxxx_DFP/1.4.119/xc8/pic/include/proc/pic16f18875.h"
+# 52 "C:/Program Files (x86)/Microchip/MPLABX/v5.40/packs/Microchip/PIC16F1xxxx_DFP/1.4.119/xc8\pic\include\proc\pic16f18875.h"
 extern volatile unsigned char INDF0 __at(0x000);
 
 asm("INDF0 equ 00h");
@@ -21009,7 +21012,7 @@ extern volatile __bit nWRITE1 __at(0xC7A);
 extern volatile __bit nWRITE2 __at(0xCCA);
 
 
-# 30 "/opt/microchip/mplabx/v5.40/packs/Microchip/PIC16F1xxxx_DFP/1.4.119/xc8/pic/include/pic.h"
+# 30 "C:/Program Files (x86)/Microchip/MPLABX/v5.40/packs/Microchip/PIC16F1xxxx_DFP/1.4.119/xc8\pic\include\pic.h"
 #pragma intrinsic(__nop)
 extern void __nop(void);
 
@@ -21020,12 +21023,12 @@ __attribute__((__unsupported__("The " "FLASH_WRITE" " macro function is no longe
 
 __attribute__((__unsupported__("The " "FLASH_ERASE" " macro function is no longer supported. Please use the MPLAB X MCC."))) void __flash_erase(unsigned short addr);
 
-# 114 "/opt/microchip/mplabx/v5.40/packs/Microchip/PIC16F1xxxx_DFP/1.4.119/xc8/pic/include/eeprom_routines.h"
+# 114 "C:/Program Files (x86)/Microchip/MPLABX/v5.40/packs/Microchip/PIC16F1xxxx_DFP/1.4.119/xc8\pic\include\eeprom_routines.h"
 extern void eeprom_write(unsigned char addr, unsigned char value);
 extern unsigned char eeprom_read(unsigned char addr);
 
 
-# 91 "/opt/microchip/mplabx/v5.40/packs/Microchip/PIC16F1xxxx_DFP/1.4.119/xc8/pic/include/pic.h"
+# 91 "C:/Program Files (x86)/Microchip/MPLABX/v5.40/packs/Microchip/PIC16F1xxxx_DFP/1.4.119/xc8\pic\include\pic.h"
 #pragma intrinsic(_delay)
 extern __nonreentrant void _delay(unsigned long);
 #pragma intrinsic(_delaywdt)
@@ -21083,7 +21086,7 @@ extern void (*IOCCF5_InterruptHandler)(void);
 # 432
 void IOCCF5_DefaultInterruptHandler(void);
 
-# 13 "/opt/microchip/xc8/v2.30/pic/include/c90/stdint.h"
+# 13 "C:\Program Files\Microchip\xc8\v2.30\pic\include\c90\stdint.h"
 typedef signed char int8_t;
 
 # 20
@@ -21169,13 +21172,13 @@ typedef int16_t intptr_t;
 
 typedef uint16_t uintptr_t;
 
-# 15 "/opt/microchip/xc8/v2.30/pic/include/c90/stdbool.h"
+# 15 "C:\Program Files\Microchip\xc8\v2.30\pic\include\c90\stdbool.h"
 typedef unsigned char bool;
 
-# 4 "/opt/microchip/mplabx/v5.40/packs/Microchip/PIC16F1xxxx_DFP/1.4.119/xc8/pic/include/__size_t.h"
+# 4 "C:/Program Files (x86)/Microchip/MPLABX/v5.40/packs/Microchip/PIC16F1xxxx_DFP/1.4.119/xc8\pic\include\__size_t.h"
 typedef unsigned size_t;
 
-# 7 "/opt/microchip/xc8/v2.30/pic/include/c90/stdarg.h"
+# 7 "C:\Program Files\Microchip\xc8\v2.30\pic\include\c90\stdarg.h"
 typedef void * va_list[1];
 
 #pragma intrinsic(__va_start)
@@ -21184,17 +21187,17 @@ extern void * __va_start(void);
 #pragma intrinsic(__va_arg)
 extern void * __va_arg(void *, ...);
 
-# 43 "/opt/microchip/xc8/v2.30/pic/include/c90/stdio.h"
+# 43 "C:\Program Files\Microchip\xc8\v2.30\pic\include\c90\stdio.h"
 struct __prbuf
 {
 char * ptr;
 void (* func)(char);
 };
 
-# 29 "/opt/microchip/xc8/v2.30/pic/include/c90/errno.h"
+# 29 "C:\Program Files\Microchip\xc8\v2.30\pic\include\c90\errno.h"
 extern int errno;
 
-# 12 "/opt/microchip/xc8/v2.30/pic/include/c90/conio.h"
+# 12 "C:\Program Files\Microchip\xc8\v2.30\pic\include\c90\conio.h"
 extern void init_uart(void);
 
 extern char getch(void);
@@ -21208,7 +21211,7 @@ extern __bit kbhit(void);
 extern char * cgets(char *);
 extern void cputs(const char *);
 
-# 88 "/opt/microchip/xc8/v2.30/pic/include/c90/stdio.h"
+# 88 "C:\Program Files\Microchip\xc8\v2.30\pic\include\c90\stdio.h"
 extern int cprintf(char *, ...);
 #pragma printf_check(cprintf)
 
@@ -21235,7 +21238,7 @@ extern int vsscanf(const char *, const char *, va_list) __attribute__((unsupport
 extern int sprintf(char *, const char *, ...);
 extern int printf(const char *, ...);
 
-# 15 "/opt/microchip/xc8/v2.30/pic/include/c90/stdbool.h"
+# 15 "C:\Program Files\Microchip\xc8\v2.30\pic\include\c90\stdbool.h"
 typedef unsigned char bool;
 
 # 33 "peripherals/../mcc_generated_files/i2c1_driver.h"
@@ -21286,7 +21289,7 @@ inline void i2c1_driver_setI2cISR(interruptHandler handler);
 void (*i2c1_driver_busCollisionISR)(void);
 void (*i2c1_driver_i2cISR)(void);
 
-# 15 "/opt/microchip/xc8/v2.30/pic/include/c90/stdbool.h"
+# 15 "C:\Program Files\Microchip\xc8\v2.30\pic\include\c90\stdbool.h"
 typedef unsigned char bool;
 
 # 72 "peripherals/../mcc_generated_files/adcc.h"
@@ -21383,7 +21386,7 @@ bool ADCC_HasErrorCrossedLowerThreshold(void);
 # 827
 uint8_t ADCC_GetConversionStageStatus(void);
 
-# 15 "/opt/microchip/xc8/v2.30/pic/include/c90/stdbool.h"
+# 15 "C:\Program Files\Microchip\xc8\v2.30\pic\include\c90\stdbool.h"
 typedef unsigned char bool;
 
 # 100 "peripherals/../mcc_generated_files/tmr1.h"
@@ -21452,6 +21455,9 @@ bool WWDT_TimeOutStatusGet(void);
 # 179
 bool WWDT_WindowViolationStatusGet(void);
 
+# 27 "peripherals/../config.h"
+int ALAF;
+
 # 6 "peripherals/temp_sensor.c"
 unsigned char tsttc(void)
 {
@@ -21495,4 +21501,20 @@ while ((SSP1CON2 & 0x1F) | (SSP1STATbits.R_W));
 SSP1CON2bits.PEN = 1;while(SSP1CON2bits.PEN);
 
 return value;
+}
+
+
+unsigned char readTemp(void)
+{
+unsigned int readint;
+unsigned char read;
+
+read = tsttc();
+
+sprintf(&readint, "%02d", read);
+if (readint < 0 || readint > 50)
+{
+read = 'E';
+}
+return read;
 }

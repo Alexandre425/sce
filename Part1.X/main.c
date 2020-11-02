@@ -10,6 +10,8 @@
 
 #include "timers/timers.h"
 
+#include "config.h"
+
 rtc_t clk;
 
 void* timerInterrupt(void)
@@ -27,6 +29,15 @@ void takeMeasurement(void)
     LED_D2_Toggle();
 }
 
+void readLuminosity (void)
+{
+    
+}
+
+void enableAlarms (void)
+{
+    
+}
 void checkButtonS1(void) {
     if (btnState == NOT_PRESSED) {
         if (SWITCH_S1_PORT == LOW) {
@@ -81,9 +92,7 @@ void main(void)
     while (1)
     {
         NOP();
-       
-        // Take a temperature measurement
-        c = tsttc();
+        
         // Clear the display
         LCDcmd(0x80);
         LCDstr("                ");
@@ -91,15 +100,17 @@ void main(void)
         LCDstr("                ");
         // Display the LCD header
         LCDcmd(0x80);
-        LCDstr("Temp");
+        sprintf(buf, "%02d:%02d:%02d", clk.h, clk.m, clk.s);
+        LCDstr(buf);
         LCDcmd(0x8b);
         LCDstr("Time");
         // Display the temperature and time values
         LCDcmd(0xc0);
-        sprintf(buf, "%02d C", c);
+        // Take a temperature measurement
+        sprintf(buf, "%02d C", readTemp());
         LCDstr(buf);
-        LCDcmd(0xc8);
-        sprintf(buf, "%02d:%02d:%02d", clk.h, clk.m, clk.s);
+        LCDcmd(0xcd);
+        sprintf(buf, "L %1d", 1);
         LCDstr(buf);
         
         LCDcmd(0x81);

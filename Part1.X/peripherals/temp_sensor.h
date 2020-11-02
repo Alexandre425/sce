@@ -14,6 +14,9 @@ extern "C" {
 
 unsigned char tsttc(void);
 
+// Function to read the temperature
+unsigned char readTemp(void);
+
 #ifdef	__cplusplus
 }
 #endif

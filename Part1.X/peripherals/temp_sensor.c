@@ -1,7 +1,7 @@
 #include "temp_sensor.h"
 #include "../I2C/i2c.h"
 #include "../mcc_generated_files/mcc.h"
-
+#include "../config.h"
 
 unsigned char tsttc(void)
 {
@@ -45,4 +45,20 @@ unsigned char tsttc(void)
 	StopI2C();
 
 	return value;
+}
+
+
+unsigned char readTemp(void)
+{
+    unsigned int readint;
+    unsigned char read;
+    
+    read = tsttc();
+    
+    sprintf(&readint, "%02d", read);
+    if (readint < 0 || readint > 50)
+    {
+        read = 'E';
+    }
+    return read;
 }
