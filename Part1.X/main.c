@@ -23,24 +23,29 @@ void* timerInterrupt(void)
 
 void* buttonInterrupt(void)
 {
+    unsigned char buff[10];
+    sprintf(buff, "%d",DATAEE_ReadByte(EEAddr + 2));
+    LCDcmd(0x89);
+    LCDstr(buff);
     LED_D5_Toggle();
 }
 
 void takeMeasurement(unsigned char nreg)
 {
+    // Writing the bytes to the EEPROM for a register
     DATAEE_WriteByte(nreg, clk.h);
     DATAEE_WriteByte(nreg+1, clk.m);
     DATAEE_WriteByte(nreg+2, clk.s);
     DATAEE_WriteByte(nreg+3, temp);
     DATAEE_WriteByte(nreg+4, luminosity);
-    
+    // visual check
     LED_D2_Toggle();
 }
 
 adc_result_t readLuminosity (void)
 {
     adc_result_t res = ADCC_GetSingleConversion(POT_CHANNEL);
-    return (res >> 12);
+    return (res >> 13);
 }
 
 void enableAlarms (void)
@@ -59,9 +64,6 @@ void generateAlarmString(unsigned char* alarm_buf)
 
 void main(void)
 {
-    unsigned char c;
-    unsigned char hc;
-    unsigned char lc;
     unsigned char c1;
     unsigned char c2;
     unsigned char buf[17];
@@ -111,7 +113,7 @@ void main(void)
         LCDstr("                ");
         LCDcmd(0xc0);
         LCDstr("                ");
-        // Display the ytime
+        // Display the time
         LCDcmd(0x80);
         sprintf(buf, "%02d:%02d:%02d", clk.h, clk.m, clk.s);
         LCDstr(buf);
@@ -127,15 +129,12 @@ void main(void)
         LCDstr(alarm_buf);
         // Display the luminosity
         LCDcmd(0xc4);
-        sprintf(buf, "L %u", readLuminosity()%8);
+        sprintf(buf, "L %u", readLuminosity());
         LCDstr(buf);
-        
-        LCDcmd(0x81);
+        // Positions of the beginning of the lcd and the end
         c1 = LCDrecv(0);
         c2 = LCDrecv(LCD_RS);
-        LCDcmd(0xc6);
-        sprintf(buf, "%x", SWITCH_S1_GetValue());
-        LCDstr(buf);
+        
         NOP();
         SLEEP();
     }
