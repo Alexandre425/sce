@@ -36,12 +36,6 @@ typedef unsigned char alarm_t;
 
 alarm_t alarms;
 
-typedef struct reg
-{
-    rtc_t clk;
-    unsigned char temp;
-    unsigned char lumin;
-} reg_t;
 
 #ifdef	__cplusplus
 }

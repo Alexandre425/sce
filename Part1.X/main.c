@@ -13,7 +13,6 @@
 #include "config.h"
 
 rtc_t clk;
-reg_t registers[25];
 unsigned char temp;
 adc_result_t luminosity;
 
@@ -29,18 +28,19 @@ void* buttonInterrupt(void)
 
 void takeMeasurement(unsigned char nreg)
 {
-    registers[nreg].clk.h = clk.h;
-    registers[nreg].clk.m = clk.m;
-    registers[nreg].clk.s = clk.s;
-    registers[nreg].temp = temp;
-    registers[nreg].lumin = luminosity;
+    DATAEE_WriteByte(nreg, clk.h);
+    DATAEE_WriteByte(nreg+1, clk.m);
+    DATAEE_WriteByte(nreg+2, clk.s);
+    DATAEE_WriteByte(nreg+3, temp);
+    DATAEE_WriteByte(nreg+4, luminosity);
+    
     LED_D2_Toggle();
 }
 
 adc_result_t readLuminosity (void)
 {
     adc_result_t res = ADCC_GetSingleConversion(POT_CHANNEL);
-    return (res >> 13);
+    return (res >> 12);
 }
 
 void enableAlarms (void)
@@ -127,7 +127,7 @@ void main(void)
         LCDstr(alarm_buf);
         // Display the luminosity
         LCDcmd(0xc4);
-        sprintf(buf, "L %u", readLuminosity());
+        sprintf(buf, "L %u", readLuminosity()%8);
         LCDstr(buf);
         
         LCDcmd(0x81);

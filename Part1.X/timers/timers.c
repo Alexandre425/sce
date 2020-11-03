@@ -1,5 +1,6 @@
 #include "timers.h"
 #include "../config.h"
+#include "../mcc_generated_files/memory.h"
 
 unsigned char nreg;
 
@@ -43,9 +44,9 @@ void rtcTick(rtc_t* clk)
     if (clk->meas_tmr >= PMON)
     {
         clk->meas_tmr = 0;
-        (clk->takeMeasurement)(nreg);
-        nreg++;
-        nreg = (nreg >= 25 ? 0 : nreg);
+        (clk->takeMeasurement)(EEAddr + nreg);
+        nreg+=5;
+        nreg = (nreg >= 125 ? 0 : nreg);
     }
 }
 
