@@ -39,7 +39,7 @@ void takeMeasurement(unsigned char nreg)
     DATAEE_WriteByte(nreg+3, temp);
     DATAEE_WriteByte(nreg+4, luminosity);
     // visual check
-    LED_D2_Toggle();
+    LED_D4_Toggle();
 }
 
 adc_result_t readLuminosity (void)
@@ -61,6 +61,33 @@ void generateAlarmString(unsigned char* alarm_buf)
     alarm_buf[4] = (alarms & ALARM_A ? 'A' : ' ');
 }
 
+//Light LED D2 when luminosity is above threshold
+void checkLuminosity(void)
+{
+    if(readLuminosity()>=ALAL){
+        LED_D2_SetHigh();
+    }
+    else {
+        LED_D2_SetLow();
+    }  
+}
+
+//Light LED D3 when temperature is above threshold
+void checkTemperature(void)
+{
+    if(temp>=ALAT){
+        LED_D3_SetHigh();
+    }
+    else {
+        LED_D3_SetLow();
+    }  
+}
+
+void alarmLeds(void)
+{
+    checkTemperature();
+    checkLuminosity();
+}
 
 void main(void)
 {
@@ -134,7 +161,8 @@ void main(void)
         // Positions of the beginning of the lcd and the end
         c1 = LCDrecv(0);
         c2 = LCDrecv(LCD_RS);
-        
+        // Display the alarms related to the leds
+        alarmLeds();
         NOP();
         SLEEP();
     }
