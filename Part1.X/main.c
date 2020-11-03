@@ -13,8 +13,11 @@
 #include "config.h"
 
 rtc_t clk;
+unsigned char nreg;
 unsigned char temp;
+unsigned char last_temp;
 adc_result_t luminosity;
+adc_result_t last_luminosity;
 
 void* timerInterrupt(void)
 {
@@ -30,16 +33,25 @@ void* buttonInterrupt(void)
     LED_D5_Toggle();
 }
 
-void takeMeasurement(unsigned char nreg)
+void takeMeasurement(void)
 {
     // Writing the bytes to the EEPROM for a register
-    DATAEE_WriteByte(nreg, clk.h);
-    DATAEE_WriteByte(nreg+1, clk.m);
-    DATAEE_WriteByte(nreg+2, clk.s);
-    DATAEE_WriteByte(nreg+3, temp);
-    DATAEE_WriteByte(nreg+4, luminosity);
-    // visual check
-    LED_D4_Toggle();
+    if (temp != last_temp || luminosity != last_luminosity){
+        DATAEE_WriteByte(EEAddr_reg + nreg, clk.h);
+        DATAEE_WriteByte(EEAddr_reg + nreg+1, clk.m);
+        DATAEE_WriteByte(EEAddr_reg + nreg+2, clk.s);
+        DATAEE_WriteByte(EEAddr_reg + nreg+3, temp);
+        DATAEE_WriteByte(EEAddr_reg + nreg+4, luminosity);
+        // Updating register iterator and temperature and luminosity values
+        nreg += 5;
+        nreg = (nreg >= 125 ? '0' : nreg);
+        last_temp = temp;
+        last_luminosity = luminosity;
+        // visual check
+        LED_D4_SetHigh();
+    } else {
+        LED_D4_SetLow();
+    }
 }
 
 adc_result_t readLuminosity (void)
@@ -99,6 +111,10 @@ void main(void)
     alarm_buf[5] = '\0';
     clk = rtcInit();
     rtcSetMeasurementFunction(&clk, takeMeasurement);
+    last_luminosity = 99;
+    last_temp = 99;
+    nreg = 0;
+    
     
     ALAF = 1;
     alarms = ALARM_C | ALARM_L | ALARM_A;
@@ -156,7 +172,8 @@ void main(void)
         LCDstr(alarm_buf);
         // Display the luminosity
         LCDcmd(0xc4);
-        sprintf(buf, "L %u", readLuminosity());
+        luminosity = readLuminosity();
+        sprintf(buf, "L %u", luminosity);
         LCDstr(buf);
         // Positions of the beginning of the lcd and the end
         c1 = LCDrecv(0);

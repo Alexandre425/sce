@@ -2,7 +2,6 @@
 #include "../config.h"
 #include "../mcc_generated_files/memory.h"
 
-unsigned char nreg;
 
 rtc_t rtcInit(void)
 {
@@ -12,7 +11,6 @@ rtc_t rtcInit(void)
     clk.s = CLKS;
     clk.meas_tmr = 0;
     clk.takeMeasurement = 0x0;
-    nreg = '0';
     return clk;
 }
 
@@ -41,12 +39,10 @@ void rtcTick(rtc_t* clk)
     }
     // Incrementing the measurement timer
     clk->meas_tmr++;
-    if (clk->meas_tmr >= PMON)
+    if (clk->meas_tmr >= PMON && PMON!=0)
     {
         clk->meas_tmr = 0;
-        (clk->takeMeasurement)(EEAddr + nreg);
-        nreg+=5;
-        nreg = (nreg >= 125 ? 0 : nreg);
+        (clk->takeMeasurement)();
     }
 }
 

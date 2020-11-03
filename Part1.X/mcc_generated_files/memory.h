@@ -67,7 +67,6 @@
 #define WRITE_FLASH_BLOCKSIZE    32
 #define ERASE_FLASH_BLOCKSIZE    32
 #define END_FLASH                0x2000
-#define EEAddr                   0x7000 // starting eeprom address
 
 
 /**

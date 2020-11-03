@@ -12,8 +12,6 @@
 extern "C" {
 #endif
     
-#include "timers/timers.h"
-    
 #define NREG 25
 #define PMON 3
 #define TALA 5
@@ -36,6 +34,9 @@ typedef unsigned char alarm_t;
 
 alarm_t alarms;
 
+// starting eeprom address
+#define EEAddr                   0x7000 
+#define EEAddr_reg               0x7032 
 
 #ifdef	__cplusplus
 }
