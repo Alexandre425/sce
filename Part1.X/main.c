@@ -90,7 +90,7 @@ void checkLuminosity(void)
     if (luminosity >= ALAL){
         LED_D2_SetHigh();
         if (alarms & ALARM_A)   // If alarms are on
-            alarms |= ALARM_T;
+            alarms |= ALARM_L;
     }
     else {
         LED_D2_SetLow();
