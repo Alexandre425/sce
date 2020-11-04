@@ -8,6 +8,8 @@
 #ifndef CONFIG_H
 #define	CONFIG_H
 
+#include <stdint.h>
+
 #ifdef	__cplusplus
 extern "C" {
 #endif
@@ -18,15 +20,14 @@ extern "C" {
 #define ALAH 12
 #define ALAM 0
 #define ALAS 0
-#define ALAT 28
-#define ALAL 4
 #define CLKH 12
 #define CLKM 0
 #define CLKS 30
 
-unsigned char ALAF;
+uint8_t ALAT;
+uint8_t ALAL;
 
-typedef unsigned char alarm_t;
+typedef uint8_t alarm_t;
 #define ALARM_C 0b00000001
 #define ALARM_T 0b00000010
 #define ALARM_L 0b00000100
@@ -34,9 +35,18 @@ typedef unsigned char alarm_t;
 
 alarm_t alarms;
 
-// starting eeprom address
+// Starting eeprom address
 #define EEAddr                   0x7000 
 #define EEAddr_reg               0x7032 
+
+// Initializes the configurations with the default values
+void configInit(void);
+// Increments the temperature threshold for the alarm.
+// Loops back at 50
+void incTemperatureThreshold (void);
+// Increments the luminosity threshold for the alarm.
+// Loops back at 7
+void incLuminosityThreshold (void);
 
 #ifdef	__cplusplus
 }

@@ -16,6 +16,7 @@
             <sourceRootList>
                 <sourceRootElem>I2C</sourceRootElem>
                 <sourceRootElem>peripherals</sourceRootElem>
+                <sourceRootElem>mcc_generated_files</sourceRootElem>
             </sourceRootList>
             <confList>
                 <confElem>

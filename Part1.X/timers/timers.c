@@ -1,7 +1,8 @@
 #include "timers.h"
 #include "../config.h"
+#include "../mcc_generated_files/mcc.h"
 #include "../mcc_generated_files/memory.h"
-
+#include "../mcc_generated_files/pin_manager.h"
 
 rtc_t rtcInit(void)
 {
@@ -37,6 +38,8 @@ void rtcTick(rtc_t* clk)
             }
         }
     }
+    // Blinking the LED
+    LED_D5_Toggle();
     // Incrementing the measurement timer
     clk->meas_tmr++;
     if (clk->meas_tmr >= PMON && PMON!=0)
@@ -44,5 +47,15 @@ void rtcTick(rtc_t* clk)
         clk->meas_tmr = 0;
         (clk->takeMeasurement)();
     }
+}
+
+void rtcIncrement(rtc_t* clk, uint8_t h, uint8_t m, uint8_t s)
+{
+    if (h)
+        clk->h = (clk->h + 1 >= 24 ? 0 : clk->h + 1);
+    if (m)
+        clk->m = (clk->m + 1 >= 60 ? 0 : clk->m + 1);
+    if (s)
+        clk->s = (clk->s + 1 >= 60 ? 0 : clk->s + 1);
 }
 
