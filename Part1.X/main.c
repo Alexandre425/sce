@@ -9,6 +9,8 @@
 #include "peripherals/temp_sensor.h"
 #include "timers/timers.h"
 #include "config.h"
+#include "mcc_generated_files/tmr2.h"
+#include "mcc_generated_files/pwm6.h"
 
 // Real time clock
 rtc_t clk;
@@ -98,7 +100,7 @@ void checkLuminosity(void)
 }
 
 // Light LED D3 when temperature is above threshold
-void checkTemperature(void)
+void checkTemperature(void) 
 {
     if(temp >= ALAT){
         LED_D3_SetHigh();
