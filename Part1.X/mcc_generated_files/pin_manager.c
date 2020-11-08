@@ -120,13 +120,13 @@ void PIN_MANAGER_Initialize(void)
     //interrupt on change for group IOCBF - flag
     IOCBFbits.IOCBF4 = 0;
     //interrupt on change for group IOCBN - negative
-    IOCBNbits.IOCBN4 = 1;
+    IOCBNbits.IOCBN4 = 0;
     //interrupt on change for group IOCBP - positive
     IOCBPbits.IOCBP4 = 0;
     //interrupt on change for group IOCCF - flag
     IOCCFbits.IOCCF5 = 0;
     //interrupt on change for group IOCCN - negative
-    IOCCNbits.IOCCN5 = 1;
+    IOCCNbits.IOCCN5 = 0;
     //interrupt on change for group IOCCP - positive
     IOCCPbits.IOCCP5 = 0;
 
@@ -143,6 +143,7 @@ void PIN_MANAGER_Initialize(void)
     SSP1CLKPPS = 0x13;   //RC3->MSSP1:SCL1;    
     RC3PPS = 0x14;   //RC3->MSSP1:SCL1;    
     RC4PPS = 0x15;   //RC4->MSSP1:SDA1;    
+    RA6PPS = 0x0E;   //RA6->PWM6:PWM6OUT;    
     SSP1DATPPS = 0x14;   //RC4->MSSP1:SDA1;    
 }
   
@@ -186,7 +187,8 @@ void IOCBF4_SetInterruptHandler(void (* InterruptHandler)(void)){
   Default interrupt handler for IOCBF4
 */
 void IOCBF4_DefaultInterruptHandler(void){
-
+    // add your IOCBF4 interrupt custom code
+    // or set custom function using IOCBF4_SetInterruptHandler()
 }
 
 /**

@@ -55,8 +55,8 @@
 #include "i2c1_driver.h"
 #include "adcc.h"
 #include "tmr1.h"
-#include "pwm6.h"
 #include "memory.h"
+#include "pwm6.h"
 #include "tmr2.h"
 
 #define WDTCWS  7
