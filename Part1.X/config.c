@@ -18,6 +18,9 @@ void incLuminosityThreshold (void)
 
 void setAlarm(uint8_t FLAG)
 {
-    alarms |= FLAG;
-    alarm_trigger = 1;
+    if (!(alarms & FLAG))
+    {
+        alarm_trigger = 1;
+        alarms |= FLAG;
+    }
 }

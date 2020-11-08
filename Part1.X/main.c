@@ -36,13 +36,52 @@ int8_t sign;
 // Cursor position for each mode
 const uint8_t CURSOR_POS[7] = {0x00, 0x81, 0x84, 0x87, 0x8f, 0xc1, 0xcf};
 
+void generateAlarmString(unsigned char* alarm_buf)
+{
+    alarm_buf[0] = (alarms & ALARM_C ? 'C' : ' ');
+    alarm_buf[1] = (alarms & ALARM_T ? 'T' : ' ');
+    alarm_buf[2] = (alarms & ALARM_L ? 'L' : ' ');
+    alarm_buf[3] = ' ';
+    alarm_buf[4] = (alarms & ALARM_A ? 'A' : ' ');
+}
+
+// Updates the LCD (every second and when there's a button press)
+void updateLCD(void)
+{
+    unsigned char buf[9];
+    // Display the time
+    LCDcmd(0x80);
+    sprintf(buf, "%02d:%02d:%02d", clk.h, clk.m, clk.s);
+    LCDstr(buf);
+    // Display the temperature
+    uint8_t display_temp = (mode ? ALAT : temp);
+    LCDcmd(0xc0);
+    sprintf(buf, "%02d C", display_temp);
+    LCDstr(buf);
+    // Display the alarms
+    generateAlarmString(buf);
+    LCDcmd(0x8b);
+    LCDstr(buf);
+    // Display the luminosity
+    uint8_t display_lum = (mode ? ALAL : luminosity);
+    LCDcmd(0xcd);
+    sprintf(buf, "L %u", display_lum);
+    LCDstr(buf);
+
+    // Place the cursor on the correct spot depending on the mode
+    if (mode)
+        LCDcmd(CURSOR_POS[mode]);
+}
+
 void* timerInterrupt(void)
 {
     if (mode != 1 && mode != 2 && mode != 3) // Tick the clock only if not editing it
     {
         rtcTick(&clk);
     }
+    updateLCD();
 }
+
 
 // Brightens or dims the LED when an alarm occurs
 void* alarmPWMInterrupt(void)
@@ -69,6 +108,7 @@ void* buttonS1Interrupt(void)
     alarms = alarms & ALARM_A;
 
     mode = (mode + 1 > 6 ? 0 : mode + 1);
+    updateLCD();
 }
 
 void* buttonS2Interrupt(void)
@@ -98,6 +138,7 @@ void* buttonS2Interrupt(void)
         // Move the alarm clean here?
     break;
     }
+    updateLCD();
 }
 
 adc_result_t readLuminosity (void)
@@ -106,14 +147,6 @@ adc_result_t readLuminosity (void)
     return (res >> 13);
 }
 
-void generateAlarmString(unsigned char* alarm_buf)
-{
-    alarm_buf[0] = (alarms & ALARM_C ? 'C' : ' ');
-    alarm_buf[1] = (alarms & ALARM_T ? 'T' : ' ');
-    alarm_buf[2] = (alarms & ALARM_L ? 'L' : ' ');
-    alarm_buf[3] = ' ';
-    alarm_buf[4] = (alarms & ALARM_A ? 'A' : ' ');
-}
 
 //Light LED D2 when luminosity is above threshold
 void checkLuminosity(void)
@@ -174,7 +207,6 @@ void takeMeasurement(void)
 
 void main(void)
 {
-    unsigned char buf[9];
     clk = rtcInit();
     rtcSetMeasurementFunction(&clk, takeMeasurement);
     last_luminosity = 99;
@@ -212,31 +244,6 @@ void main(void)
     while (1)
     {
         NOP();
-        
-        // Display the time
-        LCDcmd(0x80);
-        sprintf(buf, "%02d:%02d:%02d", clk.h, clk.m, clk.s);
-        LCDstr(buf);
-        // Display the temperature
-        uint8_t display_temp = (mode ? ALAT : temp);
-        LCDcmd(0xc0);
-        sprintf(buf, "%02d C", display_temp);
-        LCDstr(buf);
-        // Display the alarms
-        generateAlarmString(buf);
-        LCDcmd(0x8b);
-        LCDstr(buf);
-        // Display the luminosity
-        uint8_t displau_lum = (mode ? ALAL : luminosity);
-        LCDcmd(0xcd);
-        sprintf(buf, "L %u", displau_lum);
-        LCDstr(buf);
-
-        // Place the cursor on the correct spot depending on the mode
-        if (mode)
-        {
-            LCDcmd(CURSOR_POS[mode]);
-        }
         
         // Check for an alarm trigger
         if (alarm_trigger)
