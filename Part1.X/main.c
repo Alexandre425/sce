@@ -27,7 +27,9 @@ adc_result_t last_luminosity;
 uint8_t mode;   // Selected with S1, from 0 to 6, from display to change luminosity
 
 // PWM variables
-uint8_t pwm_active;
+const uint8_t duty_cycle_inc = 60;
+const uint8_t pwm_max_count = 167;
+uint8_t pwm_count;
 uint16_t duty_cycle;
 int8_t sign;
 
@@ -40,6 +42,25 @@ void* timerInterrupt(void)
     {
         rtcTick(&clk);
     }
+}
+
+// Brightens or dims the LED when an alarm occurs
+void* alarmPWMInterrupt(void)
+{
+    duty_cycle += duty_cycle_inc * sign;
+    if (duty_cycle > 1024)
+    {
+        sign = -sign;
+        duty_cycle += duty_cycle_inc * sign;
+    }
+
+    if (pwm_count++ > pwm_max_count)
+    {
+        TMR3_StopTimer();
+        duty_cycle = 0;
+    }
+
+    PWM6_LoadDutyValue(duty_cycle);
 }
 
 void* buttonS1Interrupt(void)
@@ -167,6 +188,7 @@ void main(void)
     // Enable the Global Interrupts
     INTERRUPT_GlobalInterruptEnable();
     TMR1_SetInterruptHandler(timerInterrupt);
+    TMR3_SetInterruptHandler(alarmPWMInterrupt);
 
     // Enable the Peripheral Interrupts
     INTERRUPT_PeripheralInterruptEnable();
@@ -181,7 +203,8 @@ void main(void)
     WPUC4 = 1;
     LCDinit();
     TMR1_StartTimer();
-    TMR2_StopTimer();
+    TMR3_StopTimer();       
+    PWM6_LoadDutyValue(0);  // Turn off the LED4
 
     takeMeasurement();
     configInit();
@@ -215,6 +238,16 @@ void main(void)
             LCDcmd(CURSOR_POS[mode]);
         }
         
+        // Check for an alarm trigger
+        if (alarm_trigger)
+        {
+            pwm_count = 0;
+            duty_cycle = 0;
+            sign = 1;
+
+            TMR3_StartTimer();
+            alarm_trigger = 0;
+        }
         SLEEP();
     }
 }
