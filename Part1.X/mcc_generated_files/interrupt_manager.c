@@ -58,9 +58,13 @@ void __interrupt() INTERRUPT_InterruptManager (void)
     }
     else if(INTCONbits.PEIE == 1)
     {
-        if(PIE4bits.TMR2IE == 1 && PIR4bits.TMR2IF == 1)
+        if(PIE3bits.BCL1IE == 1 && PIR3bits.BCL1IF == 1)
         {
-            TMR2_ISR();
+            i2c1_driver_busCollisionISR();
+        } 
+        else if(PIE3bits.SSP1IE == 1 && PIR3bits.SSP1IF == 1)
+        {
+            i2c1_driver_i2cISR();
         } 
         else if(PIE4bits.TMR1IE == 1 && PIR4bits.TMR1IF == 1)
         {
@@ -70,17 +74,21 @@ void __interrupt() INTERRUPT_InterruptManager (void)
         {
             TMR1_GATE_ISR();
         } 
-        else if(PIE3bits.BCL1IE == 1 && PIR3bits.BCL1IF == 1)
-        {
-            i2c1_driver_busCollisionISR();
-        } 
-        else if(PIE3bits.SSP1IE == 1 && PIR3bits.SSP1IF == 1)
-        {
-            i2c1_driver_i2cISR();
-        } 
         else if(PIE1bits.ADIE == 1 && PIR1bits.ADIF == 1)
         {
             ADCC_ISR();
+        } 
+        else if(PIE4bits.TMR3IE == 1 && PIR4bits.TMR3IF == 1)
+        {
+            TMR3_ISR();
+        } 
+        else if(PIE5bits.TMR3GIE == 1 && PIR5bits.TMR3GIF == 1)
+        {
+            TMR3_GATE_ISR();
+        } 
+        else if(PIE4bits.TMR2IE == 1 && PIR4bits.TMR2IF == 1)
+        {
+            TMR2_ISR();
         } 
         else
         {

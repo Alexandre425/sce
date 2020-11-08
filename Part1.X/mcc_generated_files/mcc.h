@@ -53,11 +53,12 @@
 #include <stdbool.h>
 #include "interrupt_manager.h"
 #include "i2c1_driver.h"
-#include "adcc.h"
-#include "tmr1.h"
-#include "memory.h"
+#include "tmr3.h"
 #include "pwm6.h"
+#include "tmr1.h"
 #include "tmr2.h"
+#include "adcc.h"
+#include "memory.h"
 
 #define WDTCWS  7
 #define WDTCPS  22
