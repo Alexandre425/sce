@@ -120,13 +120,13 @@ void PIN_MANAGER_Initialize(void)
     //interrupt on change for group IOCBF - flag
     IOCBFbits.IOCBF4 = 0;
     //interrupt on change for group IOCBN - negative
-    IOCBNbits.IOCBN4 = 0;
+    IOCBNbits.IOCBN4 = 1;
     //interrupt on change for group IOCBP - positive
     IOCBPbits.IOCBP4 = 0;
     //interrupt on change for group IOCCF - flag
     IOCCFbits.IOCCF5 = 0;
     //interrupt on change for group IOCCN - negative
-    IOCCNbits.IOCCN5 = 0;
+    IOCCNbits.IOCCN5 = 1;
     //interrupt on change for group IOCCP - positive
     IOCCPbits.IOCCP5 = 0;
 

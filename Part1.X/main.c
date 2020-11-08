@@ -1,4 +1,5 @@
 #include <stdint.h>
+#include <xc.h>
 #include "mcc_generated_files/mcc.h"
 #include "mcc_generated_files/tmr1.h"
 #include "mcc_generated_files/memory.h"
@@ -15,13 +16,20 @@
 // Real time clock
 rtc_t clk;
 uint8_t nreg;
+
 // Measurement variables
 uint8_t temp;
 uint8_t last_temp;
 adc_result_t luminosity;
 adc_result_t last_luminosity;
+
 // UI variables
 uint8_t mode;   // Selected with S1, from 0 to 6, from display to change luminosity
+
+// PWM variables
+uint8_t pwm_active;
+uint16_t duty_cycle;
+int8_t sign;
 
 // Cursor position for each mode
 const uint8_t CURSOR_POS[7] = {0x00, 0x81, 0x84, 0x87, 0x8f, 0xc1, 0xcf};
@@ -140,9 +148,6 @@ void takeMeasurement(void)
         last_temp = temp;
         last_luminosity = luminosity;
         // visual check
-        LED_D4_SetHigh();
-    } else {
-        LED_D4_SetLow();
     }
 }
 
@@ -176,6 +181,7 @@ void main(void)
     WPUC4 = 1;
     LCDinit();
     TMR1_StartTimer();
+    TMR2_StopTimer();
 
     takeMeasurement();
     configInit();
@@ -208,7 +214,7 @@ void main(void)
         {
             LCDcmd(CURSOR_POS[mode]);
         }
-
+        
         SLEEP();
     }
 }
