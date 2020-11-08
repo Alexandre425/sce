@@ -47,6 +47,9 @@ void rtcTick(rtc_t* clk)
         clk->meas_tmr = 0;
         (clk->takeMeasurement)();
     }
+    // Checking for the time alarm
+    if ((alarms & ALARM_A) && clk->h == ALAH && clk->m == ALAM && clk->s == ALAS)
+        setAlarm(ALARM_C);
 }
 
 void rtcIncrement(rtc_t* clk, uint8_t h, uint8_t m, uint8_t s)

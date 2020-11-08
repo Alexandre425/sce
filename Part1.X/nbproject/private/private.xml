@@ -8,9 +8,10 @@
             <file>file:/home/alexandre/Desktop/ist/sce/Part1.X/mcc_generated_files/adcc.c</file>
             <file>file:/home/alexandre/Desktop/ist/sce/Part1.X/main.c</file>
             <file>file:/home/alexandre/Desktop/ist/sce/Part1.X/timers/timers.h</file>
-            <file>file:/home/alexandre/Desktop/ist/sce/Part1.X/mcc_generated_files/memory.h</file>
             <file>file:/home/alexandre/Desktop/ist/sce/Part1.X/mcc_generated_files/interrupt_manager.c</file>
+            <file>file:/home/alexandre/Desktop/ist/sce/Part1.X/config.c</file>
             <file>file:/home/alexandre/Desktop/ist/sce/Part1.X/mcc_generated_files/pin_manager.c</file>
+            <file>file:/home/alexandre/Desktop/ist/sce/Part1.X/config.h</file>
         </group>
     </open-files>
 </project-private>

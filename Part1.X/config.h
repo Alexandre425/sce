@@ -33,7 +33,10 @@ typedef uint8_t alarm_t;
 #define ALARM_L 0b00000100
 #define ALARM_A 0b00001000
 
+// Variable with the alarm flags
 alarm_t alarms;
+// 1 when an alarm was triggered
+uint8_t alarm_trigger;
 
 // Starting eeprom address
 #define EEAddr                   0x7000 
@@ -47,6 +50,9 @@ void incTemperatureThreshold (void);
 // Increments the luminosity threshold for the alarm.
 // Loops back at 7
 void incLuminosityThreshold (void);
+// Sets the flag of the alarm and sets alarm_trigger to 1
+void setAlarm(uint8_t FLAG);
+
 
 #ifdef	__cplusplus
 }

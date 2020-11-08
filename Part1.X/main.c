@@ -92,7 +92,7 @@ void checkLuminosity(void)
     if (luminosity >= ALAL){
         LED_D2_SetHigh();
         if (alarms & ALARM_A)   // If alarms are on
-            alarms |= ALARM_L;
+            setAlarm(ALARM_L);
     }
     else {
         LED_D2_SetLow();
@@ -105,7 +105,7 @@ void checkTemperature(void)
     if(temp >= ALAT){
         LED_D3_SetHigh();
         if (alarms & ALARM_A)   // If alarms are on
-            alarms |= ALARM_T;  // Trigger the temperature alarm
+            setAlarm(ALARM_T);
     }
     else {
         LED_D3_SetLow();

@@ -15,3 +15,9 @@ void incLuminosityThreshold (void)
 {
     ALAL = (ALAL + 1 > 7 ? 0 : ALAL + 1);
 }
+
+void setAlarm(uint8_t FLAG)
+{
+    alarms |= FLAG;
+    alarm_trigger = 1;
+}
