@@ -70,13 +70,21 @@ void __interrupt() INTERRUPT_InterruptManager (void)
         {
             TMR1_ISR();
         } 
-        else if(PIE5bits.TMR1GIE == 1 && PIR5bits.TMR1GIF == 1)
+        else if(PIE4bits.TMR5IE == 1 && PIR4bits.TMR5IF == 1)
         {
-            TMR1_GATE_ISR();
+            TMR5_ISR();
+        } 
+        else if(PIE5bits.TMR5GIE == 1 && PIR5bits.TMR5GIF == 1)
+        {
+            TMR5_GATE_ISR();
         } 
         else if(PIE1bits.ADIE == 1 && PIR1bits.ADIF == 1)
         {
             ADCC_ISR();
+        } 
+        else if(PIE5bits.TMR1GIE == 1 && PIR5bits.TMR1GIF == 1)
+        {
+            TMR1_GATE_ISR();
         } 
         else if(PIE4bits.TMR3IE == 1 && PIR4bits.TMR3IF == 1)
         {
