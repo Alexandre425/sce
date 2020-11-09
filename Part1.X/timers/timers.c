@@ -4,12 +4,12 @@
 #include "../mcc_generated_files/memory.h"
 #include "../mcc_generated_files/pin_manager.h"
 
-rtc_t rtcInit(void)
+rtc_t rtcInit(uint8_t h, uint8_t m, uint8_t s)
 {
     rtc_t clk;
-    clk.h = CLKH;
-    clk.m = CLKM;
-    clk.s = CLKS;
+    clk.h = h;
+    clk.m = m;
+    clk.s = s;
     clk.meas_tmr = 0;
     clk.takeMeasurement = 0x0;
     return clk;
@@ -48,7 +48,7 @@ void rtcTick(rtc_t* clk)
         (clk->takeMeasurement)();
     }
     // Checking for the time alarm
-    if ((alarms & ALARM_A) && clk->h == ALAH && clk->m == ALAM && clk->s == ALAS)
+    if ((alarms & ALARM_A) && clk->h == ALA_CLK.h && clk->m == ALA_CLK.m && clk->s == ALA_CLK.s)
         setAlarm(ALARM_C);
 }
 

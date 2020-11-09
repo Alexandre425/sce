@@ -24,8 +24,6 @@ uint8_t last_temp;
 adc_result_t luminosity;
 adc_result_t last_luminosity;
 
-// UI variables
-uint8_t mode;   // Selected with S1, from 0 to 6, from display to change luminosity
 
 // PWM variables
 const uint8_t duty_cycle_inc = 60;
@@ -34,8 +32,19 @@ uint8_t pwm_count;
 uint16_t duty_cycle;
 int8_t sign;
 
+// The different modes changed by the buttons
+enum modes
+{
+    M_VIEW,                         // Normal, viewing mode
+    M_TIME_H, M_TIME_M, M_TIME_S,   // Modes to change the clock time
+    M_C, M_T, M_L, M_A,             // To access the thresholds or en/disable alarms
+    M_ALARM_H, M_ALARM_M, M_ALARM_S,// Change the alarm clock
+    M_THRESH_TEMP, M_THRESH_LUM     // Change the thresholds
+} mode;
+
 // Cursor position for each mode
-const uint8_t CURSOR_POS[7] = {0x00, 0x81, 0x84, 0x87, 0x8f, 0xc1, 0xcf};
+const uint8_t CURSOR_POS[13] = 
+{0x00, 0x81, 0x84, 0x87, 0x8b, 0x8c, 0x8d ,0x8f, 0x81, 0x84, 0x87 ,0xc1, 0xcf};
 
 void generateAlarmString(unsigned char* alarm_buf)
 {
@@ -52,10 +61,11 @@ void updateLCD(void)
     unsigned char buf[9];
     // Display the time
     LCDcmd(0x80);
-    sprintf(buf, "%02d:%02d:%02d", clk.h, clk.m, clk.s);
+    rtc_t display_clk = (mode == M_ALARM_H || mode == M_ALARM_M || mode == M_ALARM_S ? ALA_CLK : clk);
+    sprintf(buf, "%02d:%02d:%02d", display_clk.h, display_clk.m, display_clk.s);
     LCDstr(buf);
     // Display the temperature
-    uint8_t display_temp = (mode ? ALAT : temp);
+    uint8_t display_temp = (mode == M_THRESH_TEMP ? ALAT : temp);
     LCDcmd(0xc0);
     sprintf(buf, "%02d C", display_temp);
     LCDstr(buf);
@@ -64,7 +74,7 @@ void updateLCD(void)
     LCDcmd(0x8b);
     LCDstr(buf);
     // Display the luminosity
-    uint8_t display_lum = (mode ? ALAL : luminosity);
+    uint8_t display_lum = (mode == M_THRESH_LUM ? ALAL : luminosity);
     LCDcmd(0xcd);
     sprintf(buf, "L %u", display_lum);
     LCDstr(buf);
@@ -113,10 +123,31 @@ void* bounceTimer(void)
 
 void* buttonS1Interrupt(void)
 {
-    if( alarms != ALARM_A && alarms & ALARM_A){
-        alarms = alarms & ALARM_A; // Reset the alarms
-    } else { 
-        mode = (mode + 1 > 6 ? 0 : mode + 1); // Change modes
+    // If in viewing mode and there are alarms
+    if (alarms & ALARM_A && alarms != ALARM_A && mode == M_VIEW)
+    {
+        alarms &= ALARM_A; // Reset the alarms
+    } 
+    else 
+    { 
+        switch (mode)   // Switch modes
+        {
+        case M_A:           // Alarm enable edit mode: loop back to view mode
+            mode = M_VIEW;
+            break;
+        case M_ALARM_S:     // Back to T
+            mode = M_T;
+            break;
+        case M_THRESH_TEMP: // Back to L
+            mode = M_L;
+            break;
+        case M_THRESH_LUM:  // Back to A
+            mode = M_A;
+            break;
+        default:            // For all others: simply move to the next state
+            mode++;         // Hopefully it never goes above the last enumeration!
+            break;
+        }
     }
     updateLCD();
     TMR5_StartTimer();
@@ -127,28 +158,44 @@ void* buttonS2Interrupt(void)
 {
     switch (mode)
     {
-    case 1:
+    case M_TIME_H:
         rtcIncrement(&clk, 1, 0, 0);
-    break;
-    case 2:
+        break;
+    case M_TIME_M:
         rtcIncrement(&clk, 0, 1, 0);
-    break;
-    case 3:
+        break;
+    case M_TIME_S:
         rtcIncrement(&clk, 0, 0, 1);
-    break;
-    case 4:
+        break;
+    case M_C:
+        mode = M_ALARM_H; 
+        break;
+    case M_T:
+        mode = M_THRESH_TEMP; 
+        break;
+    case M_L:
+        mode = M_THRESH_LUM; 
+        break;
+    case M_A:
         alarms ^= ALARM_A;  // Bitwise XOR to toggle the bit
-    break;
-    case 5:
+        break;
+    case M_ALARM_H:
+        rtcIncrement(&ALA_CLK, 1, 0, 0);
+        break;
+    case M_ALARM_M:
+        rtcIncrement(&ALA_CLK, 0, 1, 0);
+        break;
+    case M_ALARM_S:
+        rtcIncrement(&ALA_CLK, 0, 0, 1);
+        break;
+    case M_THRESH_TEMP:
         incTemperatureThreshold();
-    break;
-    case 6:
+        break;
+    case M_THRESH_LUM:
         incLuminosityThreshold();
-    break;
-    
+        break;
     default:
-        // Move the alarm clean here?
-    break;
+        break;
     }
     updateLCD();
     TMR5_StartTimer();
@@ -188,11 +235,6 @@ void checkTemperature(void)
     }  
 }
 
-void displayMeasurement(void)
-{
-    
-}
-
 void takeMeasurement(void)
 {
     // Take the measurements and save them to the global variables
@@ -215,13 +257,12 @@ void takeMeasurement(void)
         nreg = (nreg >= 125 ? '0' : nreg);
         last_temp = temp;
         last_luminosity = luminosity;
-        // visual check
     }
 }
 
 void main(void)
 {
-    clk = rtcInit();
+    clk = rtcInit(CLKH, CLKM, CLKS);
     rtcSetMeasurementFunction(&clk, takeMeasurement);
     last_luminosity = 99;
     last_temp = 99;

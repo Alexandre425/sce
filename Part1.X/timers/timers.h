@@ -18,8 +18,8 @@ typedef struct rtc
 
 } rtc_t;
 
-// Returns a real time clock with the time set to 0
-rtc_t rtcInit(void);
+// Returns a real time clock with the time set what is provided in the parameters
+rtc_t rtcInit(uint8_t h, uint8_t m, uint8_t s);
 // Increments the time by one and overflows if necessary
 void rtcTick(rtc_t* clk);
 // Sets the measurement function that is called once the measurement timer overflows (PMON seconds)

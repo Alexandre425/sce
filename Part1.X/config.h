@@ -9,6 +9,7 @@
 #define	CONFIG_H
 
 #include <stdint.h>
+#include "timers/timers.h"
 
 #ifdef	__cplusplus
 extern "C" {
@@ -26,6 +27,9 @@ extern "C" {
 
 uint8_t ALAT;
 uint8_t ALAL;
+
+// The alarm clock
+rtc_t ALA_CLK;
 
 typedef uint8_t alarm_t;
 #define ALARM_C 0b00000001

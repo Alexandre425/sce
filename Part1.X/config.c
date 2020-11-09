@@ -7,7 +7,10 @@ void configInit(void)
     if (DATAEE_ReadByte(EEAddr_MAGIC_WORD) != MAGIC_WORD)
     {
         //DATAEE_WriteByte();
-    } else {
+    } 
+    else 
+    {
+        ALA_CLK = rtcInit(ALAH, ALAM, ALAS);
         ALAT = 28;
         ALAL = 4;
         alarms = ALARM_A;
