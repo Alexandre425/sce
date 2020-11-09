@@ -38,20 +38,20 @@ alarm_t alarms;
 // 1 when an alarm was triggered
 uint8_t alarm_trigger;
 
-#define MAGIC_WORD  0b11111101
+#define MAGIC_WORD  0b11010101
 
 // Starting eeprom address
-#define EEAddr              0x7000 
+#define EEAddr              0x7000  // Initial address for saving EEPROM memory
 #define EEAddr_MAGIC_WORD   0x7001  // Address of the magic word
-#define EEAddr_TIME_H       0x7002  // Addr of the saved time
+#define EEAddr_TIME_H       0x7002  // Address of the saved time
 #define EEAddr_TIME_M       0x7003
 #define EEAddr_ALARMS       0x7004
 #define EEAddr_ALAT         0x7005  // Temperature threshold
 #define EEAddr_ALAL         0x7006  // Luminosity threshold
-#define EEAddr_CHECKSUM     0x7007  // Addr of the checksum
+#define EEAddr_CHECKSUM     0x7007  // Address of the checksum
 
 
-#define EEAddr_reg          0x7032 
+#define EEAddr_reg          0x7032  // Start address for registers
 
 // Initializes the configurations with the saved values (in EEPROM)
 // If the magic word or checksum is incorrect, loads the default values

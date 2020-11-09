@@ -11,6 +11,7 @@
 #include "timers/timers.h"
 #include "config.h"
 #include "mcc_generated_files/tmr2.h"
+#include "mcc_generated_files/tmr5.h"
 #include "mcc_generated_files/pwm6.h"
 
 // Real time clock
@@ -102,13 +103,24 @@ void* alarmPWMInterrupt(void)
     PWM6_LoadDutyValue(duty_cycle);
 }
 
+void* bounceTimer(void)
+{
+    TMR5_StopTimer();
+    IOCBNbits.IOCBN4 = 1;
+    IOCCNbits.IOCCN5 = 1;
+}
+
+
 void* buttonS1Interrupt(void)
 {
-    // Reset the alarms -- Shouldn't this be moved to the other button???
-    alarms = alarms & ALARM_A;
-
-    mode = (mode + 1 > 6 ? 0 : mode + 1);
+    if( alarms != ALARM_A && alarms & ALARM_A){
+        alarms = alarms & ALARM_A; // Reset the alarms
+    } else { 
+        mode = (mode + 1 > 6 ? 0 : mode + 1); // Change modes
+    }
     updateLCD();
+    TMR5_StartTimer();
+    IOCBNbits.IOCBN4 = 0;
 }
 
 void* buttonS2Interrupt(void)
@@ -139,6 +151,8 @@ void* buttonS2Interrupt(void)
     break;
     }
     updateLCD();
+    TMR5_StartTimer();
+    IOCCNbits.IOCCN5 = 0;
 }
 
 adc_result_t readLuminosity (void)
@@ -221,6 +235,7 @@ void main(void)
     INTERRUPT_GlobalInterruptEnable();
     TMR1_SetInterruptHandler(timerInterrupt);
     TMR3_SetInterruptHandler(alarmPWMInterrupt);
+    TMR5_SetInterruptHandler(bounceTimer);
 
     // Enable the Peripheral Interrupts
     INTERRUPT_PeripheralInterruptEnable();
