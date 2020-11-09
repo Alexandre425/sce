@@ -1,7 +1,13 @@
 #include "config.h"
+#include "../mcc_generated_files/memory.h"
 
 void configInit(void)
 {
+    // Checking for the magic word
+    if (DATAEE_ReadByte(EEAddr_MAGIC_WORD) != MAGIC_WORD)
+    {
+        DATAEE_WriteByte()
+    }
     ALAT = 28;
     ALAL = 4;
     alarms = ALARM_A;
