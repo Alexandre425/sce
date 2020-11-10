@@ -15,15 +15,17 @@
 extern "C" {
 #endif
     
-#define NREG 25
-#define PMON 3
-#define TALA 5
-#define ALAH 12
-#define ALAM 0
-#define ALAS 0
-#define CLKH 12
-#define CLKM 0
-#define CLKS 30
+#define NREG     25
+#define PMON     3
+#define TALA     5
+#define ALAH     12
+#define ALAM     0
+#define ALAS     0
+#define ALAT_ini 0
+#define ALAL_ini 0
+#define CLKH     0
+#define CLKM     0
+    
 
 uint8_t ALAT;
 uint8_t ALAL;
@@ -52,7 +54,10 @@ uint8_t alarm_trigger;
 #define EEAddr_ALARMS       0x7004
 #define EEAddr_ALAT         0x7005  // Temperature threshold
 #define EEAddr_ALAL         0x7006  // Luminosity threshold
-#define EEAddr_CHECKSUM     0x7007  // Address of the checksum
+#define EEAddr_ALAH         0x7007  // Alarm hour
+#define EEAddr_ALAM         0x7008  // Alarm minute
+#define EEAddr_ALAS         0x7009  // Alarm second
+#define EEAddr_CHECKSUM  0x700a  // Address of the checksum 
 
 
 #define EEAddr_reg          0x7032  // Start address for registers
@@ -68,6 +73,10 @@ void incTemperatureThreshold (void);
 void incLuminosityThreshold (void);
 // Sets the flag of the alarm and sets alarm_trigger to 1
 void setAlarm(uint8_t FLAG);
+// Add all the non-volatile saved values
+uint8_t addChecksum (void);
+// Check if the Checksum is correct
+bool checkChecksum (void);
 
 
 #ifdef	__cplusplus

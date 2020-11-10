@@ -178,15 +178,23 @@ void* buttonS2Interrupt(void)
         break;
     case M_A:
         alarms ^= ALARM_A;  // Bitwise XOR to toggle the bit
+        DATAEE_WriteByte(EEAddr_ALARMS, alarms);
+        DATAEE_WriteByte(EEAddr_CHECKSUM, addChecksum());
         break;
     case M_ALARM_H:
         rtcIncrement(&ALA_CLK, 1, 0, 0);
+        DATAEE_WriteByte(EEAddr_ALAH, ALA_CLK->h);
+        DATAEE_WriteByte(EEAddr_CHECKSUM, addChecksum());
         break;
     case M_ALARM_M:
         rtcIncrement(&ALA_CLK, 0, 1, 0);
+        DATAEE_WriteByte(EEAddr_ALAM, ALA_CLK->m);
+        DATAEE_WriteByte(EEAddr_CHECKSUM, addChecksum());
         break;
     case M_ALARM_S:
         rtcIncrement(&ALA_CLK, 0, 0, 1);
+        DATAEE_WriteByte(EEAddr_ALAS, ALA_CLK->s);
+        DATAEE_WriteByte(EEAddr_CHECKSUM, addChecksum());
         break;
     case M_THRESH_TEMP:
         incTemperatureThreshold();
@@ -262,7 +270,7 @@ void takeMeasurement(void)
 
 void main(void)
 {
-    clk = rtcInit(CLKH, CLKM, CLKS);
+    clk = rtcInit(CLKH, CLKM, 0);
     rtcSetMeasurementFunction(&clk, takeMeasurement);
     last_luminosity = 99;
     last_temp = 99;
