@@ -21,8 +21,8 @@ extern "C" {
 #define ALAH     12
 #define ALAM     0
 #define ALAS     0
-#define ALAT_ini 0
-#define ALAL_ini 0
+#define ALAT_ini 28
+#define ALAL_ini 4
 #define CLKH     0
 #define CLKM     0
     
@@ -32,6 +32,7 @@ uint8_t ALAL;
 
 // The alarm clock
 rtc_t ALA_CLK;
+rtc_t clk;
 
 typedef uint8_t alarm_t;
 #define ALARM_C 0b00000001
@@ -57,7 +58,7 @@ uint8_t alarm_trigger;
 #define EEAddr_ALAH         0x7007  // Alarm hour
 #define EEAddr_ALAM         0x7008  // Alarm minute
 #define EEAddr_ALAS         0x7009  // Alarm second
-#define EEAddr_CHECKSUM  0x700a  // Address of the checksum 
+#define EEAddr_CHECKSUM     0x700a  // Address of the checksum 
 
 
 #define EEAddr_reg          0x7032  // Start address for registers
@@ -75,8 +76,8 @@ void incLuminosityThreshold (void);
 void setAlarm(uint8_t FLAG);
 // Add all the non-volatile saved values
 uint8_t addChecksum (void);
-// Check if the Checksum is correct
-bool checkChecksum (void);
+// Check if the Checksum is correct, returns 0 if so
+uint8_t checkChecksum (void);
 
 
 #ifdef	__cplusplus

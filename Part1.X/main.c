@@ -14,8 +14,7 @@
 #include "mcc_generated_files/tmr5.h"
 #include "mcc_generated_files/pwm6.h"
 
-// Real time clock
-rtc_t clk;
+// Number of data registers
 uint8_t nreg;
 
 // Measurement variables
@@ -160,9 +159,14 @@ void* buttonS2Interrupt(void)
     {
     case M_TIME_H:
         rtcIncrement(&clk, 1, 0, 0);
+        DATAEE_WriteByte(EEAddr_TIME_H, clk.h);
+        DATAEE_WriteByte(EEAddr_CHECKSUM, addChecksum());
         break;
     case M_TIME_M:
         rtcIncrement(&clk, 0, 1, 0);
+        DATAEE_WriteByte(EEAddr_TIME_M, clk.m);
+        DATAEE_WriteByte(EEAddr_CHECKSUM, addChecksum());
+
         break;
     case M_TIME_S:
         rtcIncrement(&clk, 0, 0, 1);
@@ -183,17 +187,17 @@ void* buttonS2Interrupt(void)
         break;
     case M_ALARM_H:
         rtcIncrement(&ALA_CLK, 1, 0, 0);
-        DATAEE_WriteByte(EEAddr_ALAH, ALA_CLK->h);
+        DATAEE_WriteByte(EEAddr_ALAH, ALA_CLK.h);
         DATAEE_WriteByte(EEAddr_CHECKSUM, addChecksum());
         break;
     case M_ALARM_M:
         rtcIncrement(&ALA_CLK, 0, 1, 0);
-        DATAEE_WriteByte(EEAddr_ALAM, ALA_CLK->m);
+        DATAEE_WriteByte(EEAddr_ALAM, ALA_CLK.m);
         DATAEE_WriteByte(EEAddr_CHECKSUM, addChecksum());
         break;
     case M_ALARM_S:
         rtcIncrement(&ALA_CLK, 0, 0, 1);
-        DATAEE_WriteByte(EEAddr_ALAS, ALA_CLK->s);
+        DATAEE_WriteByte(EEAddr_ALAS, ALA_CLK.s);
         DATAEE_WriteByte(EEAddr_CHECKSUM, addChecksum());
         break;
     case M_THRESH_TEMP:
@@ -270,8 +274,6 @@ void takeMeasurement(void)
 
 void main(void)
 {
-    clk = rtcInit(CLKH, CLKM, 0);
-    rtcSetMeasurementFunction(&clk, takeMeasurement);
     last_luminosity = 99;
     last_temp = 99;
     nreg = 0;
@@ -292,6 +294,8 @@ void main(void)
     IOCCF5_SetInterruptHandler(buttonS2Interrupt);
     
     
+    configInit();
+    rtcSetMeasurementFunction(&clk, takeMeasurement);
     i2c1_driver_open();
     I2C_SCL = 1;
     I2C_SDA = 1;
@@ -301,9 +305,7 @@ void main(void)
     TMR1_StartTimer();
     TMR3_StopTimer();       
     PWM6_LoadDutyValue(0);  // Turn off the LED4
-
     takeMeasurement();
-    configInit();
 
     while (1)
     {

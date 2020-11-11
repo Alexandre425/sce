@@ -36,10 +36,11 @@ void rtcTick(rtc_t* clk)
             {
                 clk->h = 0;
             }
-            DATAEE_WriteByte(EEAddr_TIME_H, clk->h);
-            DATAEE_WriteByte(EEAddr_TIME_M, clk->m);
-            DATAEE_WriteByte(EEAddr_CHECKSUM, addChecksum());
         }
+        // Save the time every minute
+        DATAEE_WriteByte(EEAddr_TIME_H, clk->h);
+        DATAEE_WriteByte(EEAddr_TIME_M, clk->m);
+        DATAEE_WriteByte(EEAddr_CHECKSUM, addChecksum());
     }
     // Blinking the LED
     LED_D5_Toggle();

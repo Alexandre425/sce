@@ -17,10 +17,13 @@ void configInit(void)
         DATAEE_WriteByte(EEAddr_ALAS, ALAS);
         DATAEE_WriteByte(EEAddr_CHECKSUM, addChecksum());
     }
-    unsigned char h = DATAEE_ReadByte(EEAddr_ALAH);
-    unsigned char m = DATAEE_ReadByte(EEAddr_ALAM);
-    unsigned char s = DATAEE_ReadByte(EEAddr_ALAS);
+    uint8_t h = DATAEE_ReadByte(EEAddr_ALAH);
+    uint8_t m = DATAEE_ReadByte(EEAddr_ALAM);
+    uint8_t s = DATAEE_ReadByte(EEAddr_ALAS);
     ALA_CLK = rtcInit(h, m, s);
+    h = DATAEE_ReadByte(EEAddr_TIME_H);
+    m = DATAEE_ReadByte(EEAddr_TIME_M);
+    clk = rtcInit(h, m, 0);
     ALAT = DATAEE_ReadByte(EEAddr_ALAT);
     ALAL = DATAEE_ReadByte(EEAddr_ALAL);
     alarms = DATAEE_ReadByte(EEAddr_ALARMS);
@@ -55,15 +58,15 @@ uint8_t addChecksum (void)
             DATAEE_ReadByte(EEAddr_ALAM)+DATAEE_ReadByte(EEAddr_ALAS));
 } 
 
-bool checkChecksum ( void)
+uint8_t checkChecksum (void)
 {
-    unsigned char checksum = DATAEE_ReadByte(EEAddr_CHECKSUM);
+    uint8_t checksum = DATAEE_ReadByte(EEAddr_CHECKSUM);
     if(checksum != addChecksum())
     {
-        return true;
+        return 1;
     }
     else
     {
-        return false;
+        return 0;
     }
 }
