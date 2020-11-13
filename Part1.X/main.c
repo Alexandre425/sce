@@ -225,9 +225,11 @@ adc_result_t readLuminosity (void)
 void checkLuminosity(void)
 {
     if (luminosity >= ALAL){
-        LED_D2_SetHigh();
         if (alarms & ALARM_A)   // If alarms are on
+        {
             setAlarm(ALARM_L);
+            LED_D2_SetHigh();
+        }
     }
     else {
         LED_D2_SetLow();
@@ -238,9 +240,11 @@ void checkLuminosity(void)
 void checkTemperature(void) 
 {
     if(temp >= ALAT){
-        LED_D3_SetHigh();
         if (alarms & ALARM_A)   // If alarms are on
+        {
             setAlarm(ALARM_T);
+            LED_D3_SetHigh();
+        }
     }
     else {
         LED_D3_SetLow();
