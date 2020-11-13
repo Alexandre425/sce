@@ -47,11 +47,22 @@ const uint8_t CURSOR_POS[13] =
 
 void generateAlarmString(unsigned char* alarm_buf)
 {
+    if (alarms & ALARM_A)
+    {
     alarm_buf[0] = (alarms & ALARM_C ? 'C' : ' ');
     alarm_buf[1] = (alarms & ALARM_T ? 'T' : ' ');
     alarm_buf[2] = (alarms & ALARM_L ? 'L' : ' ');
     alarm_buf[3] = ' ';
     alarm_buf[4] = (alarms & ALARM_A ? 'A' : ' ');
+    } 
+    else 
+    {
+    alarm_buf[0] = ' ';
+    alarm_buf[1] = ' ';
+    alarm_buf[2] = ' ';
+    alarm_buf[3] = ' ';
+    alarm_buf[4] = ' ';
+    }
 }
 
 // Updates the LCD (every second and when there's a button press)
@@ -230,6 +241,10 @@ void checkLuminosity(void)
             setAlarm(ALARM_L);
             LED_D2_SetHigh();
         }
+        else
+        {
+            LED_D2_SetLow();
+        }
     }
     else {
         LED_D2_SetLow();
@@ -244,6 +259,10 @@ void checkTemperature(void)
         {
             setAlarm(ALARM_T);
             LED_D3_SetHigh();
+        }
+        else
+        {
+            LED_D3_SetLow();
         }
     }
     else {
