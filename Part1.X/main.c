@@ -16,6 +16,7 @@
 
 // Number of data registers
 uint8_t nreg;
+uint8_t last_sent_index;
 
 // Measurement variables
 uint8_t temp;
@@ -87,6 +88,12 @@ void updateLCD(void)
     uint8_t display_lum = (mode == M_THRESH_LUM ? ALAL : luminosity);
     LCDcmd(0xcd);
     sprintf(buf, "L %u", display_lum);
+    LCDstr(buf);
+    
+    // Display the memory alarm
+    uint8_t display_mem = (nreg/5 > 12 ? 'M' : ' ');
+    LCDcmd(0xc7);
+    sprintf(buf, "%c", display_mem);
     LCDstr(buf);
 
     // Place the cursor on the correct spot depending on the mode
@@ -301,6 +308,7 @@ void main(void)
     last_temp = 99;
     nreg = 0;
     mode = 0;
+    last_sent_index = 0;
     
     // initialize the device
     SYSTEM_Initialize();

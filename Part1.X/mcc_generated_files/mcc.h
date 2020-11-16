@@ -55,11 +55,12 @@
 #include "i2c1_driver.h"
 #include "tmr5.h"
 #include "tmr3.h"
-#include "pwm6.h"
 #include "tmr1.h"
+#include "pwm6.h"
 #include "tmr2.h"
 #include "adcc.h"
 #include "memory.h"
+#include "eusart.h"
 
 #define WDTCWS  7
 #define WDTCPS  22

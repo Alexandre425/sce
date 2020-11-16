@@ -4,6 +4,9 @@
     <logicalFolder name="HeaderFiles"
                    displayName="Header Files"
                    projectFiles="true">
+      <logicalFolder name="f3" displayName="comunication" projectFiles="true">
+        <itemPath>comunication/comunication.h</itemPath>
+      </logicalFolder>
       <logicalFolder name="I2C" displayName="I2C" projectFiles="true">
         <itemPath>I2C/i2c.h</itemPath>
       </logicalFolder>
@@ -22,6 +25,7 @@
         <itemPath>mcc_generated_files/tmr2.h</itemPath>
         <itemPath>mcc_generated_files/tmr3.h</itemPath>
         <itemPath>mcc_generated_files/tmr5.h</itemPath>
+        <itemPath>mcc_generated_files/eusart.h</itemPath>
       </logicalFolder>
       <logicalFolder name="f1" displayName="peripherals" projectFiles="true">
         <itemPath>peripherals/temp_sensor.h</itemPath>
@@ -39,6 +43,9 @@
     <logicalFolder name="SourceFiles"
                    displayName="Source Files"
                    projectFiles="true">
+      <logicalFolder name="f3" displayName="comunication" projectFiles="true">
+        <itemPath>comunication/comunication.c</itemPath>
+      </logicalFolder>
       <logicalFolder name="I2C" displayName="I2C" projectFiles="true">
         <itemPath>I2C/i2c.c</itemPath>
       </logicalFolder>
@@ -57,6 +64,7 @@
         <itemPath>mcc_generated_files/tmr2.c</itemPath>
         <itemPath>mcc_generated_files/tmr3.c</itemPath>
         <itemPath>mcc_generated_files/tmr5.c</itemPath>
+        <itemPath>mcc_generated_files/eusart.c</itemPath>
       </logicalFolder>
       <logicalFolder name="f2" displayName="peripherals" projectFiles="true">
         <itemPath>peripherals/lcd.c</itemPath>

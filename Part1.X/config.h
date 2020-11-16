@@ -59,9 +59,8 @@ uint8_t alarm_trigger;
 #define EEAddr_ALAM         0x7008  // Alarm minute
 #define EEAddr_ALAS         0x7009  // Alarm second
 #define EEAddr_CHECKSUM     0x700a  // Address of the checksum 
-
-
 #define EEAddr_reg          0x7032  // Start address for registers
+
 
 // Initializes the configurations with the saved values (in EEPROM)
 // If the magic word or checksum is incorrect, loads the default values
@@ -78,7 +77,6 @@ void setAlarm(uint8_t FLAG);
 uint8_t addChecksum (void);
 // Check if the Checksum is correct, returns 0 if so
 uint8_t checkChecksum (void);
-
 
 #ifdef	__cplusplus
 }
