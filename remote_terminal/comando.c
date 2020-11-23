@@ -131,64 +131,127 @@ void cmd_ini(int argc, char **argv)
 }
 
 // Read the clock from the board
-void cmd_comm_read_clock (int argc, char** argv);
+void cmd_comm_read_clock (int argc, char** argv)
+{
+	return;
+}
 
 // Set the clock on the board
-void cmd_comm_set_clock (int argc, char** argv);
+void cmd_comm_set_clock (int argc, char** argv)
+{
+	return;
+}
 
 // Read the temperature and luminosity from the board
-void cmd_comm_read_temp_lum (int argc, char** argv);
+void cmd_comm_read_temp_lum (int argc, char** argv)
+{
+	return;
+}
 
 // Read the PMON and TALA parameters from the board
-void cmd_comm_read_param (int argc, char** argv);
+void cmd_comm_read_param (int argc, char** argv)
+{
+	return;
+}
 
 // Modify the monitoring period of the board
-void cmd_comm_mod_monitor_period (int argc, char** argv);
+void cmd_comm_mod_monitor_period (int argc, char** argv)
+{
+	return;
+}
 
 // Modify the time the alarm stays active on the board
-void cmd_comm_mod_time_alarm (int argc, char** argv);
+void cmd_comm_mod_time_alarm (int argc, char** argv)
+{
+	return;
+}
 
 // Read the alarms (CTL A) from the board
-void cmd_comm_read_alarms (int argc, char** argv);
+void cmd_comm_read_alarms (int argc, char** argv)
+{
+	return;
+}
 
 // Modify the time of the alarm clock on the board
-void cmd_comm_define_alarm_clock (int argc, char** argv);
+void cmd_comm_define_alarm_clock (int argc, char** argv)
+{
+	return;
+}
 
 // Modify the temperature and luminosity thresholds on the board
-void cmd_comm_define_temp_lum (int argc, char** argv);
+void cmd_comm_define_temp_lum (int argc, char** argv)
+{
+	return;
+}
 
 // Enable/disable the alarms on the board
-void cmd_comm_activate_alarms (int argc, char** argv);
+void cmd_comm_activate_alarms (int argc, char** argv)
+{
+	return;
+}
 
 // Get information on the board's registers (NREG, nr, iread, iwrite)
-void cmd_comm_info_reg (int argc, char** argv);
+void cmd_comm_info_reg (int argc, char** argv)
+{
+	return;
+}
 
 // Transfer n registers from the board from index iread
-void cmd_comm_transfer_reg (int argc, char** argv);
+void cmd_comm_transfer_reg (int argc, char** argv)
+{
+	return;
+}
 
 // Transfer n registers from the board from index i
-void cmd_comm_transfer_reg_from (int argc, char** argv);
+void cmd_comm_transfer_reg_from (int argc, char** argv)
+{
+	return;
+}
 
 // Get information on the local registers (NRBUF, nr, iread, iwrite)
-void cmd_local_info_local_reg (int argc, char** argv);
+void cmd_local_info_local_reg (int argc, char** argv)
+{
+	return;
+}
 
 // List n registers from index i in local memory
-void cmd_local_list_reg (int argc, char** argv);
+void cmd_local_list_reg (int argc, char** argv)
+{
+	return;
+}
 
 // Delete the local registers
-void cmd_local_delete_reg (int argc, char** argv);
+void cmd_local_delete_reg (int argc, char** argv)
+{
+	return;
+}
 
 // Check the transfer period for registers
-void cmd_proc_check_period_transfer (int argc, char** argv);
+void cmd_proc_check_period_transfer (int argc, char** argv)
+{
+	return;
+}
 
 // Change the transfer period for registers
-void cmd_proc_mod_period_tranfer (int argc, char** argv);
+void cmd_proc_mod_period_tranfer (int argc, char** argv)
+{
+	return;
+}
 
 // Check the threshold temperature and luminosity thresholds for the data processing
-void cmd_proc_check_thresh_temp_lum (int argc, char** argv);
+void cmd_proc_check_thresh_temp_lum (int argc, char** argv)
+{
+	return;
+}
 
 // Change the threshold temperature and luminosity thresholds for the data processing
-void cmd_proc_define_thresh_temp_lum (int argc, char** argv);
+void cmd_proc_define_thresh_temp_lum (int argc, char** argv)
+{
+	return;
+}
 
 // Process the local registers
-void cmd_proc_process_reg (int argc, char** argv);
+void cmd_proc_process_reg (int argc, char** argv)
+{
+	return;
+}
