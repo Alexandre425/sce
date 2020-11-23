@@ -17,13 +17,14 @@ CXXFLAGS      = $(CFLAGS)
 LDFLAGS       = -nostartfiles -L$(INSTALL_DIR)/lib -Ttarget.ld
 
 #####
-OBJS= cmd.o comando.o monitor.o
+OBJS	= cmd.o comando.o monitor.o
+APP 	= cmd
 
 # RULES
 
 .PHONY: all clean
 
-all: cmd
+all: bin source_fetch
 
 clean:
 	-rm -f cmd $(OBJS)
@@ -41,4 +42,10 @@ clean:
 	$(XCXX) -c -o $*.o $(CXXFLAGS) $(ECOS_GLOBAL_CFLAGS) $<
 
 cmd: $(OBJS)
-	$(XLD) $(LDFLAGS) $(ECOS_GLOBAL_LDFLAGS) -o $@ $(OBJS)
+	$(XLD) $(LDFLAGS) $(ECOS_GLOBAL_LDFLAGS) -o $(APP) $(OBJS)
+
+bin: cmd
+	i386-elf-objcopy -O binary $(APP) $(APP).bin
+
+source_fetch:
+	source /opt/ecos/ecosenv.sh
