@@ -26,6 +26,9 @@ APP 	= cmd
 
 all: source_fetch bin
 
+run: bin
+	qemu-system-i386 -fda $(APP).bin
+
 clean:
 	-rm -f cmd $(OBJS)
 
