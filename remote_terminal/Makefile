@@ -24,7 +24,7 @@ APP 	= cmd
 
 .PHONY: all clean
 
-all: bin source_fetch
+all: source_fetch bin
 
 clean:
 	-rm -f cmd $(OBJS)
@@ -41,11 +41,11 @@ clean:
 %.o: %.cc
 	$(XCXX) -c -o $*.o $(CXXFLAGS) $(ECOS_GLOBAL_CFLAGS) $<
 
-cmd: $(OBJS)
+cmd: $(OBJS) source_fetch
 	$(XLD) $(LDFLAGS) $(ECOS_GLOBAL_LDFLAGS) -o $(APP) $(OBJS)
 
 bin: cmd
 	i386-elf-objcopy -O binary $(APP) $(APP).bin
 
 source_fetch:
-	source /opt/ecos/ecosenv.sh
+	. /opt/ecos/ecosenv.sh
