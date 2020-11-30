@@ -11,6 +11,8 @@
 Cyg_ErrNo err;
 cyg_io_handle_t serH;
 
+void send_message (int argc, char **argv)
+
 /*-------------------------------------------------------------------------+
 | Function: cmd_sair - termina a aplicacao
 +--------------------------------------------------------------------------*/
