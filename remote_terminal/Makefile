@@ -26,6 +26,12 @@ APP 	= cmd
 
 all: source_fetch bin
 
+run: bin
+	qemu-system-i386 -fda $(APP).bin
+
+run-usb: bin
+	qemu-system-i386 -fda $(APP).bin -serial /dev/ttyUSB0
+
 clean:
 	-rm -f cmd $(OBJS)
 
