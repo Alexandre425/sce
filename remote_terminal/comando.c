@@ -5,7 +5,6 @@
 | Data:  Maio 2008
 ***************************************************************************/
 #include <stdio.h>
-#include <stdint.h>
 #include <stdlib.h>
 #include <cyg/io/io.h>
 #include <cyg/kernel/kapi.h>
@@ -36,9 +35,9 @@ cyg_io_handle_t serial_handle;
 
 typedef struct message
 {
-	uint8_t code;
-	uint8_t argc
-	uint8_t argv[6];	// Maximum number of arguments is 6
+	unsigned char code;
+	unsigned char argc
+	unsigned char argv[6];	// Maximum number of arguments is 6
 } message_t;
 
 extern static message_t next_message;
