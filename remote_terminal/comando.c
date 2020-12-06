@@ -5,11 +5,46 @@
 | Data:  Maio 2008
 ***************************************************************************/
 #include <stdio.h>
+#include <stdint.h>
 #include <stdlib.h>
 #include <cyg/io/io.h>
+#include <cyg/kernel/kapi.h>
+
+
+#define RCLK  		0xC0  /* read clock */
+#define SCLK  		0XC1  /* set clock */
+#define RTL   		0XC2  /* read temperature and luminosity */
+#define RPAR  		0XC3  /* read parameters */
+#define MMP   		0XC4  /* modify monitoring period */
+#define MTA   		0XC5  /* modify time alarm */
+#define RALA  		0XC6  /* read alarms (clock, temperature, luminosity, active/inactive) */
+#define DAC   		0XC7  /* define alarm clock */
+#define DATL  		0XC8  /* define alarm temperature and luminosity */
+#define AALA  		0XC9  /* activate/deactivate alarms */
+#define IREG  		0XCA  /* information about registers (NREG, nr, iread, iwrite)*/
+#define TRGC  		0XCB  /* transfer registers (curr. position)*/
+#define TRGI  		0XCC  /* transfer registers (index) */
+#define NMFL  		0XCD  /* notification memory (half) full */
+#define CMD_OK    	0x00  /* command successful */
+#define CMD_ERROR 	0xFF  /* error in command */
+
+
+#define ERR_WRONG_ARG_NUM "ERROR: Wrong number of arguments provided!\n"
 
 Cyg_ErrNo err;
-cyg_io_handle_t serH;
+cyg_io_handle_t serial_handle;
+
+typedef struct message
+{
+	uint8_t code;
+	uint8_t argc
+	uint8_t argv[6];	// Maximum number of arguments is 6
+} message_t;
+
+extern static message_t next_message;
+
+extern static cyg_sem_t comm_semaph, proc_semaph, term_semaph;
+
 
 /*-------------------------------------------------------------------------+
 | Function: cmd_sair - termina a aplicacao
@@ -41,13 +76,13 @@ void cmd_ems(int argc, char **argv)
 	if (argc > 1)
 	{
 		n = strlen(argv[1]) + 1;
-		err = cyg_io_write(serH, argv[1], &n);
+		err = cyg_io_write(serial_handle, argv[1], &n);
 		printf("io_write err=%x, n=%d str=%s\n", err, n, argv[1]);
 	}
 	else
 	{
 		n = 10;
-		err = cyg_io_write(serH, "123456789", &n);
+		err = cyg_io_write(serial_handle, "123456789", &n);
 		printf("io_write err=%x, n=%d str=%s\n", err, n, "123456789");
 	}
 }
@@ -72,7 +107,7 @@ void cmd_emh(int argc, char **argv)
 			sscanf(argv[i + 1], "%x", &x);
 			bufw[i] = (unsigned char)x;
 		}
-		err = cyg_io_write(serH, bufw, &n);
+		err = cyg_io_write(serial_handle, bufw, &n);
 		printf("io_write err=%x, n=%d\n", err, n);
 		for (i = 0; i < n; i++)
 			printf("buf[%d]=%x\n", i, bufw[i]);
@@ -95,7 +130,7 @@ void cmd_rms(int argc, char **argv)
 		n = atoi(argv[1]);
 	if (n > 50)
 		n = 50;
-	err = cyg_io_read(serH, bufr, &n);
+	err = cyg_io_read(serial_handle, bufr, &n);
 	printf("io_read err=%x, n=%d buf=%s\n", err, n, bufr);
 }
 
@@ -111,7 +146,7 @@ void cmd_rmh(int argc, char **argv)
 		n = atoi(argv[1]);
 	if (n > 50)
 		n = 50;
-	err = cyg_io_read(serH, bufr, &n);
+	err = cyg_io_read(serial_handle, bufr, &n);
 	printf("io_read err=%x, n=%d\n", err, n);
 	for (i = 0; i < n; i++)
 		printf("buf[%d]=%x\n", i, bufr[i]);
@@ -124,15 +159,29 @@ void cmd_ini(int argc, char **argv)
 {
 	printf("io_lookup\n");
 	if ((argc > 1) && (argv[1][0] = '1'))
-		err = cyg_io_lookup("/dev/ser1", &serH);
+		err = cyg_io_lookup("/dev/ser1", &serial_handle);
 	else
-		err = cyg_io_lookup("/dev/ser0", &serH);
+		err = cyg_io_lookup("/dev/ser0", &serial_handle);
 	printf("lookup err=%x\n", err);
 }
 
 // Read the clock from the board
 void cmd_comm_read_clock (int argc, char** argv)
 {
+	// This function is extensively commented as an example to understand
+	//	how the following ones work
+	if (argc == 1)	// If the correct number of args is provided
+	{
+		next_message.code = RCLK;			// The code to be sent to the board
+		next_message.argc = 1;				// The number of arguments (just the code in this case)
+											// See the next function for an example on how to set argv
+		cyg_semaphore_post(&comm_semaph);	// Post to the communication thread's semaphore
+	}
+	else			// If a wrong number of arguments is provided
+	{
+		printf(ERR_WRONG_ARG_NUM);	// Print an error message and return
+	}
+	
 	return;
 }
 
