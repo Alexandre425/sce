@@ -1,5 +1,4 @@
 #include <stdio.h>
-#include <stdint.h>
 #include <cyg/kernel/kapi.h>
 #include <cyg/hal/hal_arch.h>
 
@@ -22,9 +21,9 @@ static cyg_sem_t comm_semaph, proc_semaph, term_semaph;
 #define EOM 0xFE  /* end of message */
 typedef struct message
 {
-	uint8_t code;
-	uint8_t argc
-	uint8_t argv[6];	// Maximum number of arguments is 6
+	unsigned char code;
+	unsigned char argc
+	unsigned char argv[6];	// Maximum number of arguments is 6
 } message_t;
 
 static message_t next_message;
@@ -39,12 +38,10 @@ typedef struct common_info
 extern void cmd_ini(int, char **);
 extern void monitor(void);
 
-void 
-
 void send_message (void)
 {
 	// Convert the message to a serialized byte stream
-	uint8_t stream [10];
+	unsigned char stream [10];
 	stream[0] = SOM;						// Write the start of message code
 	stream[1] = message.code;				// The message code
 	int i = 2;
@@ -55,7 +52,7 @@ void send_message (void)
 	stream[i] = EOM;						// The end of message
 	i++;									// I becomes the message length
 
-	cyg_io_write(serial_handle, (unsigned char*)stream, &i);
+	cyg_io_write(serial_handle, stream, &i);
 	printf("Sent message with code %x and length %i\n", stream[1], i);
 }
 
