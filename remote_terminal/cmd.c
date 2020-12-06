@@ -16,7 +16,7 @@ static cyg_handle_t comm_handle, proc_handle;
 static cyg_thread comm_thread, proc_thread;
 
 // Variables for the semaphores
-static cyg_sem_t comm_semaph, proc_semaph, term_semaph;
+cyg_sem_t comm_semaph, proc_semaph, term_semaph;
 
 #define SOM 0xFD  /* start of message */
 #define EOM 0xFE  /* end of message */
@@ -27,7 +27,7 @@ typedef struct message
 	unsigned char argv[6];	// Maximum number of arguments is 6
 } message_t;
 
-static message_t next_message;
+message_t next_message;
 
 extern cyg_io_handle_t serial_handle;
 
