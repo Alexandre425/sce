@@ -22,7 +22,7 @@ static cyg_sem_t comm_semaph, proc_semaph, term_semaph;
 typedef struct message
 {
 	unsigned char code;
-	unsigned char argc
+	unsigned char argc;
 	unsigned char argv[6];	// Maximum number of arguments is 6
 } message_t;
 
@@ -43,11 +43,11 @@ void send_message (void)
 	// Convert the message to a serialized byte stream
 	unsigned char stream [10];
 	stream[0] = SOM;						// Write the start of message code
-	stream[1] = message.code;				// The message code
+	stream[1] = next_message.code;				// The message code
 	int i = 2;
-	for (i = 2; i < message.argc + 1; i++)	// Each of the arguments
+	for (i = 2; i < next_message.argc + 1; i++)	// Each of the arguments
 	{
-		stream[i] = message.argv[i-2];
+		stream[i] = next_message.argv[i-2];
 	}
 	stream[i] = EOM;						// The end of message
 	i++;									// I becomes the message length
