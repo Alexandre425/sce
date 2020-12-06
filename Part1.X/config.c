@@ -15,6 +15,8 @@ void configInit(void)
         DATAEE_WriteByte(EEAddr_ALAH, ALAH);
         DATAEE_WriteByte(EEAddr_ALAM, ALAM);
         DATAEE_WriteByte(EEAddr_ALAS, ALAS);
+        DATAEE_WriteByte(EEAddr_PMON, PMON);
+        DATAEE_WriteByte(EEAddr_TALA, TALA);
         DATAEE_WriteByte(EEAddr_CHECKSUM, addChecksum());
     }
     uint8_t h = DATAEE_ReadByte(EEAddr_ALAH);
@@ -27,6 +29,9 @@ void configInit(void)
     ALAT = DATAEE_ReadByte(EEAddr_ALAT);
     ALAL = DATAEE_ReadByte(EEAddr_ALAL);
     alarms = DATAEE_ReadByte(EEAddr_ALARMS);
+    PMONITOR = DATAEE_ReadByte(EEAddr_PMON);
+    TimeALA = DATAEE_ReadByte(EEAddr_TALA);
+    pwm_max_count = (TimeALA*1000)/30;
 }
 
 void incTemperatureThreshold (void)
@@ -55,7 +60,8 @@ uint8_t addChecksum (void)
 {
     return(DATAEE_ReadByte(EEAddr_TIME_H)+DATAEE_ReadByte(EEAddr_TIME_M)+DATAEE_ReadByte(EEAddr_ALARMS)+
             DATAEE_ReadByte(EEAddr_ALAT)+DATAEE_ReadByte(EEAddr_ALAL)+DATAEE_ReadByte(EEAddr_ALAH)+
-            DATAEE_ReadByte(EEAddr_ALAM)+DATAEE_ReadByte(EEAddr_ALAS));
+            DATAEE_ReadByte(EEAddr_ALAM)+DATAEE_ReadByte(EEAddr_ALAS)+DATAEE_ReadByte(EEAddr_PMON)+
+            DATAEE_ReadByte(EEAddr_TALA));
 } 
 
 uint8_t checkChecksum (void)

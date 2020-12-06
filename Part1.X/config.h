@@ -10,6 +10,7 @@
 
 #include <stdint.h>
 #include "timers/timers.h"
+#include "mcc_generated_files/adcc.h"
 
 #ifdef	__cplusplus
 extern "C" {
@@ -29,10 +30,17 @@ extern "C" {
 
 uint8_t ALAT;
 uint8_t ALAL;
+uint8_t PMONITOR; // Monitorization period
+uint8_t TimeALA;
 
 // The alarm clock
 rtc_t ALA_CLK;
 rtc_t clk;
+
+// Measurement variables
+uint8_t temp;
+adc_result_t luminosity;
+uint8_t pwm_max_count;
 
 typedef uint8_t alarm_t;
 #define ALARM_C 0b00000001
@@ -58,7 +66,9 @@ uint8_t alarm_trigger;
 #define EEAddr_ALAH         0x7007  // Alarm hour
 #define EEAddr_ALAM         0x7008  // Alarm minute
 #define EEAddr_ALAS         0x7009  // Alarm second
-#define EEAddr_CHECKSUM     0x700a  // Address of the checksum 
+#define EEAddr_PMON         0x700a  // Address of the checksum 
+#define EEAddr_TALA         0x700b  // Address of the checksum 
+#define EEAddr_CHECKSUM     0x700c  // Address of the checksum 
 #define EEAddr_reg          0x7032  // Start address for registers
 
 

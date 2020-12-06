@@ -13,21 +13,20 @@
 #include "mcc_generated_files/tmr2.h"
 #include "mcc_generated_files/tmr5.h"
 #include "mcc_generated_files/pwm6.h"
+#include "comunication/comunication.h"
+#include "mcc_generated_files/adcc.h"
 
 // Number of data registers
 uint8_t nreg;
 uint8_t last_sent_index;
 
 // Measurement variables
-uint8_t temp;
 uint8_t last_temp;
-adc_result_t luminosity;
 adc_result_t last_luminosity;
 
 
 // PWM variables
 const uint8_t duty_cycle_inc = 60;
-const uint8_t pwm_max_count = 167;
 uint8_t pwm_count;
 uint16_t duty_cycle;
 int8_t sign;
@@ -324,6 +323,8 @@ void main(void)
     IOCBF4_SetInterruptHandler(buttonS1Interrupt);
     IOCCF5_SetInterruptHandler(buttonS2Interrupt);
     
+    // Set interrupt handles for comunication
+    EUSART_SetRxInterruptHandler(readMessage);
     
     configInit();
     rtcSetMeasurementFunction(&clk, takeMeasurement);

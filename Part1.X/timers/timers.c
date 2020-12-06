@@ -46,7 +46,7 @@ void rtcTick(rtc_t* clk)
     LED_D5_Toggle();
     // Incrementing the measurement timer
     clk->meas_tmr++;
-    if (clk->meas_tmr >= PMON && PMON!=0)
+    if (clk->meas_tmr >= PMONITOR && PMONITOR!=0)
     {
         clk->meas_tmr = 0;
         (clk->takeMeasurement)();
