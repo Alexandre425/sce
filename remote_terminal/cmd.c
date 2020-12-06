@@ -94,6 +94,7 @@ static void comm_entry (cyg_addrword_t data)
 	while (1)
 	{
 		cyg_semaphore_wait(&comm_semaph);	// Wait for new messages to be sent
+		printf("TEST: Semaphore unlocked\n");
 		send_message();						// Send the stored message
 	}
 
