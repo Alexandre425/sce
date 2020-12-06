@@ -30,7 +30,14 @@ extern void monitor(void);
 static void comm_send_entry (cyg_addrword_t data)
 {
 	printf("Communication (send) thread initialized!\n");
-	printf("Received pointer to data %x\n", (void*)data);
+
+	// Casting as common_info_t
+	common_info_t* com_info = (common_info_t*)data;
+
+	printf("TEST: Blocking on mailbox\n");
+	int* object = (int*)cyg_mbox_get(com_info->comm_mbox_handle);
+	printf("TEST: Got value %d from mailbox\n", *object);
+
 }
 
 static void comm_recv_entry (cyg_addrword_t data)
@@ -72,6 +79,10 @@ int main(void)
 	cyg_thread_resume(comm_send_handle);
 	cyg_thread_resume(comm_recv_handle);
 	cyg_thread_resume(proc_handle);
+
+	int val = 42;
+	printf("TEST: Putting value %d in mailbox\n", val);
+	cyg_mbox_put(com_info.comm_mbox_handle, &val);
 
 	monitor();
 
