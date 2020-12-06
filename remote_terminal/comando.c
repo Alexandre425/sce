@@ -177,6 +177,7 @@ void cmd_comm_read_clock (int argc, char** argv)
 		next_message.argc = 1;				// The number of arguments (just the code in this case)
 											// See the next function for an example on how to set argv
 		cyg_semaphore_post(&comm_semaph);	// Post to the communication thread's semaphore
+		printf("TEST: Unlocking semaphore\n");
 	}
 	else			// If a wrong number of arguments is provided
 	{

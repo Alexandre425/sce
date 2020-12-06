@@ -8,12 +8,12 @@
 #define TERM_PRI 3
 #define STACK_SIZE CYGNUM_HAL_STACK_SIZE_TYPICAL
 
-static unsigned char comm_stack[STACK_SIZE]; 
-static unsigned char proc_stack[STACK_SIZE];
+unsigned char comm_stack[STACK_SIZE]; 
+unsigned char proc_stack[STACK_SIZE];
 
 // Handles for the threads
-static cyg_handle_t comm_handle, proc_handle;
-static cyg_thread comm_thread, proc_thread;
+cyg_handle_t comm_handle, proc_handle;
+cyg_thread comm_thread, proc_thread;
 
 // Variables for the semaphores
 cyg_sem_t comm_semaph, proc_semaph, term_semaph;
@@ -65,6 +65,7 @@ static void comm_entry (cyg_addrword_t data)
 	while (1)
 	{
 		cyg_semaphore_wait(&comm_semaph);	// Wait for new messages to be sent
+		printf("TEST: Semaphore unlocked\n");
 		send_message();						// Send the stored message
 	}
 
