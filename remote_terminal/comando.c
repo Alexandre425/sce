@@ -36,13 +36,15 @@ cyg_io_handle_t serial_handle;
 typedef struct message
 {
 	unsigned char code;
-	unsigned char argc
+	unsigned char argc;
 	unsigned char argv[6];	// Maximum number of arguments is 6
 } message_t;
 
 extern static message_t next_message;
 
-extern static cyg_sem_t comm_semaph, proc_semaph, term_semaph;
+extern static cyg_sem_t comm_semaph;
+extern static cyg_sem_t proc_semaph;
+extern static cyg_sem_t term_semaph;
 
 
 /*-------------------------------------------------------------------------+
