@@ -32,7 +32,7 @@ static void comm_send_entry (cyg_addrword_t data)
 
 	printf("TEST: Waiting on semaphore\n");
 	cyg_semaphore_wait(&comm_semaph);
-	printf("TEST: Resumed from semaphore\n", *object);
+	printf("TEST: Resumed from semaphore\n");
 
 }
 
@@ -60,7 +60,7 @@ int main(void)
 	// Creating the 3 other threads
 	// Communication (send) thread
 	cyg_thread_create(
-		COMM_SEND_PRI, &comm_send_entry, &com_info, "comm_send", comm_send_stack, 
+		COMM_SEND_PRI, &comm_send_entry, (cyg_addrword_t)&com_info, "comm_send", comm_send_stack, 
 		STACK_SIZE, &comm_send_handle, &comm_send_thread
 	);
 	// Communication (receive) thread
