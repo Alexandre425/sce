@@ -15,13 +15,12 @@ static unsigned char proc_stack[STACK_SIZE];
 static cyg_handle_t comm_send_handle, comm_recv_handle, proc_handle;
 static cyg_thread comm_send_thread, comm_recv_thread, proc_thread;
 
-// Variables to store the mailboxes
-static cyg_mbox comm_mbox, proc_mbox;
+// Variables for the semaphores
+static cyg_sem_t comm_semaph, proc_semaph;
 
 typedef struct common_info
 {
-	// Mailbox handles
-	cyg_handle_t comm_mbox_handle, proc_mbox_handle;
+	
 } common_info_t;
 
 extern void cmd_ini(int, char **);
@@ -31,12 +30,9 @@ static void comm_send_entry (cyg_addrword_t data)
 {
 	printf("Communication (send) thread initialized!\n");
 
-	// Casting as common_info_t
-	common_info_t* com_info = (common_info_t*)data;
-
-	printf("TEST: Blocking on mailbox\n");
-	int* object = (int*)cyg_mbox_get(com_info->comm_mbox_handle);
-	printf("TEST: Got value %d from mailbox\n", *object);
+	printf("TEST: Waiting on semaphore\n");
+	cyg_semaphore_wait(&comm_semaph);
+	printf("TEST: Resumed from semaphore\n", *object);
 
 }
 
@@ -57,9 +53,9 @@ int main(void)
 
 	// Generating the common information struct
 	common_info_t com_info; 
-	// Creating the mailboxes
-	cyg_mbox_create(&com_info.comm_mbox_handle, &comm_mbox);
-	cyg_mbox_create(&com_info.proc_mbox_handle, &proc_mbox);
+	// Creating the semaphores
+	cyg_semaphore_init(&comm_semaph, 0);
+	cyg_semaphore_init(&proc_semaph, 0);
 
 	// Creating the 3 other threads
 	// Communication (send) thread
@@ -80,9 +76,8 @@ int main(void)
 	cyg_thread_resume(comm_recv_handle);
 	cyg_thread_resume(proc_handle);
 
-	int val = 42;
-	printf("TEST: Putting value %d in mailbox\n", val);
-	cyg_mbox_put(com_info.comm_mbox_handle, &val);
+	printf("TEST: Posted to semaphore\n");
+	cyg_semaphore_post(&comm_semaph);
 
 	monitor();
 
