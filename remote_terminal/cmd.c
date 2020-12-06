@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <cyg/kernel/kapi.h>
+#include <cyg/io/io.h>
 #include <cyg/hal/hal_arch.h>
 
 #define COMM_PRI 1
@@ -100,9 +101,8 @@ int main(void)
 		STACK_SIZE, &proc_handle, &proc_thread
 	);
 	// Set own priority to the lowest
-	cyg_thread_set_priority(cyg_thread_self(), TERM_PRI)
-	cyg_thread_resume(comm_send_handle);
-	cyg_thread_resume(comm_recv_handle);
+	cyg_thread_set_priority(cyg_thread_self(), TERM_PRI);
+	cyg_thread_resume(comm_handle);
 	cyg_thread_resume(proc_handle);
 
 
