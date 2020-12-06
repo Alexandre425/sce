@@ -39,6 +39,22 @@ typedef struct common_info
 extern void cmd_ini(int, char **);
 extern void monitor(void);
 
+void recv_message (void)
+{
+	// This is all temporary
+	printf("Receiving message: %x ", SOM);
+	unsigned char* recv;
+	int i = 1;
+	do
+	{
+		cyg_io_read(serial_handle, recv, &i);
+		printf("%x ", *recv);
+		i = 1;
+	}
+	while (*recv != EOM);
+	
+}
+
 void send_message (void)
 {
 	// Convert the message to a serialized byte stream
@@ -55,6 +71,19 @@ void send_message (void)
 
 	cyg_io_write(serial_handle, stream, &i);
 	printf("Sent message with code %x and length %i\n", stream[1], i);
+
+	// Receiving the response
+	i = 1;
+	cyg_io_read(serial_handle, stream, &i);
+	if (stream[0] == SOM)
+	{
+		recv_message();
+	}
+	else
+	{
+		printf("ERROR: Message didn't begin with SOM!\n");
+	}
+	
 }
 
 // Communication thread handles the sending of requests and the receival of responses
@@ -65,9 +94,10 @@ static void comm_entry (cyg_addrword_t data)
 	while (1)
 	{
 		cyg_semaphore_wait(&comm_semaph);	// Wait for new messages to be sent
-		printf("TEST: Semaphore unlocked\n");
 		send_message();						// Send the stored message
 	}
+
+
 
 }
 
