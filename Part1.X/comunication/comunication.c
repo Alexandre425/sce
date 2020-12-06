@@ -83,9 +83,11 @@ void sendError (unsigned char msg_ok)
 
 void readClock(void)
 {
+    EUSART_Write(SOM);
     EUSART_Write(clk.h);
     EUSART_Write(clk.m);
     EUSART_Write(clk.s);
+    EUSART_Write(EOM);
 }
 
 void setClock(uint8_t* msg_data)
