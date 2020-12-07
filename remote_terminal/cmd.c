@@ -89,6 +89,7 @@ static void comm_entry (cyg_addrword_t data)
 		send_message();						// Send the stored message
 		printf("TEST: Waiting for response\n");
 		recv_message();						// Receive and interpret the response
+		cyg_semaphore_post(&term_semaph);
 	}
 }
 

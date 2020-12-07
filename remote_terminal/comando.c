@@ -178,6 +178,7 @@ void cmd_comm_read_clock (int argc, char** argv)
 											// See the next function for an example on how to set argv
 		printf("TEST: Posting to semaphore\n");
 		cyg_semaphore_post(&comm_semaph);	// Post to the communication thread's semaphore
+		cyg_semaphore_wait(&term_semaph);	// Wait for the task to finish to return the control to the terminal
 	}
 	else			// If a wrong number of arguments is provided
 	{

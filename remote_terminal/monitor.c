@@ -44,7 +44,6 @@ extern void cmd_rmh(int, char **);
 extern void cmd_test(int, char **);
 void cmd_help(int, char **);
 
-
 const char TitleMsg[] = "\n\n";
 const char InvalMsg[] = "\tInvalid command!\n";
 
