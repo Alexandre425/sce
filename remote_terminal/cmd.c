@@ -42,9 +42,10 @@ extern void monitor(void);
 void recv_message (void)
 {
 	// This is all temporary
-	printf("Receiving message: %x ", SOM);
 	unsigned char* recv;
 	int i = 1;
+	cyg_io_read(serial_handle, recv, &i);
+	printf("Receiving message: %x ", *recv);
 	do
 	{
 		cyg_io_read(serial_handle, recv, &i);
@@ -59,7 +60,7 @@ void send_message (void)
 {
 	// Convert the message to a serialized byte stream
 	unsigned char stream [10];
-	stream[0] = SOM;						// Write the start of message code
+	stream[0] = SOM;							// Write the start of message code
 	stream[1] = next_message.code;				// The message code
 	int i = 2;
 	for (i = 2; i < next_message.argc + 1; i++)	// Each of the arguments
@@ -67,39 +68,26 @@ void send_message (void)
 		stream[i] = next_message.argv[i-2];
 	}
 	stream[i] = EOM;						// The end of message
-	i++;									// I becomes the message length
+	i++;									// i becomes the message length
 
 	cyg_io_write(serial_handle, stream, &i);
-	printf("Sent message with code %x and length %i\n", stream[1], i);
-
-	// Receiving the response
-	i = 1;
-	cyg_io_read(serial_handle, stream, &i);
-	if (stream[0] == SOM)
-	{
-		recv_message();
-	}
-	else
-	{
-		printf("ERROR: Message didn't begin with SOM!\n");
-	}
+	printf("TEST: Sent message with code %x and length %i\n", stream[1], i);
 	
 }
 
 // Communication thread handles the sending of requests and the receival of responses
 static void comm_entry (cyg_addrword_t data)
 {
-	printf("Communication (send) thread initialized!\n");
+	printf("Communication thread initialized!\n");
 
 	while (1)
 	{
 		cyg_semaphore_wait(&comm_semaph);	// Wait for new messages to be sent
 		printf("TEST: Semaphore unlocked\n");
 		send_message();						// Send the stored message
+		printf("TEST: Waiting for response\n");
+		recv_message();						// Receive and interpret the response
 	}
-
-
-
 }
 
 // The processing thread requests registers from the board using the communication

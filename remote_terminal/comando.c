@@ -11,19 +11,19 @@
 
 
 #define RCLK  		0xC0  /* read clock */
-#define SCLK  		0XC1  /* set clock */
-#define RTL   		0XC2  /* read temperature and luminosity */
-#define RPAR  		0XC3  /* read parameters */
-#define MMP   		0XC4  /* modify monitoring period */
-#define MTA   		0XC5  /* modify time alarm */
-#define RALA  		0XC6  /* read alarms (clock, temperature, luminosity, active/inactive) */
-#define DAC   		0XC7  /* define alarm clock */
-#define DATL  		0XC8  /* define alarm temperature and luminosity */
-#define AALA  		0XC9  /* activate/deactivate alarms */
-#define IREG  		0XCA  /* information about registers (NREG, nr, iread, iwrite)*/
-#define TRGC  		0XCB  /* transfer registers (curr. position)*/
-#define TRGI  		0XCC  /* transfer registers (index) */
-#define NMFL  		0XCD  /* notification memory (half) full */
+#define SCLK  		0xC1  /* set clock */
+#define RTL   		0xC2  /* read temperature and luminosity */
+#define RPAR  		0xC3  /* read parameters */
+#define MMP   		0xC4  /* modify monitoring period */
+#define MTA   		0xC5  /* modify time alarm */
+#define RALA  		0xC6  /* read alarms (clock, temperature, luminosity, active/inactive) */
+#define DAC   		0xC7  /* define alarm clock */
+#define DATL  		0xC8  /* define alarm temperature and luminosity */
+#define AALA  		0xC9  /* activate/deactivate alarms */
+#define IREG  		0xCA  /* information about registers (NREG, nr, iread, iwrite)*/
+#define TRGC  		0xCB  /* transfer registers (curr. position)*/
+#define TRGI  		0xCC  /* transfer registers (index) */
+#define NMFL  		0xCD  /* notification memory (half) full */
 #define CMD_OK    	0x00  /* command successful */
 #define CMD_ERROR 	0xFF  /* error in command */
 
@@ -176,8 +176,8 @@ void cmd_comm_read_clock (int argc, char** argv)
 		next_message.code = RCLK;			// The code to be sent to the board
 		next_message.argc = 1;				// The number of arguments (just the code in this case)
 											// See the next function for an example on how to set argv
-		cyg_semaphore_post(&comm_semaph);	// Post to the communication thread's semaphore
 		printf("TEST: Posting to semaphore\n");
+		cyg_semaphore_post(&comm_semaph);	// Post to the communication thread's semaphore
 	}
 	else			// If a wrong number of arguments is provided
 	{
