@@ -189,7 +189,7 @@ void cmd_comm_read_clock (int argc, char** argv)
 		cyg_semaphore_post(&comm_semaph);	// Post to the communication thread's semaphore
 		cyg_semaphore_wait(&term_semaph);	// Wait for the task to finish to return the control to the terminal
 
-		printf("Time: %02dh%02dm%02s\n", received_message[2], received_message[3], received_message[4]);
+		printf("Time: %02dh%02dm%02ds\n", received_message[2], received_message[3], received_message[4]);
 		return;
 	}
 	else			// If a wrong number of arguments is provided
@@ -209,13 +209,13 @@ void cmd_comm_set_clock (int argc, char** argv)
 		next_message.argc = 4;
 		if 
 		(
-			!sscanf(argv[1], "%u", next_message.argv[0]) ||	// Checking if the inputs are valid
-			!sscanf(argv[2], "%u", next_message.argv[1]) ||	// Basically checks if sscanf found anything
-			!sscanf(argv[3], "%u", next_message.argv[2])
+			!sscanf(argv[1], "%d", next_message.argv[0]) ||	// Checking if the inputs are valid
+			!sscanf(argv[2], "%d", next_message.argv[1]) ||	// Basically checks if sscanf found anything
+			!sscanf(argv[3], "%d", next_message.argv[2])
 		)
 		{
 			printf(ERR_BAD_ARG);
-			return
+			return;
 		}
 		cyg_semaphore_post(&comm_semaph);
 		cyg_semaphore_wait(&term_semaph);
