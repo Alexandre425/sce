@@ -333,10 +333,10 @@ void cmd_comm_read_alarms (int argc, char** argv)
 		cyg_semaphore_post(&comm_semaph);
 		cyg_semaphore_wait(&term_semaph);
 
-		printf("Alarm time:        %02dh%02dm%02ds\n," received_message[2]);
-		printf("Alarm temperature: %dºC\n", received_message[3]);
-		printf("Alarm luminosity:  %d\n", received_message[4]);
-		printf("Alarms:            %s\n", (received_message[5] == 1 ? "ENABLED" : "DISABLED"));
+		printf("Alarm time:        %02dh%02dm%02ds\n", received_message[2], received_message[3], received_message[4]);
+		printf("Alarm temperature: %dºC\n", received_message[4]);
+		printf("Alarm luminosity:  %d\n", received_message[5]);
+		printf("Alarms:            %s\n", (received_message[6] == 1 ? "ENABLED" : "DISABLED"));
 		return;
 	}
 	else
