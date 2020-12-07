@@ -191,7 +191,7 @@ void cmd_comm_read_clock (int argc, char** argv)
 // Set the clock on the board
 void cmd_comm_set_clock (int argc, char** argv)
 {
-	if (argc == 4)	// If the correct number of args is provided
+	if (argc == 4)
 	{
 		next_message.code = SCLK;
 		next_message.argc = 4;
@@ -201,9 +201,9 @@ void cmd_comm_set_clock (int argc, char** argv)
 		cyg_semaphore_post(&comm_semaph);
 		cyg_semaphore_wait(&term_semaph);
 	}
-	else			// If a wrong number of arguments is provided
+	else
 	{
-		printf(ERR_WRONG_ARG_NUM);	// Print an error message and return
+		printf(ERR_WRONG_ARG_NUM);
 	}
 	
 	return;
@@ -212,6 +212,18 @@ void cmd_comm_set_clock (int argc, char** argv)
 // Read the temperature and luminosity from the board
 void cmd_comm_read_temp_lum (int argc, char** argv)
 {
+	if (argc == 1)
+	{
+		next_message.code = RTL;
+		next_message.argc = 1;
+		cyg_semaphore_post(&comm_semaph);
+		cyg_semaphore_wait(&term_semaph);
+	}
+	else
+	{
+		printf(ERR_WRONG_ARG_NUM);
+	}
+	
 	return;
 }
 
