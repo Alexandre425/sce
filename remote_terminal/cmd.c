@@ -45,10 +45,9 @@ extern void monitor(void);
 
 void recv_message (void)
 {
-	unsigned char* recv;
 	int i = 1;
-	cyg_io_read(serial_handle, recv, &i);
-	printf("Receiving message: %x ", *recv);
+	unsigned char* recv;
+	printf("TEST: Received message ");
 	do
 	{
 		i = 1;
@@ -74,6 +73,10 @@ void send_message (void)
 	}
 	stream[i] = EOM;						// The end of message
 	i++;									// i becomes the message length
+
+	printf("Sent message: ");
+	for (int j = 0; j < i; j++) printf("%x ", stream[i]);
+	printf("\n"); 
 
 	cyg_io_write(serial_handle, stream, &i);
 	printf("TEST: Sent message with code %x and length %i\n", stream[1], i);
