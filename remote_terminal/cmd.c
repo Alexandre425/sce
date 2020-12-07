@@ -31,7 +31,7 @@ typedef struct message
 message_t next_message;
 
 // Max message size received is 25 registers (5 bytes each) plus SOM and EOM (1 byte each)
-unsigned char recv_message [5*25 + 2];	
+unsigned char received_message [5*25 + 2];	
 
 extern cyg_io_handle_t serial_handle;
 
