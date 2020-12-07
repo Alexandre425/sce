@@ -324,7 +324,6 @@ void main(void)
     IOCCF5_SetInterruptHandler(buttonS2Interrupt);
     
     // Set interrupt handles for comunication
-    //EUSART_SetRxInterruptHandler(readMessage);
     
     configInit();
     rtcSetMeasurementFunction(&clk, takeMeasurement);

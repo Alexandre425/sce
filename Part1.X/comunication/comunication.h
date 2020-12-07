@@ -34,9 +34,9 @@ extern "C" {
 #define CMD_OK 0x00 /* command successful */
 #define CMD_ERROR 0xFF /* error in command */
 
-void* readMessage(void); // Reads the message
+void readMessage(void); // Reads the message
 void processMessage (uint8_t *); // Processes the command and calls fucntions to handle command
-void sendError (unsigned char ); // Sends a reply with ok or error
+void sendError (uint8_t); // Sends a reply with ok or error
 /* Handlers for commands */
 void readClock(void);
 void setClock(uint8_t*);
@@ -44,6 +44,10 @@ void readTempLumin(void);
 void readParam(void);
 void modifyPMONITOR(uint8_t);
 void modifyTimeAlarm(uint8_t);
+void readAlarm (void);
+void setAlarmClock(uint8_t*);
+void setAlarmTempLumin(uint8_t*);
+void setAlarmCom(uint8_t*);
 
 
 

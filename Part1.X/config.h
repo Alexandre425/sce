@@ -82,7 +82,7 @@ void incTemperatureThreshold (void);
 // Loops back at 7
 void incLuminosityThreshold (void);
 // Sets the flag of the alarm and sets alarm_trigger to 1
-void setAlarm(uint8_t FLAG);
+void setAlarm(uint8_t );
 // Add all the non-volatile saved values
 uint8_t addChecksum (void);
 // Check if the Checksum is correct, returns 0 if so
