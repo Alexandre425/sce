@@ -191,6 +191,21 @@ void cmd_comm_read_clock (int argc, char** argv)
 // Set the clock on the board
 void cmd_comm_set_clock (int argc, char** argv)
 {
+	if (argc == 4)	// If the correct number of args is provided
+	{
+		next_message.code = SCLK;
+		next_message.argc = 4;
+		next_message.argv[0] = atoi(argv[1]);	// Hours
+		next_message.argv[1] = atoi(argv[2]);	// minutes
+		next_message.argv[2] = atoi(argv[3]);	// seconds
+		cyg_semaphore_post(&comm_semaph);
+		cyg_semaphore_wait(&term_semaph);
+	}
+	else			// If a wrong number of arguments is provided
+	{
+		printf(ERR_WRONG_ARG_NUM);	// Print an error message and return
+	}
+	
 	return;
 }
 
