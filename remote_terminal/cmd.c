@@ -48,11 +48,13 @@ void recv_message (void)
 	printf("Receiving message: %x ", *recv);
 	do
 	{
+		i = 1;
 		cyg_io_read(serial_handle, recv, &i);
 		printf("%x ", *recv);
-		i = 1;
 	}
 	while (*recv != EOM);
+
+	printf("\n");
 	
 }
 
