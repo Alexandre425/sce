@@ -46,12 +46,14 @@ extern void monitor(void);
 void recv_message (void)
 {
 	int i = 1;
+	int j = 0;
 	unsigned char* recv;
 	printf("TEST: Received message ");
 	do
 	{
 		i = 1;
 		cyg_io_read(serial_handle, recv, &i);
+		received_message[j++];
 		printf("%x ", *recv);
 	}
 	while (*recv != EOM);
