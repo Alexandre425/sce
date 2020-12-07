@@ -75,7 +75,8 @@ void send_message (void)
 	i++;									// i becomes the message length
 
 	printf("Sent message: ");
-	for (int j = 0; j < i; j++) printf("%x ", stream[i]);
+	int j = 0;
+	for (j = 0; j < i; j++) printf("%x ", stream[i]);
 	printf("\n"); 
 
 	cyg_io_write(serial_handle, stream, &i);
