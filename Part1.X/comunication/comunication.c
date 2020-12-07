@@ -1,34 +1,34 @@
 #include "comunication.h"
 #include "../config.h"
 #include "../mcc_generated_files/eusart.h"
+#include "../peripherals/lcd.h"
 
 void* readMessage(void)
 {
     uint8_t som = 0;
     uint8_t msg_data[7];
     
-    if(EUSART_is_rx_ready()){ // if there is nothing to be read
-        return;
-    }
-    
+    LCDcmd(0xc8);
+    LCDstr("A");
+
     while (som!=SOM){
         som = EUSART_Read();
     }
     
     msg_cmd = EUSART_Read();
     
-    for(unsigned char i= 0; i<7 && msg_data[i]!=EOM && !EUSART_is_rx_ready(); i++){
-        msg_data[i] = EUSART_Read();
+    for(unsigned char i= 0; i<7 ; i++){
+        msg_data[0] = EUSART_Read();
+        if (msg_data[i]==EOM)
+            break;
     }
     
     processMessage(msg_data);
-    
+    return;
 }
 
 void processMessage (uint8_t* msg_data)
 {   
-    while(!EUSART_is_tx_done()) // should we check if there is space on the buffer?
-        ;
     switch(msg_cmd){
         case RCLK:
             readClock();
@@ -73,17 +73,20 @@ void processMessage (uint8_t* msg_data)
 
 void sendError (unsigned char msg_ok)
 {
+    EUSART_Write(SOM);
     EUSART_Write(msg_cmd);
     if(msg_ok == '0'){
         EUSART_Write(CMD_OK); 
     } else if (msg_ok == '1'){
         EUSART_Write(CMD_ERROR);
     }
+    EUSART_Write(EOM);
 }
 
 void readClock(void)
 {
     EUSART_Write(SOM);
+    EUSART_Write(msg_cmd);
     EUSART_Write(clk.h);
     EUSART_Write(clk.m);
     EUSART_Write(clk.s);
@@ -108,14 +111,20 @@ void setClock(uint8_t* msg_data)
 
 void readTempLumin(void)
 {
+    EUSART_Write(SOM);
+    EUSART_Write(msg_cmd);
     EUSART_Write(temp);
-    EUSART_Write(luminosity); // ASK ALEX ABOUT OVERFLOW
+    EUSART_Write(luminosity);
+    EUSART_Write(EOM);
 }
 
 void readParam (void)
 {
+    EUSART_Write(SOM);
+    EUSART_Write(msg_cmd);
     EUSART_Write(PMONITOR);
     EUSART_Write(TimeALA);
+    EUSART_Write(EOM);
 }
 
 void modifyPMONITOR(uint8_t msg_data)

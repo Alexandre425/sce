@@ -39,7 +39,7 @@ rtc_t clk;
 
 // Measurement variables
 uint8_t temp;
-adc_result_t luminosity;
+uint8_t luminosity;
 uint8_t pwm_max_count;
 
 typedef uint8_t alarm_t;

@@ -22,7 +22,7 @@ uint8_t last_sent_index;
 
 // Measurement variables
 uint8_t last_temp;
-adc_result_t last_luminosity;
+uint8_t last_luminosity;
 
 
 // PWM variables
@@ -231,10 +231,10 @@ void* buttonS2Interrupt(void)
     IOCCNbits.IOCCN5 = 0;
 }
 
-adc_result_t readLuminosity (void)
+uint8_t readLuminosity (void)
 {
     adc_result_t res = ADCC_GetSingleConversion(POT_CHANNEL);
-    return (res >> 13);
+    return (uint8_t)(res >> 13);
 }
 
 
@@ -324,7 +324,7 @@ void main(void)
     IOCCF5_SetInterruptHandler(buttonS2Interrupt);
     
     // Set interrupt handles for comunication
-    EUSART_SetRxInterruptHandler(readMessage);
+    //EUSART_SetRxInterruptHandler(readMessage);
     
     configInit();
     rtcSetMeasurementFunction(&clk, takeMeasurement);
@@ -353,7 +353,12 @@ void main(void)
             TMR3_StartTimer();
             alarm_trigger = 0;
         }
-        SLEEP();
+        //EUSART_Write(EUSART_Read());
+        if (EUSART_is_rx_ready())
+        {
+            readMessage();
+        }
+        //SLEEP();
     }
 }
 
