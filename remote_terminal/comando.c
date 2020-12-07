@@ -29,6 +29,7 @@
 
 
 #define ERR_WRONG_ARG_NUM "ERROR: Wrong number of arguments provided!\n"
+#define ERR_BAD_ARG "ERROR: Bad argument!\n"
 
 Cyg_ErrNo err;
 cyg_io_handle_t serial_handle;
@@ -41,6 +42,8 @@ typedef struct message
 } message_t;
 
 extern message_t next_message;
+
+extern unsigned char received_message [5*25 + 3];
 
 extern cyg_sem_t comm_semaph;
 extern cyg_sem_t proc_semaph;
@@ -166,6 +169,12 @@ void cmd_ini(int argc, char **argv)
 	printf("lookup err=%x\n", err);
 }
 
+// Prints wether the last command was successful or not
+void print_err(unsigned char error_code)
+{
+	printf("Response: %s\n", (error_code == CMD_OK ? "OK" : "ERROR"));
+}
+
 // Read the clock from the board
 void cmd_comm_read_clock (int argc, char** argv)
 {
@@ -179,13 +188,16 @@ void cmd_comm_read_clock (int argc, char** argv)
 		printf("TEST: Posting to semaphore\n");
 		cyg_semaphore_post(&comm_semaph);	// Post to the communication thread's semaphore
 		cyg_semaphore_wait(&term_semaph);	// Wait for the task to finish to return the control to the terminal
+		// Printing the received message
+		printf("Time: %02dh%02dm%02ds\n", received_message[2], received_message[3], received_message[4]);
+		return;
 	}
 	else			// If a wrong number of arguments is provided
 	{
 		printf(ERR_WRONG_ARG_NUM);	// Print an error message and return
+		return;
 	}
 	
-	return;
 }
 
 // Set the clock on the board
@@ -195,18 +207,26 @@ void cmd_comm_set_clock (int argc, char** argv)
 	{
 		next_message.code = SCLK;
 		next_message.argc = 4;
-		next_message.argv[0] = atoi(argv[1]);	// Hours
-		next_message.argv[1] = atoi(argv[2]);	// minutes
-		next_message.argv[2] = atoi(argv[3]);	// seconds
+		if 
+		(
+			!sscanf(argv[1], "%d", &next_message.argv[0]) ||	// Checking if the inputs are valid
+			!sscanf(argv[2], "%d", &next_message.argv[1]) ||	// Basically checks if sscanf found anything
+			!sscanf(argv[3], "%d", &next_message.argv[2])
+		)
+		{
+			printf(ERR_BAD_ARG);
+			return;
+		}
 		cyg_semaphore_post(&comm_semaph);
 		cyg_semaphore_wait(&term_semaph);
+
+		print_err(received_message[2]);
 	}
 	else
 	{
 		printf(ERR_WRONG_ARG_NUM);
-	}
-	
-	return;
+		return;
+	}	
 }
 
 // Read the temperature and luminosity from the board
@@ -218,61 +238,220 @@ void cmd_comm_read_temp_lum (int argc, char** argv)
 		next_message.argc = 1;
 		cyg_semaphore_post(&comm_semaph);
 		cyg_semaphore_wait(&term_semaph);
+
+		printf("Temperature: %dºC\nLuminosity: %d", received_message[2], received_message[3]);
+		return;
 	}
 	else
 	{
 		printf(ERR_WRONG_ARG_NUM);
+		return;
 	}
-	
-	return;
 }
 
 // Read the PMON and TALA parameters from the board
 void cmd_comm_read_param (int argc, char** argv)
 {
-	return;
+	if (argc == 1)
+	{
+		next_message.code = RPAR;
+		next_message.argc = 1;
+		cyg_semaphore_post(&comm_semaph);
+		cyg_semaphore_wait(&term_semaph);
+
+		printf("PMON: %ds\nTALA: %ds", received_message[2], received_message[3]);
+		return;
+	}
+	else
+	{
+		printf(ERR_WRONG_ARG_NUM);
+		return;
+	}
 }
 
 // Modify the monitoring period of the board
 void cmd_comm_mod_monitor_period (int argc, char** argv)
 {
-	return;
+	if (argc == 2)
+	{
+		next_message.code = MMP;
+		next_message.argc = 2;
+		if 
+		(
+			!sscanf(argv[1], "%d", &next_message.argv[0])
+		)
+		{
+			printf(ERR_BAD_ARG);
+			return;
+		}
+		cyg_semaphore_post(&comm_semaph);
+		cyg_semaphore_wait(&term_semaph);
+
+		print_err(received_message[2]);
+	}
+	else
+	{
+		printf(ERR_WRONG_ARG_NUM);
+		return;
+	}	
 }
 
 // Modify the time the alarm stays active on the board
 void cmd_comm_mod_time_alarm (int argc, char** argv)
 {
-	return;
+	if (argc == 2)
+	{
+		next_message.code = MTA;
+		next_message.argc = 2;
+		if 
+		(
+			!sscanf(argv[1], "%d", &next_message.argv[0])
+		)
+		{
+			printf(ERR_BAD_ARG);
+			return;
+		}
+		cyg_semaphore_post(&comm_semaph);
+		cyg_semaphore_wait(&term_semaph);
+
+		print_err(received_message[2]);
+	}
+	else
+	{
+		printf(ERR_WRONG_ARG_NUM);
+		return;
+	}	
 }
 
 // Read the alarms (CTL A) from the board
 void cmd_comm_read_alarms (int argc, char** argv)
 {
-	return;
+	if (argc == 1)
+	{
+		next_message.code = RALA;
+		next_message.argc = 1;
+		cyg_semaphore_post(&comm_semaph);
+		cyg_semaphore_wait(&term_semaph);
+
+		printf("Alarm time:        %02dh%02dm%02ds\n", received_message[2], received_message[3], received_message[4]);
+		printf("Alarm temperature: %dºC\n", received_message[4]);
+		printf("Alarm luminosity:  %d\n", received_message[5]);
+		printf("Alarms:            %s\n", (received_message[6] == 1 ? "ENABLED" : "DISABLED"));
+		return;
+	}
+	else
+	{
+		printf(ERR_WRONG_ARG_NUM);
+		return;
+	}
 }
 
 // Modify the time of the alarm clock on the board
 void cmd_comm_define_alarm_clock (int argc, char** argv)
 {
-	return;
+	if (argc == 4)
+	{
+		next_message.code = DAC;
+		next_message.argc = 4;
+		if 
+		(
+			!sscanf(argv[1], "%d", &next_message.argv[0])||
+			!sscanf(argv[2], "%d", &next_message.argv[1])||
+			!sscanf(argv[3], "%d", &next_message.argv[2])
+		)
+		{
+			printf(ERR_BAD_ARG);
+			return;
+		}
+		cyg_semaphore_post(&comm_semaph);
+		cyg_semaphore_wait(&term_semaph);
+
+		print_err(received_message[2]);
+	}
+	else
+	{
+		printf(ERR_WRONG_ARG_NUM);
+		return;
+	}	
 }
 
 // Modify the temperature and luminosity thresholds on the board
 void cmd_comm_define_temp_lum (int argc, char** argv)
 {
-	return;
+	if (argc == 3)
+	{
+		next_message.code = DAC;
+		next_message.argc = 3;
+		if 
+		(
+			!sscanf(argv[1], "%d", &next_message.argv[0])||
+			!sscanf(argv[2], "%d", &next_message.argv[1])
+		)
+		{
+			printf(ERR_BAD_ARG);
+			return;
+		}
+		cyg_semaphore_post(&comm_semaph);
+		cyg_semaphore_wait(&term_semaph);
+
+		print_err(received_message[2]);
+	}
+	else
+	{
+		printf(ERR_WRONG_ARG_NUM);
+		return;
+	}	
 }
 
 // Enable/disable the alarms on the board
 void cmd_comm_activate_alarms (int argc, char** argv)
 {
-	return;
+	if (argc == 2)
+	{
+		next_message.code = DAC;
+		next_message.argc = 2;
+		if 
+		(
+			!sscanf(argv[1], "%d", &next_message.argv[0])
+		)
+		{
+			printf(ERR_BAD_ARG);
+			return;
+		}
+		cyg_semaphore_post(&comm_semaph);
+		cyg_semaphore_wait(&term_semaph);
+
+		print_err(received_message[2]);
+	}
+	else
+	{
+		printf(ERR_WRONG_ARG_NUM);
+		return;
+	}	
 }
 
 // Get information on the board's registers (NREG, nr, iread, iwrite)
 void cmd_comm_info_reg (int argc, char** argv)
 {
-	return;
+	if (argc == 1)
+	{
+		next_message.code = IREG;
+		next_message.argc = 1;
+		cyg_semaphore_post(&comm_semaph);
+		cyg_semaphore_wait(&term_semaph);
+
+		printf("NREG:        %d", received_message[2]);
+		printf("Registers:   %d", received_message[3]);
+		printf("Read index:  %d", received_message[4]);
+		printf("Write index: %d", received_message[5]);
+
+		return;
+	}
+	else
+	{
+		printf(ERR_WRONG_ARG_NUM);
+		return;
+	}
 }
 
 // Transfer n registers from the board from index iread
