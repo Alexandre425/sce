@@ -53,7 +53,7 @@ void recv_message (void)
 	{
 		i = 1;
 		cyg_io_read(serial_handle, recv, &i);
-		received_message[j++];
+		received_message[j++] = *recv;
 		printf("%x ", *recv);
 	}
 	while (*recv != EOM);
