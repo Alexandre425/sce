@@ -146,7 +146,7 @@ void list_registers(int n, int start_idx)
         printf("Press RETURN to continue, press Q and RETURN to quit: ");
         char c = getchar();
         printf("\r");
-        if (c != 'q' && c != 'Q')
+        if (c == 'q' || c == 'Q')
         {
             return;
         }

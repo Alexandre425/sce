@@ -457,10 +457,10 @@ void cmd_comm_info_reg (int argc, char** argv)
 		cyg_semaphore_post(&comm_semaph);
 		cyg_semaphore_wait(&term_semaph);
 
-		printf("NREG:        %d", received_message[2]);
-		printf("Registers:   %d", received_message[3]);
-		printf("Read index:  %d", received_message[4]);
-		printf("Write index: %d", received_message[5]);
+		printf("NREG:        %d\n", received_message[2]);
+		printf("Registers:   %d\n", received_message[3]);
+		printf("Read index:  %d\n", received_message[4]);
+		printf("Write index: %d\n", received_message[5]);
 
 		return;
 	}
