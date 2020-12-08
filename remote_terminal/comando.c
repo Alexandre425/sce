@@ -49,7 +49,11 @@ extern cyg_sem_t comm_semaph;
 extern cyg_sem_t proc_semaph;
 extern cyg_sem_t term_semaph;
 
-typedef struct reg reg_t;
+typedef struct reg
+{
+	unsigned char h, m, s;
+	unsigned char temperature, luminosity;
+} reg_t;
 
 extern void add_register(reg_t* src);
 
@@ -214,9 +218,9 @@ void cmd_comm_set_clock (int argc, char** argv)
 		next_message.argc = 4;
 		if 
 		(
-			!sscanf(argv[1], "%d", &next_message.argv[0]) ||	// Checking if the inputs are valid
-			!sscanf(argv[2], "%d", &next_message.argv[1]) ||	// Basically checks if sscanf found anything
-			!sscanf(argv[3], "%d", &next_message.argv[2])
+			!sscanf(argv[1], "%hhu", &next_message.argv[0]) ||	// Checking if the inputs are valid
+			!sscanf(argv[2], "%hhu", &next_message.argv[1]) ||	// Basically checks if sscanf found anything
+			!sscanf(argv[3], "%hhu", &next_message.argv[2])
 		)
 		{
 			printf(ERR_BAD_ARG);
