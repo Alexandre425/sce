@@ -104,12 +104,12 @@ void list_registers(int n, int start_idx)
 	else if (start_idx == 0)
 	{
 		// If the buffer is full
-		if (ring_buffer.n_reg == ring_buffer.NREG)
+		if (ring_buffer.n_reg == ring_buffer.NRBUF)
 		{
 			// Oldest register is the next one that would be written to
 			i = ring_buffer.i_write;
 			// Returns i-1 or 99 if i == 0
-			stop_i = (i == 0 ? ring_buffer.NREG : i) - 1;
+			stop_i = (i == 0 ? ring_buffer.NRBUF : i) - 1;
 		}
 		else
 		{
@@ -122,9 +122,9 @@ void list_registers(int n, int start_idx)
 	else	// start_idx == -1
 	{
 		i = ring_buffer.i_read;
-		if (ring_buffer.n_reg == ring_buffer.NREG)
+		if (ring_buffer.n_reg == ring_buffer.NRBUF)
 		{
-			stop_i = (i == 0 ? ring_buffer.NREG : i) - 1;
+			stop_i = (i == 0 ? ring_buffer.NRBUF : i) - 1;
 		}
 		else
 		{
