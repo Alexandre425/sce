@@ -27,9 +27,10 @@
 #define CMD_OK    	0x00  /* command successful */
 #define CMD_ERROR 	0xFF  /* error in command */
 
-
 #define ERR_WRONG_ARG_NUM "ERROR: Wrong number of arguments provided!\n"
 #define ERR_BAD_ARG "ERROR: Bad argument!\n"
+
+#define RING_BUFF_SIZE 100
 
 Cyg_ErrNo err;
 cyg_io_handle_t serial_handle;
