@@ -72,6 +72,8 @@ void add_register(reg_t* src)
     dst->temperature = src->temperature;
     dst->luminosity = src->luminosity;
     ring_buffer.i_write++;
+    if (ring_buffer.n_reg < ring_buffer.NRBUF)
+        ring_buffer.n_reg++;
 }
 
 void list_registers(int n, int start_idx)

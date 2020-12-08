@@ -54,6 +54,13 @@ typedef struct reg
 	unsigned char h, m, s;
 	unsigned char temperature, luminosity;
 } reg_t;
+typedef struct ring_buff
+{
+	reg_t registers[RING_BUFF_SIZE];
+	unsigned char NRBUF, n_reg, i_read, i_write;
+} ring_buff_t;
+
+extern ring_buff_t ring_buffer;
 
 extern void add_register(reg_t* src);
 
@@ -481,6 +488,25 @@ extern void list_registers(int n, int start_idx);
 // Get information on the local registers (NRBUF, nr, iread, iwrite)
 void cmd_local_info_local_reg (int argc, char** argv)
 {
+	if (argc == 1)
+	{
+		printf("NRBUF:       %d", ring_buffer.NRBUF);
+		printf("Registers:   %d", ring_buffer.n_reg);
+		printf("Read index:  %d", ring_buffer.i_read);
+		printf("Write index: %d", ring_buffer.i_write);
+
+		return;
+	}
+	else
+	{
+		printf(ERR_WRONG_ARG_NUM);
+		return;
+	}
+}
+
+// List n registers from index i in local memory
+void cmd_local_list_reg (int argc, char** argv)
+{
 	if (argc == 2 || argc == 3)
 	{
 		int n = 0, i = 0;
@@ -501,12 +527,6 @@ void cmd_local_info_local_reg (int argc, char** argv)
 		printf(ERR_WRONG_ARG_NUM);
 		return;
 	}	
-}
-
-// List n registers from index i in local memory
-void cmd_local_list_reg (int argc, char** argv)
-{
-	return;
 }
 
 // Delete the local registers
@@ -550,7 +570,7 @@ extern reg_t random_register(void);
 
 void cmd_generate_random_registers (int argc, char** argv)
 {
-	if (argc == 3)
+	if (argc == 2)
 	{
 		int n = 0;
 		if 
