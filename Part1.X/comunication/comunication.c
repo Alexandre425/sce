@@ -47,12 +47,16 @@ void processMessage (uint8_t* msg_data)
             modifyTimeAlarm(msg_data[0]);
             break;
         case RALA:
+            readAlarm();
             break;
         case DAC:
+            setAlarmClock(msg_data);
             break;
         case DATL:
+            setAlarmTempLumin(msg_data);
             break;
         case AALA:
+            setAlarmCom(msg_data);
             break;
         case IREG:
             break;
