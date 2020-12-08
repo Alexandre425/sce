@@ -49,6 +49,11 @@ extern cyg_sem_t comm_semaph;
 extern cyg_sem_t proc_semaph;
 extern cyg_sem_t term_semaph;
 
+typedef struct reg reg_t;
+
+extern void add_register(reg_t* src);
+
+
 
 /*-------------------------------------------------------------------------+
 | Function: cmd_sair - termina a aplicacao
@@ -466,10 +471,32 @@ void cmd_comm_transfer_reg_from (int argc, char** argv)
 	return;
 }
 
+
+extern void list_registers(int n, int start_idx);
+
 // Get information on the local registers (NRBUF, nr, iread, iwrite)
 void cmd_local_info_local_reg (int argc, char** argv)
 {
-	return;
+	if (argc == 2 || argc == 3)
+	{
+		int n = 0, i = 0;
+		if 
+		(
+			!sscanf(argv[1], "%d", &n) ||
+			!sscanf(argv[2], "%d", &i)
+		)
+		{
+			printf(ERR_BAD_ARG);
+			return;
+		}
+		// If i was given, call with i, otherwise call with -1 to read at i_read
+		list_registers(n, (argc == 3 ? i : -1));
+	}
+	else
+	{
+		printf(ERR_WRONG_ARG_NUM);
+		return;
+	}	
 }
 
 // List n registers from index i in local memory
@@ -512,4 +539,36 @@ void cmd_proc_define_thresh_temp_lum (int argc, char** argv)
 void cmd_proc_process_reg (int argc, char** argv)
 {
 	return;
+}
+
+extern reg_t random_register(void);
+
+
+void cmd_generate_random_registers (int argc, char** argv)
+{
+	if (argc == 3)
+	{
+		int n = 0;
+		if 
+		(
+			!sscanf(argv[1], "%d", &n)
+		)
+		{
+			printf(ERR_BAD_ARG);
+			return;
+		}
+
+		int i = 0;
+		for (i = 0; i < n; i++)
+		{
+			reg_t reg = random_register();
+			add_register(&reg);
+		}
+	}
+	else
+	{
+		printf(ERR_WRONG_ARG_NUM);
+		return;
+	}	
+	
 }

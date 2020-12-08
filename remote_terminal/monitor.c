@@ -34,6 +34,7 @@ extern void cmd_proc_mod_period_tranfer (int argc, char** argv);
 extern void cmd_proc_check_thresh_temp_lum (int argc, char** argv);
 extern void cmd_proc_define_thresh_temp_lum (int argc, char** argv);
 extern void cmd_proc_process_reg (int argc, char** argv);
+extern void cmd_generate_random_registers (int argc, char** argv);
 
 extern void cmd_sair(int, char **);
 extern void cmd_ini(int, char **);
@@ -61,6 +62,8 @@ struct command_d
 	{cmd_rms, 	"rms", "	<n>             receber mensagem (string)"},
 	{cmd_rmh, 	"rmh", "	<n>             receber mensagem (hexadecimal)"},
 	{cmd_test, 	"teste", "	<arg1> <arg2>  	comando de teste"},
+
+	{cmd_generate_random_registers,		"grr", "	<n>			generate random registers and store them"},
 
 	{cmd_comm_read_clock, 				"rc", "                 read the clock"},
 	{cmd_comm_set_clock, 				"sc", "     <h> <m> <s> set the clock"},

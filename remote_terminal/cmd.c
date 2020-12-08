@@ -3,11 +3,14 @@
 #include <cyg/io/io.h>
 #include <cyg/hal/hal_arch.h>
 
+#define max(a,b) ((a) > (b) ? (a) : (b))
+
 #define COMM_PRI 1
 #define PROC_PRI 2
 #define TERM_PRI 3
 #define STACK_SIZE CYGNUM_HAL_STACK_SIZE_TYPICAL
 
+#define RING_BUFF_SIZE 100
 
 unsigned char comm_stack[STACK_SIZE]; 
 unsigned char proc_stack[STACK_SIZE];
@@ -18,6 +21,137 @@ cyg_thread comm_thread, proc_thread;
 
 // Variables for the semaphores
 cyg_sem_t comm_semaph, proc_semaph, term_semaph;
+
+typedef struct reg
+{
+	unsigned char h, m, s;
+	unsigned char temperature, luminosity;
+} reg_t;
+typedef struct ring_buff
+{
+	reg_t registers[RING_BUFF_SIZE];
+	unsigned char NRBUF, n_reg, i_read, i_write;
+} ring_buff_t
+
+ring_buff_t ring_buffer;
+
+void ring_buff_init(void)
+{
+	ring_buffer.NRBUF = RING_BUFF_SIZE;
+	ring_buffer.n_reg = 0;
+	ring_buffer.i_read = 0;
+	ring_buffer.i_write = 0;
+}
+
+unsigned char rng(void)
+{
+    static int seed;
+    seed = (1103515245 * seed + 12345) % (2<<31);
+    return (unsigned char)seed;
+}
+
+// For testing purposes
+reg_t random_register(void)
+{
+    reg_t reg;
+    reg.h = rng()%24;
+    reg.m = rng()%60;
+    reg.s = rng()%60;
+    reg.temperature = rng()%40;
+    reg.luminosity = rng()%8;
+    return reg;
+}
+
+// Adds the provided register to the ring buffer
+void add_register(reg_t* src)
+{
+    reg_t* dst = &(ring_buffer.registers[ring_buffer.i_write]); 
+    dst->h = src->h;
+    dst->m = src->m;
+    dst->s = src->s;
+    dst->temperature = src->temperature;
+    dst->luminosity = src->luminosity;
+    ring_buffer.i_write++;
+}
+
+void list_registers(int n, int start_idx)
+{
+	int i = 0;
+	int listed = 0;
+	// Stopping index
+	int stop_i = 0;
+	// If the buffer is empty
+	if (!ring_buffer.n_reg)
+	{
+		printf("ERROR: Buffer is empty!\n");
+		return;
+	}
+	// Reading from a provided index
+	if (start_idx > 0)
+	{
+		// If attempting to read out of bounds
+		if (start_idx >= (int)ring_buffer.n_reg)
+		{
+			printf("ERROR: Index %d is out of bounds! (Buffer has %d elements)\n", start_idx, ring_buffer.n_reg);
+			return;
+		}
+		// Start from the starting index
+		i = start_idx;
+		// Stop behind the start to prevent repeating		
+		stop_i = i - 1;
+	}
+	// Reading from the oldest index
+	else if (start_idx == 0)
+	{
+		// If the buffer is full
+		if (ring_buffer.n_reg == ring_buffer.NREG)
+		{
+			// Oldest register is the next one that would be written to
+			i = ring_buffer.i_write;
+			// Returns i-1 or 99 if i == 0
+			stop_i = (i == 0 ? ring_buffer.NREG : i) - 1;
+		}
+		else
+		{
+			// Otherwise, it is the first register ever stored
+			i = 0;
+			stop_i = ring_buffer.n_reg - 1;
+		}
+	}
+	// Reading from i_read
+	else	// start_idx == -1
+	{
+		i = ring_buffer.i_read;
+		if (ring_buffer.n_reg == ring_buffer.NREG)
+		{
+			stop_i = (i == 0 ? ring_buffer.NREG : i) - 1;
+		}
+		else
+		{
+			stop_i = ring_buffer.n_reg - 1;
+		}		
+	}
+	// Printing the registers
+	reg_t* regs = ring_buffer.registers;
+	while (i != stop_i && listed != n)
+	{
+        reg_t reg = regs[i];
+		printf("Register i = %d\n", i);
+		printf("    Time:        %02dh%02dm%02ds\n", reg.h, reg.m, reg.s);
+		printf("    Temperature: %dC\n", reg.temperature);
+		printf("    Luminosity:  %d\n", reg.luminosity);
+		i++;
+        printf("Press RETURN to continue, press Q and RETURN to quit: ");
+        char c = getchar();
+        printf("\r");
+        if (c != 'q' && c != 'Q')
+        {
+            return;
+        }
+	}
+}
+
+
 
 #define SOM 0xFD  /* start of message */
 #define EOM 0xFE  /* end of message */
@@ -106,6 +240,7 @@ static void comm_entry (cyg_addrword_t data)
 //	thread as a proxy, and processes these registers
 static void proc_entry (cyg_addrword_t data)
 {
+	ring_buff_init();
 	printf("Processing thread initialized!\n");
 }
 
