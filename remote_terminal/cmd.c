@@ -31,7 +31,7 @@ typedef struct ring_buff
 {
 	reg_t registers[RING_BUFF_SIZE];
 	unsigned char NRBUF, n_reg, i_read, i_write;
-} ring_buff_t
+} ring_buff_t;
 
 ring_buff_t ring_buffer;
 
@@ -46,7 +46,7 @@ void ring_buff_init(void)
 unsigned char rng(void)
 {
     static int seed;
-    seed = (1103515245 * seed + 12345) % (2<<31);
+    seed = (48271 * seed) % ((2<<31)-1);
     return (unsigned char)seed;
 }
 
