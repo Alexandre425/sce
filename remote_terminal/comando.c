@@ -239,7 +239,7 @@ void cmd_comm_read_temp_lum (int argc, char** argv)
 		cyg_semaphore_post(&comm_semaph);
 		cyg_semaphore_wait(&term_semaph);
 
-		printf("Temperature: %dºC\nLuminosity: %d", received_message[2], received_message[3]);
+		printf("Temperature: %dC\nLuminosity: %d", received_message[2], received_message[3]);
 		return;
 	}
 	else
@@ -334,9 +334,9 @@ void cmd_comm_read_alarms (int argc, char** argv)
 		cyg_semaphore_wait(&term_semaph);
 
 		printf("Alarm time:        %02dh%02dm%02ds\n", received_message[2], received_message[3], received_message[4]);
-		printf("Alarm temperature: %dºC\n", received_message[4]);
-		printf("Alarm luminosity:  %d\n", received_message[5]);
-		printf("Alarms:            %s\n", (received_message[6] == 1 ? "ENABLED" : "DISABLED"));
+		printf("Alarm temperature: %dC\n", received_message[5]);
+		printf("Alarm luminosity:  %d\n", received_message[6]);
+		printf("Alarms:            %s\n", (received_message[7] == 1 ? "ENABLED" : "DISABLED"));
 		return;
 	}
 	else
@@ -408,7 +408,7 @@ void cmd_comm_activate_alarms (int argc, char** argv)
 {
 	if (argc == 2)
 	{
-		next_message.code = DAC;
+		next_message.code = AALA;
 		next_message.argc = 2;
 		if 
 		(
