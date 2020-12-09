@@ -71,7 +71,7 @@ void add_register(reg_t* src)
     dst->s = src->s;
     dst->temperature = src->temperature;
     dst->luminosity = src->luminosity;
-    ring_buffer.i_write++;
+    ring_buffer.i_write = (ring_buffer.i_write) % ring_buffer.NRBUF;
     if (ring_buffer.n_reg < ring_buffer.NRBUF)
         ring_buffer.n_reg++;
 }
@@ -135,7 +135,7 @@ void list_registers(int n, int start_idx)
 	}
 	// Printing the registers
 	reg_t* regs = ring_buffer.registers;
-	while (i != stop_i && listed != n)
+    do
 	{
         reg_t reg = regs[i];
 		printf("Register i = %d\n", i);
@@ -151,6 +151,7 @@ void list_registers(int n, int start_idx)
             return;
         }
 	}
+	while (i != stop_i && listed != n);
 }
 
 
