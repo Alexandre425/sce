@@ -45,7 +45,7 @@ void ring_buff_init(void)
 
 unsigned char rng(void)
 {
-    static int seed;
+    static int seed = 123432;
     seed = (48271 * seed) % ((2<<31)-1);
     return (unsigned char)seed;
 }
@@ -142,7 +142,7 @@ void list_registers(int n, int start_idx)
 		printf("    Time:        %02dh%02dm%02ds\n", reg.h, reg.m, reg.s);
 		printf("    Temperature: %dC\n", reg.temperature);
 		printf("    Luminosity:  %d\n", reg.luminosity);
-		i++;
+		i++; listed++;
         printf("Press RETURN to continue, press Q and RETURN to quit: ");
         char c = getchar();
         printf("\r");
