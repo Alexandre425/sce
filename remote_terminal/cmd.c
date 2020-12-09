@@ -149,7 +149,6 @@ void list_registers(int n, int start_idx)
 	reg_t* regs = ring_buffer.registers;
     do
 	{
-		if (update_i_read) ring_buffer.i_read = i;
         reg_t reg = regs[i];
 		printf("Register i = %d\n", i);
 		printf("    Time:        %02dh%02dm%02ds\n", reg.h, reg.m, reg.s);
@@ -157,12 +156,12 @@ void list_registers(int n, int start_idx)
 		printf("    Luminosity:  %d\n", reg.luminosity);
         printf("Press RETURN to continue, press Q and RETURN to quit: ");
         char c = getchar();
+		i = (i+1)%ring_buffer.NRBUF; listed++;
+		if (update_i_read) ring_buffer.i_read = i;
         if (c == 'q' || c == 'Q')
         {
             return;
         }
-
-		i = (i+1)%ring_buffer.NRBUF; listed++;
 	}
 	while (i != stop_i && i < ring_buffer.n_reg && listed != n);
 }
@@ -263,7 +262,7 @@ static void mem_alert_entry (cyg_addrword_t data)
 		cyg_io_read(serial_handle, recv, &i);	// Block until a SOM arrives
 		cyg_mutex_lock(&comm_mutex);			// Ensure the integrity of the message
 		recv_message();							// Receive the rest of the alert
-		
+
 		if (received_message[0] != NMFL || recv != SOM)
 		{
 			printf("ERROR: Memory alert read bad data!");
@@ -323,7 +322,7 @@ int main(void)
 	cyg_thread_set_priority(cyg_thread_self(), TERM_PRI);
 	cyg_thread_resume(comm_handle);
 	cyg_thread_resume(proc_handle);
-	cyg_thread_resume(proc_handle);
+	cyg_thread_resume(alrt_handle);
 
 
 	monitor();
