@@ -71,6 +71,9 @@ void add_register(reg_t* src)
     dst->s = src->s;
     dst->temperature = src->temperature;
     dst->luminosity = src->luminosity;
+	// If overwritting the oldest unread register, oldest becomes the one after that
+	if (ring_buffer.i_write == ring_buffer.i_read && ring_buffer.n_reg)
+		ring_buffer.i_read = (ring_buffer.i_read + 1) % ring_buffer.NRBUF;
     ring_buffer.i_write = (ring_buffer.i_write + 1) % ring_buffer.NRBUF;
     if (ring_buffer.n_reg < ring_buffer.NRBUF)
         ring_buffer.n_reg++;
@@ -78,6 +81,7 @@ void add_register(reg_t* src)
 
 void list_registers(int n, int start_idx)
 {
+	int update_i_read = 0;
 	int i = 0;
 	int listed = 0;
 	// Stopping index
@@ -123,6 +127,7 @@ void list_registers(int n, int start_idx)
 	// Reading from i_read
 	else	// start_idx == -1
 	{
+		update_i_read = 1;
 		i = ring_buffer.i_read;
 		if (ring_buffer.n_reg == ring_buffer.NRBUF)
 		{
@@ -137,19 +142,20 @@ void list_registers(int n, int start_idx)
 	reg_t* regs = ring_buffer.registers;
     do
 	{
+		if (update_i_read) ring_buffer.i_read = i;
         reg_t reg = regs[i];
 		printf("Register i = %d\n", i);
 		printf("    Time:        %02dh%02dm%02ds\n", reg.h, reg.m, reg.s);
 		printf("    Temperature: %dC\n", reg.temperature);
 		printf("    Luminosity:  %d\n", reg.luminosity);
-		i = (i+1)%ring_buffer.NRBUF; listed++;
         printf("Press RETURN to continue, press Q and RETURN to quit: ");
         char c = getchar();
-        printf("\r");
         if (c == 'q' || c == 'Q')
         {
             return;
         }
+
+		i = (i+1)%ring_buffer.NRBUF; listed++;
 	}
 	while (i != stop_i && i < ring_buffer.n_reg && listed != n);
 }
