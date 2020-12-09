@@ -47,7 +47,6 @@ uint8_t nreg;
 bool half_reg;
 bool full_reg;
 uint8_t iread;
-uint8_t iwrite;
 uint8_t last_sent_index;
 
 typedef uint8_t alarm_t;
