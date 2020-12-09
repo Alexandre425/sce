@@ -259,11 +259,12 @@ static void mem_alert_entry (cyg_addrword_t data)
 	while (1)
 	{
 		int i = 1;
+		unsigned char recv = 0;
 		cyg_io_read(serial_handle, recv, &i);	// Block until a SOM arrives
 		cyg_mutex_lock(&comm_mutex);			// Ensure the integrity of the message
 		recv_message();							// Receive the rest of the alert
-
-		if (received_message[0] != NMFL)
+		
+		if (received_message[0] != NMFL || recv != SOM)
 		{
 			printf("ERROR: Memory alert read bad data!");
 			cyg_mutex_unlock(&comm_mutex);
