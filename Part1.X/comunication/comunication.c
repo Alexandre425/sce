@@ -225,9 +225,9 @@ void readReg(void)
     EUSART_Write(SOM);
     EUSART_Write(msg_cmd);
     EUSART_Write(NREG);
-    EUSART_Write(nreg);
-    EUSART_Write(); // wasn't sure what to put here
-    EUSART_Write(); // same
+    EUSART_Write((full_reg ? NREG : nreg/5));
+    EUSART_Write(iread); // wasn't sure what to put here
+    EUSART_Write(nreg/5); // same
     EUSART_Write(EOM);
 }
 
@@ -246,18 +246,20 @@ void transferCurrent(uint8_t* msg_data) // not finished
     
     for(i = 0; i<msg_data[0]; i++)
     {
-        EUSART_Write(DATAEE_ReadByte(EEAddr_reg + nreg));
-        EUSART_Write(DATAEE_ReadByte(EEAddr_reg + nreg+1));
-        EUSART_Write(DATAEE_ReadByte(EEAddr_reg + nreg+2));
-        EUSART_Write(DATAEE_ReadByte(EEAddr_reg + nreg+3));
-        EUSART_Write(DATAEE_ReadByte(EEAddr_reg + nreg+4));
+        EUSART_Write(DATAEE_ReadByte(EEAddr_reg + iread));
+        EUSART_Write(DATAEE_ReadByte(EEAddr_reg + iread+1));
+        EUSART_Write(DATAEE_ReadByte(EEAddr_reg + iread+2));
+        EUSART_Write(DATAEE_ReadByte(EEAddr_reg + iread+3));
+        EUSART_Write(DATAEE_ReadByte(EEAddr_reg + iread+4));
+        iread += 5;
+        iread = (iread >= 125 ? 0 : iread);
     }
     EUSART_Write(EOM);
 }
 
 void transferIndex (uint8_t* msg_data)
 {
-    unsigned char i, index;
+    unsigned char i;
     
     if(msg_data[0] > 25 || msg_data[1]>NREG-1)
     {
@@ -267,16 +269,16 @@ void transferIndex (uint8_t* msg_data)
     
     EUSART_Write(SOM);
     EUSART_Write(msg_cmd);
-    index = msg_data[1]*5;
+    iread = msg_data[1]*5;
     for(i = 0; i<msg_data[0]; i++)
     {
-        EUSART_Write(DATAEE_ReadByte(EEAddr_reg + index));
-        EUSART_Write(DATAEE_ReadByte(EEAddr_reg + index+1));
-        EUSART_Write(DATAEE_ReadByte(EEAddr_reg + index+2));
-        EUSART_Write(DATAEE_ReadByte(EEAddr_reg + index+3));
-        EUSART_Write(DATAEE_ReadByte(EEAddr_reg + index+4));
-        index += 5;
-        index = (index >= 125 ? '0' : index);
+        EUSART_Write(DATAEE_ReadByte(EEAddr_reg + iread));
+        EUSART_Write(DATAEE_ReadByte(EEAddr_reg + iread+1));
+        EUSART_Write(DATAEE_ReadByte(EEAddr_reg + iread+2));
+        EUSART_Write(DATAEE_ReadByte(EEAddr_reg + iread+3));
+        EUSART_Write(DATAEE_ReadByte(EEAddr_reg + iread+4));
+        iread += 5;
+        iread = (iread >= 125 ? 0 : iread);
     }
     EUSART_Write(EOM);
 }
@@ -285,6 +287,6 @@ void memNotification(void)
 {
     EUSART_Write(SOM);
     EUSART_Write(msg_cmd);
-    EUSART_Write((nreg/5 > 12 ? 1 : 0)); 
+    EUSART_Write((half_reg ? 1 : 0)); 
     EUSART_Write(EOM);
 }
