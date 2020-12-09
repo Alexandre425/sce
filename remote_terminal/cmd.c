@@ -43,12 +43,11 @@ void ring_buff_init(void)
 	ring_buffer.i_write = 0;
 }
 
-// Simple random number generator
 unsigned char rng(void)
 {
-    static unsigned int seed = 123432;
-    seed = (1103515245 * seed + 12345) % (2<<31);
-    return (unsigned char)(seed>>16);
+    static int seed = 123432;
+    seed = (48271 * seed + 1) % ((2<<31)-1);
+    return (unsigned char)seed;
 }
 
 // For testing purposes
@@ -66,7 +65,6 @@ reg_t random_register(void)
 // Adds the provided register to the ring buffer
 void add_register(reg_t* src)
 {
-    printf("%dh %dC %d\n", src->h, src->temperature, src->luminosity);
     reg_t* dst = &(ring_buffer.registers[ring_buffer.i_write]); 
     dst->h = src->h;
     dst->m = src->m;
