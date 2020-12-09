@@ -5,22 +5,29 @@
 
 #define max(a,b) ((a) > (b) ? (a) : (b))
 
+#define NMFL  		0xCD  /* notification memory (half) full */
+
 #define COMM_PRI 1
 #define PROC_PRI 2
-#define TERM_PRI 3
+#define ALRT_PRI 3
+#define TERM_PRI 4
 #define STACK_SIZE CYGNUM_HAL_STACK_SIZE_TYPICAL
 
 #define RING_BUFF_SIZE 100
 
 unsigned char comm_stack[STACK_SIZE]; 
 unsigned char proc_stack[STACK_SIZE];
+unsigned char alrt_stack[STACK_SIZE];
 
 // Handles for the threads
-cyg_handle_t comm_handle, proc_handle;
-cyg_thread comm_thread, proc_thread;
+cyg_handle_t comm_handle, proc_handle, alrt_handle;
+cyg_thread comm_thread, proc_thread, alrt_thread;
 
 // Variables for the semaphores
 cyg_sem_t comm_semaph, proc_semaph, term_semaph;
+
+// Communication mutex (so messages don't get interleaved)
+cyg_mutex_t comm_mutex;
 
 typedef struct reg
 {
@@ -237,12 +244,41 @@ static void comm_entry (cyg_addrword_t data)
 	while (1)
 	{
 		cyg_semaphore_wait(&comm_semaph);	// Wait for new messages to be sent
-		printf("TEST: Semaphore unlocked\n");
+		cyg_mutex_lock(&comm_mutex);
 		send_message();						// Send the stored message
 		printf("TEST: Waiting for response\n");
 		recv_message();						// Receive and interpret the response
+		cyg_mutex_unlock(&comm_mutex);
 		cyg_semaphore_post(&term_semaph);
 	}
+}
+
+// Memory alert thread waits for the memory alert from the board
+static void mem_alert_entry (cyg_addrword_t data)
+{
+	while (1)
+	{
+		int i = 1;
+		cyg_io_read(serial_handle, recv, &i);	// Block until a SOM arrives
+		cyg_mutex_lock(&comm_mutex);			// Ensure the integrity of the message
+		recv_message();							// Receive the rest of the alert
+
+		if (received_message[0] != NMFL)
+		{
+			printf("ERROR: Memory alert read bad data!");
+			cyg_mutex_unlock(&comm_mutex);
+			continue;
+		}
+
+		printf("\rALERT: Board memory almost full!\n");
+		printf("	NREG: 		 %d\n", received_message[1]);
+		printf("	Registers: 	 %d\n", received_message[2]);
+		printf("	Read index:  %d\n", received_message[3]);
+		printf("	Write index: %d\n", received_message[4]);
+
+		cyg_mutex_unlock(&comm_mutex);
+	}
+	
 }
 
 // The processing thread requests registers from the board using the communication
@@ -264,11 +300,13 @@ int main(void)
 	cyg_semaphore_init(&comm_semaph, 0);
 	cyg_semaphore_init(&proc_semaph, 0);
 	cyg_semaphore_init(&term_semaph, 0);
+	// Creating the comm mutex
+	cyg_mutex_init(&comm_mutex);
 
-	// Creating the 2 other threads
+	// Creating the 3 other threads
 	// Communication thread
 	cyg_thread_create(
-		COMM_PRI, &comm_entry, (cyg_addrword_t)&com_info, "comm_send", comm_stack, 
+		COMM_PRI, &comm_entry, (cyg_addrword_t)&com_info, "comm", comm_stack, 
 		STACK_SIZE, &comm_handle, &comm_thread
 	);
 	// Processing thread
@@ -276,9 +314,14 @@ int main(void)
 		PROC_PRI, &proc_entry, (cyg_addrword_t)&com_info, "proc", proc_stack, 
 		STACK_SIZE, &proc_handle, &proc_thread
 	);
+	cyg_thread_create(
+		PROC_PRI, &mem_alert_entry, (cyg_addrword_t)&com_info, "alrt", alrt_stack, 
+		STACK_SIZE, &alrt_handle, &alrt_thread
+	);
 	// Set own priority to the lowest
 	cyg_thread_set_priority(cyg_thread_self(), TERM_PRI);
 	cyg_thread_resume(comm_handle);
+	cyg_thread_resume(proc_handle);
 	cyg_thread_resume(proc_handle);
 
 
