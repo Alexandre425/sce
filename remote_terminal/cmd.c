@@ -46,7 +46,7 @@ void ring_buff_init(void)
 unsigned char rng(void)
 {
     static int seed = 123432;
-    seed = (48271 * seed) % ((2<<31)-1);
+    seed = (48271 * seed + 1) % ((2<<31)-1);
     return (unsigned char)seed;
 }
 
@@ -65,6 +65,7 @@ reg_t random_register(void)
 // Adds the provided register to the ring buffer
 void add_register(reg_t* src)
 {
+    printf("%dh %dC %d\nL", src->h, src->temperature, src->luminosity);
     reg_t* dst = &(ring_buffer.registers[ring_buffer.i_write]); 
     dst->h = src->h;
     dst->m = src->m;
