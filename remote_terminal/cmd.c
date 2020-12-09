@@ -46,7 +46,7 @@ void ring_buff_init(void)
 // Simple random number generator
 unsigned char rng(void)
 {
-    static unsigned long seed = 123432;
+    static unsigned int seed = 123432;
     seed = (1103515245 * seed + 12345) % (2<<31);
     return (unsigned char)(seed>>16);
 }
