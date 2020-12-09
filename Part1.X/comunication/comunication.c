@@ -59,15 +59,18 @@ void processMessage (uint8_t* msg_data)
             setAlarmCom(msg_data);
             break;
         case IREG:
+            readReg();
             break;
         case TRGC:
+            transferCurrent(msg_data);
             break;
         case TRGI:
+            transferIndex(msg_data);
             break;
         case NMFL:
+            memNotification();
             break;
         default:
-            
             break;
     }
     
@@ -215,4 +218,75 @@ void setAlarmCom(uint8_t* msg_data)
     DATAEE_WriteByte(EEAddr_ALARMS, alarms);
     DATAEE_WriteByte(EEAddr_CHECKSUM, addChecksum());
     sendError(CMD_OK);
+}
+
+void readReg(void)
+{
+    EUSART_Write(SOM);
+    EUSART_Write(msg_cmd);
+    EUSART_Write(NREG);
+    EUSART_Write((full_reg ? NREG : nreg/5));
+    EUSART_Write(iread); // wasn't sure what to put here
+    EUSART_Write(nreg/5); // same
+    EUSART_Write(EOM);
+}
+
+void transferCurrent(uint8_t* msg_data) // not finished
+{
+    unsigned char i;
+    
+    if(msg_data[0] > 25)
+    {
+        sendError(CMD_ERROR);
+        return;
+    }
+    
+    EUSART_Write(SOM);
+    EUSART_Write(msg_cmd);
+    
+    for(i = 0; i<msg_data[0]; i++)
+    {
+        EUSART_Write(DATAEE_ReadByte(EEAddr_reg + iread));
+        EUSART_Write(DATAEE_ReadByte(EEAddr_reg + iread+1));
+        EUSART_Write(DATAEE_ReadByte(EEAddr_reg + iread+2));
+        EUSART_Write(DATAEE_ReadByte(EEAddr_reg + iread+3));
+        EUSART_Write(DATAEE_ReadByte(EEAddr_reg + iread+4));
+        iread += 5;
+        iread = (iread >= 125 ? 0 : iread);
+    }
+    EUSART_Write(EOM);
+}
+
+void transferIndex (uint8_t* msg_data)
+{
+    unsigned char i;
+    
+    if(msg_data[0] > 25 || msg_data[1]>NREG-1)
+    {
+        sendError(CMD_ERROR);
+        return;
+    }
+    
+    EUSART_Write(SOM);
+    EUSART_Write(msg_cmd);
+    iread = msg_data[1]*5;
+    for(i = 0; i<msg_data[0]; i++)
+    {
+        EUSART_Write(DATAEE_ReadByte(EEAddr_reg + iread));
+        EUSART_Write(DATAEE_ReadByte(EEAddr_reg + iread+1));
+        EUSART_Write(DATAEE_ReadByte(EEAddr_reg + iread+2));
+        EUSART_Write(DATAEE_ReadByte(EEAddr_reg + iread+3));
+        EUSART_Write(DATAEE_ReadByte(EEAddr_reg + iread+4));
+        iread += 5;
+        iread = (iread >= 125 ? 0 : iread);
+    }
+    EUSART_Write(EOM);
+}
+
+void memNotification(void)
+{
+    EUSART_Write(SOM);
+    EUSART_Write(msg_cmd);
+    EUSART_Write((half_reg ? 1 : 0)); 
+    EUSART_Write(EOM);
 }

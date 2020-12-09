@@ -48,6 +48,10 @@ void readAlarm (void);
 void setAlarmClock(uint8_t*);
 void setAlarmTempLumin(uint8_t*);
 void setAlarmCom(uint8_t*);
+void readReg(void);
+void transferCurrent(uint8_t*);
+void transferIndex (uint8_t*);
+void memNotification(void);
 
 
 

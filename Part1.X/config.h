@@ -42,6 +42,14 @@ uint8_t temp;
 uint8_t luminosity;
 uint8_t pwm_max_count;
 
+// Number of data registers
+uint8_t nreg;
+bool half_reg;
+bool full_reg;
+uint8_t iread;
+uint8_t iwrite;
+uint8_t last_sent_index;
+
 typedef uint8_t alarm_t;
 #define ALARM_C 0b00000001
 #define ALARM_T 0b00000010

@@ -16,9 +16,6 @@
 #include "comunication/comunication.h"
 #include "mcc_generated_files/adcc.h"
 
-// Number of data registers
-uint8_t nreg;
-uint8_t last_sent_index;
 
 // Measurement variables
 uint8_t last_temp;
@@ -90,7 +87,11 @@ void updateLCD(void)
     LCDstr(buf);
     
     // Display the memory alarm
-    uint8_t display_mem = (nreg/5 > 12 ? 'M' : ' ');
+    if(!half_reg)
+    {
+        half_reg = (nreg/5 > 12 ? true : false);
+    }
+    uint8_t display_mem = (half_reg ? 'M' : ' ');
     LCDcmd(0xc7);
     sprintf(buf, "%c", display_mem);
     LCDstr(buf);
@@ -294,7 +295,11 @@ void takeMeasurement(void)
         DATAEE_WriteByte(EEAddr_reg + nreg+3, temp);
         DATAEE_WriteByte(EEAddr_reg + nreg+4, luminosity);
         // Updating register iterator and temperature and luminosity values
-        nreg += 5;
+        nreg += 5;        
+        if(!full_reg && nreg>=125)
+        {
+            full_reg = true;
+        }
         nreg = (nreg >= 125 ? '0' : nreg);
         last_temp = temp;
         last_luminosity = luminosity;
@@ -308,6 +313,10 @@ void main(void)
     nreg = 0;
     mode = 0;
     last_sent_index = 0;
+    half_reg = false;
+    full_reg = false;
+    iread = 0;
+    iwrite = 0;
     
     // initialize the device
     SYSTEM_Initialize();
