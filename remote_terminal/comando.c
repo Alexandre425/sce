@@ -587,7 +587,6 @@ void cmd_generate_random_registers (int argc, char** argv)
 		for (i = 0; i < n; i++)
 		{
 			reg_t reg = random_register();
-			printf("After generation: %dh %dC", reg.h, reg.temperature);
 			add_register(&reg);
 		}
 	}

@@ -99,8 +99,8 @@ void list_registers(int n, int start_idx)
 		}
 		// Start from the starting index
 		i = start_idx;
-		// Stop behind the start to prevent repeating		
-		stop_i = i - 1;
+		// Stop at the start to prevent repeating		
+		stop_i = i;
 	}
 	// Reading from the oldest index
 	else if (start_idx == 0)
@@ -111,13 +111,13 @@ void list_registers(int n, int start_idx)
 			// Oldest register is the next one that would be written to
 			i = ring_buffer.i_write;
 			// Returns i-1 or 99 if i == 0
-			stop_i = (i == 0 ? ring_buffer.NRBUF : i) - 1;
+			stop_i = i;
 		}
 		else
 		{
 			// Otherwise, it is the first register ever stored
 			i = 0;
-			stop_i = ring_buffer.n_reg - 1;
+			stop_i = ring_buffer.n_reg;
 		}
 	}
 	// Reading from i_read
@@ -126,11 +126,11 @@ void list_registers(int n, int start_idx)
 		i = ring_buffer.i_read;
 		if (ring_buffer.n_reg == ring_buffer.NRBUF)
 		{
-			stop_i = (i == 0 ? ring_buffer.NRBUF : i) - 1;
+			stop_i = i;
 		}
 		else
 		{
-			stop_i = ring_buffer.n_reg - 1;
+			stop_i = ring_buffer.n_reg;
 		}		
 	}
 	// Printing the registers
@@ -142,7 +142,7 @@ void list_registers(int n, int start_idx)
 		printf("    Time:        %02dh%02dm%02ds\n", reg.h, reg.m, reg.s);
 		printf("    Temperature: %dC\n", reg.temperature);
 		printf("    Luminosity:  %d\n", reg.luminosity);
-		i++; listed++;
+		i = (i+1)%ring_buffer.NRBUF; listed++;
         printf("Press RETURN to continue, press Q and RETURN to quit: ");
         char c = getchar();
         printf("\r");
