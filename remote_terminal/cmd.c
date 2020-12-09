@@ -46,7 +46,7 @@ void ring_buff_init(void)
 unsigned char rng(void)
 {
     static int seed = 123432;
-    seed = (48271 * seed + 1) % ((2<<31)-1);
+    seed = (seed + 42)*(89-seed);   // Random stuff, idk, good enough
     return (unsigned char)seed;
 }
 
