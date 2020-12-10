@@ -304,11 +304,27 @@ int transfer_period;
 int temperature_threshold;
 int luminosity_threshold;
 
+void periodic_alarm_callback(cyg_handle_t alarm, cyg_addr_word_t data)
+{
+	int* count = (int*)data;
+	printf("Alarm %d\n", *count);
+	(*count)++;
+}
+
 // The processing thread requests registers from the board using the communication
 //	thread as a proxy, and processes these registers
 static void proc_entry (cyg_addrword_t data)
 {
 	ring_buff_init();
+
+	// Initializing the periodic alarm clock
+	static int count = 0;
+	cyg_handle_t periodic_counter, alarm_handle;
+	cyg_alarm alarm;
+	cyg_clock_to_counter(cyg_real_time_clock(), &periodic_counter);
+	cyg_alarm_create(periodic_counter, periodic_alarm_callback, &count, &alarm_handle, &alarm);
+	cyg_alarm_initialize(alarm_handle, cyg_current_time());
+
 	printf("Processing thread initialized!\n");
 }
 
