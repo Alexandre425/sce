@@ -506,13 +506,14 @@ void cmd_comm_transfer_reg (int argc, char** argv)
 // Transfer n registers from the board from index i
 void cmd_comm_transfer_reg_from (int argc, char** argv)
 {
-	if (argc == 2)
+	if (argc == 3)
 	{
 		next_message.code = TRGI;
-		next_message.argc = 2;
+		next_message.argc = 3;
 		if 
 		(
-			!sscanf(argv[1], "%hhu", &next_message.argv[0])
+			!sscanf(argv[1], "%hhu", &next_message.argv[0])||
+			!sscanf(argv[2], "%hhu", &next_message.argv[1])
 		)
 		{
 			printf(ERR_BAD_ARG);
