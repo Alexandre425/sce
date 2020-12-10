@@ -632,16 +632,17 @@ void cmd_proc_mod_period_tranfer (int argc, char** argv)
 			return;
 		}
 		transfer_period = period;
-		printf("Transfer period changed to %d minutes\n", period);
 		if (period)
 		{
 			cyg_alarm_enable(alarm_handle);
 			int ticks = time_to_ticks(period, 0);
 			cyg_alarm_initialize(alarm_handle, cyg_current_time()+ticks, ticks);
+			printf("Transfer period changed to %d minutes\n", period);
 		}
 		else
 		{
 			cyg_alarm_disable(alarm_handle);
+			printf("Transfer disabled\n");
 		}
 		
 	}
