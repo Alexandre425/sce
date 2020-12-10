@@ -358,6 +358,7 @@ static void proc_entry (cyg_addrword_t data)
 	cyg_alarm_create(periodic_counter, periodic_alarm_callback, 0, &alarm_handle, &transfer_alarm);
 	// Calculating the interval between alarms through the clock resolution
 	transfer_period = 1;
+	transfer = 0;
 	int ticks = time_to_ticks(transfer_period, 0);
 	cyg_alarm_initialize(alarm_handle, cyg_current_time()+ticks, ticks);
 
