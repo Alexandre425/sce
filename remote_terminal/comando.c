@@ -44,7 +44,7 @@ typedef struct message
 
 extern message_t next_message;
 
-extern unsigned char received_message [5*25 + 3];
+extern unsigned char received_message [5*25 + 5];
 
 extern cyg_sem_t comm_semaph;
 extern cyg_sem_t proc_semaph;
@@ -614,6 +614,8 @@ void cmd_proc_check_period_transfer (int argc, char** argv)
 	}
 }
 
+extern cyg_alarm transfer_alarm;
+
 // Change the transfer period for registers
 void cmd_proc_mod_period_tranfer (int argc, char** argv)
 {
@@ -627,6 +629,17 @@ void cmd_proc_mod_period_tranfer (int argc, char** argv)
 		}
 		transfer_period = period;
 		printf("Transfer period changed to %d minutes\n", period);
+		if (period)
+		{
+			cyg_alarm_enable(alarm_handle);
+			int ticks = time_to_ticks(period, 0);
+			cyg_alarm_initialize(alarm_handle, cyg_current_time()+ticks, ticks);
+		}
+		else
+		{
+			cyg_alarm_disable(alarm_handle);
+		}
+		
 	}
 	else
 	{

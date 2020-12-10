@@ -5,6 +5,7 @@
 
 #define max(a,b) ((a) > (b) ? (a) : (b))
 
+#define TRGC  		0xCB  /* transfer registers (curr. position)*/
 #define NMFL  		0xCD  /* notification memory (half) full */
 
 #define COMM_PRI 1
@@ -86,8 +87,8 @@ void add_register(reg_t* src)
         ring_buffer.n_reg++;
 }
 
-// Max message size received is 25 registers (5 bytes each) plus SOM, EOM and msg code (1 byte each)
-unsigned char received_message [5*25 + 3];
+// Max message size received is 25 registers (5 bytes each) plus SOM, EOM, msg code, n and i 
+unsigned char received_message [5*25 + 5];
 
 // Adds all the received registers to the buffer
 // from_index should be 1 if reading from a tri, 0 otherwise
@@ -211,6 +212,8 @@ typedef struct common_info
 extern void cmd_ini(int, char **);
 extern void monitor(void);
 
+int transfer;
+
 void recv_message (void)
 {
 	int i = 1;
@@ -233,16 +236,27 @@ void recv_message (void)
 void send_message (void)
 {
 	// Convert the message to a serialized byte stream
+	int i = 2;
 	unsigned char stream [10];
 	stream[0] = SOM;							// Write the start of message code
-	stream[1] = next_message.code;				// The message code
-	int i = 2;
-	for (i = 2; i < next_message.argc + 1; i++)	// Each of the arguments
+	if (transfer)
 	{
-		stream[i] = next_message.argv[i-2];
+		stream[1] = TRGC;
+		stream[2] = 25;
+		stream[3] = EOM;
+		i = 4;
 	}
-	stream[i] = EOM;						// The end of message
-	i++;									// i becomes the message length
+	else
+	{
+		stream[1] = next_message.code;				// The message code
+		for (i = 2; i < next_message.argc + 1; i++)	// Each of the arguments
+		{
+			stream[i] = next_message.argv[i-2];
+		}
+		stream[i] = EOM;						// The end of message
+		i++;									// i becomes the message length
+	}
+	
 
 	printf("Sent message: ");
 	int j = 0;
@@ -253,6 +267,7 @@ void send_message (void)
 	printf("TEST: Sent message with code %x and length %i\n", stream[1], i);
 	
 }
+
 
 // Communication thread handles the sending of requests and the receival of responses
 static void comm_entry (cyg_addrword_t data)
@@ -267,7 +282,15 @@ static void comm_entry (cyg_addrword_t data)
 		printf("TEST: Waiting for response\n");
 		recv_message();						// Receive and interpret the response
 		cyg_mutex_unlock(&comm_mutex);
-		cyg_semaphore_post(&term_semaph);
+		if (transfer)
+		{
+			add_received_registers(0);
+			transfer = 0;
+		}
+		else
+		{
+			cyg_semaphore_post(&term_semaph);
+		}
 	}
 }
 
@@ -306,9 +329,7 @@ int luminosity_threshold;
 
 void periodic_alarm_callback(cyg_handle_t alarm, cyg_addrword_t data)
 {
-	int* count = (int*)data;
-	printf("Alarm %d\n", *count);
-	(*count)++;
+	cyg_semaphore_post(&proc_semaphore);
 }
 
 int time_to_ticks(int m, int s)	// Seconds used as a debugging tool, not really necessary
@@ -328,14 +349,21 @@ static void proc_entry (cyg_addrword_t data)
 	ring_buff_init();
 
 	// Initializing the periodic alarm clock
-	static int count = 0;
 	cyg_clock_to_counter(cyg_real_time_clock(), &periodic_counter);
-	cyg_alarm_create(periodic_counter, periodic_alarm_callback, &count, &alarm_handle, &transfer_alarm);
+	cyg_alarm_create(periodic_counter, periodic_alarm_callback, 0, &alarm_handle, &transfer_alarm);
 	// Calculating the interval between alarms through the clock resolution
-	int ticks = time_to_ticks(0, 1);
+	int ticks = time_to_ticks(1, 0);
 	cyg_alarm_initialize(alarm_handle, cyg_current_time()+ticks, ticks);
 
 	printf("Processing thread initialized!\n");
+
+	while (1)
+	{
+		cyg_semaphore_wait(&proc_semaph);
+		transfer = 1;
+		cyg_semaphore_post(&comm_semaph);
+	}
+	
 }
 
 int main(void)
