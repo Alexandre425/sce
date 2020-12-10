@@ -79,10 +79,10 @@ void add_register(reg_t* src)
     dst->s = src->s;
     dst->temperature = src->temperature;
     dst->luminosity = src->luminosity;
+    ring_buffer.i_write = (ring_buffer.i_write + 1) % ring_buffer.NRBUF;
 	// If overwritting the oldest unread register, oldest becomes the one after that
 	if (ring_buffer.i_write == ring_buffer.i_read && ring_buffer.n_reg)
 		ring_buffer.i_read = (ring_buffer.i_read + 1) % ring_buffer.NRBUF;
-    ring_buffer.i_write = (ring_buffer.i_write + 1) % ring_buffer.NRBUF;
     if (ring_buffer.n_reg < ring_buffer.NRBUF)
         ring_buffer.n_reg++;
 }
