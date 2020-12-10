@@ -304,7 +304,7 @@ int transfer_period;
 int temperature_threshold;
 int luminosity_threshold;
 
-void periodic_alarm_callback(cyg_handle_t alarm, cyg_addr_word_t data)
+void periodic_alarm_callback(cyg_handle_t alarm, cyg_addrword_t data)
 {
 	int* count = (int*)data;
 	printf("Alarm %d\n", *count);
@@ -323,7 +323,7 @@ static void proc_entry (cyg_addrword_t data)
 	cyg_alarm alarm;
 	cyg_clock_to_counter(cyg_real_time_clock(), &periodic_counter);
 	cyg_alarm_create(periodic_counter, periodic_alarm_callback, &count, &alarm_handle, &alarm);
-	cyg_alarm_initialize(alarm_handle, cyg_current_time());
+	cyg_alarm_initialize(alarm_handle, cyg_current_time()+200, 200);
 
 	printf("Processing thread initialized!\n");
 }
