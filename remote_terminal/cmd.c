@@ -315,8 +315,8 @@ int time_to_ticks(int m, int s)	// Seconds used as a debugging tool, not really 
 {
 	cyg_resolution_t res = cyg_clock_get_resolution(cyg_real_time_clock());
 	// 1s to number of ticks conversion
-	int 1s_ticks = (1000000000 / res.dividend) * res.divisor;
-	return 1s_ticks*(60*m + s);
+	int tick_conv = (1000000000 / res.dividend) * res.divisor;
+	return tick_conv*(60*m + s);
 }
 
 cyg_handle_t periodic_counter, alarm_handle;
