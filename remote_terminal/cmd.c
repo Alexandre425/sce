@@ -329,7 +329,7 @@ int luminosity_threshold;
 
 void periodic_alarm_callback(cyg_handle_t alarm, cyg_addrword_t data)
 {
-	cyg_semaphore_post(&proc_semaphore);
+	cyg_semaphore_post(&proc_semaph);
 }
 
 int time_to_ticks(int m, int s)	// Seconds used as a debugging tool, not really necessary
