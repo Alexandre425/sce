@@ -246,7 +246,7 @@ void send_message (void)
 	stream[0] = SOM;							// Write the start of message code
 	if (transfer)
 	{
-		printf("Transfering registers automatically\n")
+		printf("Transfering registers automatically\n");
 		stream[1] = TRGC;
 		stream[2] = 25;
 		stream[3] = EOM;
