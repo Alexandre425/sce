@@ -87,10 +87,6 @@ void updateLCD(void)
     LCDstr(buf);
     
     // Display the memory alarm
-    if(!half_reg)
-    {
-        half_reg = (nreg/5 > 12 ? true : false);
-    }
     uint8_t display_mem = (half_reg ? 'M' : ' ');
     LCDcmd(0xc7);
     sprintf(buf, "%c", display_mem);
@@ -295,12 +291,39 @@ void takeMeasurement(void)
         DATAEE_WriteByte(EEAddr_reg + nreg+3, temp);
         DATAEE_WriteByte(EEAddr_reg + nreg+4, luminosity);
         // Updating register iterator and temperature and luminosity values
-        nreg += 5;        
-        if(!full_reg && nreg>=125)
-        {
+        nreg += 5; 
+        
+        if(!full_reg && nreg >=125)
             full_reg = true;
-        }
+        
         nreg = (nreg >= 125 ? '0' : nreg);
+        if(nreg > iread)
+        {
+            if((nreg/5-iread/5)>12)
+            {
+                if (half_reg == false)
+                    memNotification();
+                half_reg = true;
+            }
+            else
+                half_reg = false;
+        }   
+        else if (nreg == iread)
+        {
+            iread = ((iread+5)>=125 ? 0 : iread+5);
+        }
+        else
+        {
+            if((nreg/5+25-iread/5)>12)
+            {
+                if (half_reg == false)
+                    memNotification();
+                half_reg = true;
+            }
+            else
+                half_reg = false;
+        }
+            
         last_temp = temp;
         last_luminosity = luminosity;
     }
@@ -316,7 +339,6 @@ void main(void)
     half_reg = false;
     full_reg = false;
     iread = 0;
-    iwrite = 0;
     
     // initialize the device
     SYSTEM_Initialize();
