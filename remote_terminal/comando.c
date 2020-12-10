@@ -471,18 +471,66 @@ void cmd_comm_info_reg (int argc, char** argv)
 	}
 }
 
+extern void add_received_registers(int from_index);
+
+
 // Transfer n registers from the board from index iread
 void cmd_comm_transfer_reg (int argc, char** argv)
 {
-	return;
+	if (argc == 2)
+	{
+		next_message.code = TRGC;
+		next_message.argc = 2;
+		if 
+		(
+			!sscanf(argv[1], "%d", &next_message.argv[0])
+		)
+		{
+			printf(ERR_BAD_ARG);
+			return;
+		}
+		cyg_semaphore_post(&comm_semaph);
+		cyg_semaphore_wait(&term_semaph);
+
+		add_received_registers(0);
+
+		print_err((received_message[2] == 0 ? CMD_ERROR : CMD_OK));
+	}
+	else
+	{
+		printf(ERR_WRONG_ARG_NUM);
+		return;
+	}
 }
 
 // Transfer n registers from the board from index i
 void cmd_comm_transfer_reg_from (int argc, char** argv)
 {
-	return;
-}
+	if (argc == 2)
+	{
+		next_message.code = TRGI;
+		next_message.argc = 2;
+		if 
+		(
+			!sscanf(argv[1], "%d", &next_message.argv[0])
+		)
+		{
+			printf(ERR_BAD_ARG);
+			return;
+		}
+		cyg_semaphore_post(&comm_semaph);
+		cyg_semaphore_wait(&term_semaph);
 
+		add_received_registers(1);
+
+		print_err((received_message[2] == 0 ? CMD_ERROR : CMD_OK));
+	}
+	else
+	{
+		printf(ERR_WRONG_ARG_NUM);
+		return;
+	}
+}
 
 extern void list_registers(int n, int start_idx);
 
@@ -533,31 +581,101 @@ void cmd_local_list_reg (int argc, char** argv)
 // Delete the local registers
 void cmd_local_delete_reg (int argc, char** argv)
 {
-	return;
+	if (argc == 1)
+	{
+		ring_buffer.i_read = 0;
+		ring_buffer.i_write = 0;
+		ring_buffer.n_reg = 0;
+
+		printf("Registers deleted\n");
+	}
+	else
+	{
+		printf(ERR_WRONG_ARG_NUM);
+		return;
+	}	
 }
+
+extern int transfer_period;
+extern int temperature_threshold;
+extern int luminosity_threshold;
 
 // Check the transfer period for registers
 void cmd_proc_check_period_transfer (int argc, char** argv)
 {
-	return;
+	if (argc == 1)
+	{
+		printf("Transfer period: %d\n", transfer_period);
+	}
+	else
+	{
+		printf(ERR_WRONG_ARG_NUM);
+		return;
+	}
 }
 
 // Change the transfer period for registers
 void cmd_proc_mod_period_tranfer (int argc, char** argv)
 {
-	return;
+	if (argc == 2)
+	{
+		int period = 0;
+		if (!sscanf(argv[1], "%d", &period) || period < 0)
+		{
+			printf(ERR_BAD_ARG);
+			return;
+		}
+		transfer_period = period;
+		printf("Transfer period changed to %d minutes\n", period);
+	}
+	else
+	{
+		printf(ERR_WRONG_ARG_NUM);
+		return;
+	}
 }
 
 // Check the threshold temperature and luminosity thresholds for the data processing
 void cmd_proc_check_thresh_temp_lum (int argc, char** argv)
 {
-	return;
+	if (argc == 1)
+	{
+		printf("Temperature threshold: %dC\n", temperature_threshold);
+		printf("Luminosity threshold:  %d\n", luminosity_threshold);
+	}
+	else
+	{
+		printf(ERR_WRONG_ARG_NUM);
+		return;
+	}
 }
 
 // Change the threshold temperature and luminosity thresholds for the data processing
 void cmd_proc_define_thresh_temp_lum (int argc, char** argv)
 {
-	return;
+	if (argc == 3)
+	{
+		int temp = 0;
+		int lum= 0;
+		if 
+		(
+			!sscanf(argv[1], "%d", &temp) ||
+			!sscanf(argv[2], "%d", &lum) || 
+			temp < 0 || lum < 0 || lum > 7
+		)
+		{
+			printf(ERR_BAD_ARG);
+			return;
+		}
+		temperature_threshold = temp;
+		luminosity_threshold = lum;
+		printf("Temperature and luminosity thresholds changed to %dC and %d\n", temp, lum);
+	}
+	else
+	{
+		printf(ERR_WRONG_ARG_NUM);
+		return;
+	}
 }
 
 // Process the local registers

@@ -86,6 +86,23 @@ void add_register(reg_t* src)
         ring_buffer.n_reg++;
 }
 
+// Adds all the received registers to the buffer
+// from_index should be 1 if reading from a tri, 0 otherwise
+void add_received_registers(int from_index)
+{
+	int i = 0;
+	for (i = 0; i < received_message[2]; i++)	// For every register
+	{
+		reg_t reg;
+		reg.h 			= received_message[i*5 + 3+from_index];
+		reg.m 			= received_message[i*5 + 4+from_index];
+		reg.s 			= received_message[i*5 + 5+from_index];
+		reg.temperature = received_message[i*5 + 6+from_index];
+		reg.luminosity 	= received_message[i*5 + 7+from_index];
+		add_register(&reg);
+	}
+}
+
 void list_registers(int n, int start_idx)
 {
 	int update_i_read = 0;
@@ -281,6 +298,10 @@ static void mem_alert_entry (cyg_addrword_t data)
 	
 }
 
+int transfer_period;
+int temperature_threshold;
+int luminosity_threshold;
+
 // The processing thread requests registers from the board using the communication
 //	thread as a proxy, and processes these registers
 static void proc_entry (cyg_addrword_t data)
@@ -323,7 +344,6 @@ int main(void)
 	cyg_thread_resume(comm_handle);
 	cyg_thread_resume(proc_handle);
 	cyg_thread_resume(alrt_handle);
-
 
 	monitor();
 
