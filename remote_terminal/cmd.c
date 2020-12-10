@@ -86,6 +86,9 @@ void add_register(reg_t* src)
         ring_buffer.n_reg++;
 }
 
+// Max message size received is 25 registers (5 bytes each) plus SOM, EOM and msg code (1 byte each)
+unsigned char received_message [5*25 + 3];
+
 // Adds all the received registers to the buffer
 // from_index should be 1 if reading from a tri, 0 otherwise
 void add_received_registers(int from_index)
@@ -196,8 +199,7 @@ typedef struct message
 
 message_t next_message;
 
-// Max message size received is 25 registers (5 bytes each) plus SOM, EOM and msg code (1 byte each)
-unsigned char received_message [5*25 + 3];
+
 
 extern cyg_io_handle_t serial_handle;
 
