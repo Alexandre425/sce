@@ -295,7 +295,7 @@ void cmd_comm_mod_monitor_period (int argc, char** argv)
 		next_message.argc = 2;
 		if 
 		(
-			!sscanf(argv[1], "%d", &next_message.argv[0])
+			!sscanf(argv[1], "%hhu", &next_message.argv[0])
 		)
 		{
 			printf(ERR_BAD_ARG);
@@ -322,7 +322,7 @@ void cmd_comm_mod_time_alarm (int argc, char** argv)
 		next_message.argc = 2;
 		if 
 		(
-			!sscanf(argv[1], "%d", &next_message.argv[0])
+			!sscanf(argv[1], "%hhu", &next_message.argv[0])
 		)
 		{
 			printf(ERR_BAD_ARG);
@@ -372,9 +372,9 @@ void cmd_comm_define_alarm_clock (int argc, char** argv)
 		next_message.argc = 4;
 		if 
 		(
-			!sscanf(argv[1], "%d", &next_message.argv[0])||
-			!sscanf(argv[2], "%d", &next_message.argv[1])||
-			!sscanf(argv[3], "%d", &next_message.argv[2])
+			!sscanf(argv[1], "%hhu", &next_message.argv[0])||
+			!sscanf(argv[2], "%hhu", &next_message.argv[1])||
+			!sscanf(argv[3], "%hhu", &next_message.argv[2])
 		)
 		{
 			printf(ERR_BAD_ARG);
@@ -401,8 +401,8 @@ void cmd_comm_define_temp_lum (int argc, char** argv)
 		next_message.argc = 3;
 		if 
 		(
-			!sscanf(argv[1], "%d", &next_message.argv[0])||
-			!sscanf(argv[2], "%d", &next_message.argv[1])
+			!sscanf(argv[1], "%hhu", &next_message.argv[0])||
+			!sscanf(argv[2], "%hhu", &next_message.argv[1])
 		)
 		{
 			printf(ERR_BAD_ARG);
@@ -429,7 +429,7 @@ void cmd_comm_activate_alarms (int argc, char** argv)
 		next_message.argc = 2;
 		if 
 		(
-			!sscanf(argv[1], "%d", &next_message.argv[0])
+			!sscanf(argv[1], "%hhu", &next_message.argv[0])
 		)
 		{
 			printf(ERR_BAD_ARG);
@@ -483,7 +483,7 @@ void cmd_comm_transfer_reg (int argc, char** argv)
 		next_message.argc = 2;
 		if 
 		(
-			!sscanf(argv[1], "%d", &next_message.argv[0])
+			!sscanf(argv[1], "%hhu", &next_message.argv[0])
 		)
 		{
 			printf(ERR_BAD_ARG);
@@ -512,7 +512,7 @@ void cmd_comm_transfer_reg_from (int argc, char** argv)
 		next_message.argc = 2;
 		if 
 		(
-			!sscanf(argv[1], "%d", &next_message.argv[0])
+			!sscanf(argv[1], "%hhu", &next_message.argv[0])
 		)
 		{
 			printf(ERR_BAD_ARG);
