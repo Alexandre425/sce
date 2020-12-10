@@ -311,6 +311,14 @@ void periodic_alarm_callback(cyg_handle_t alarm, cyg_addrword_t data)
 	(*count)++;
 }
 
+int time_to_ticks(int m, int s)	// Seconds used as a debugging tool, not really necessary
+{
+	cyg_resolution_t res = cyg_clock_get_resolution(cyg_real_time_clock());
+	// 1s to number of ticks conversion
+	int 1s_ticks = (1000000000 / res.dividend) * res.divisor;
+	return 1s_ticks*(60*m + s);
+}
+
 cyg_handle_t periodic_counter, alarm_handle;
 cyg_alarm transfer_alarm;
 // The processing thread requests registers from the board using the communication
@@ -323,7 +331,9 @@ static void proc_entry (cyg_addrword_t data)
 	static int count = 0;
 	cyg_clock_to_counter(cyg_real_time_clock(), &periodic_counter);
 	cyg_alarm_create(periodic_counter, periodic_alarm_callback, &count, &alarm_handle, &transfer_alarm);
-	cyg_alarm_initialize(alarm_handle, cyg_current_time()+200, 200);
+	// Calculating the interval between alarms through the clock resolution
+	int ticks = time_to_ticks(0, 1);
+	cyg_alarm_initialize(alarm_handle, cyg_current_time()+ticks, ticks);
 
 	printf("Processing thread initialized!\n");
 }
