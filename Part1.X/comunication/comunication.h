@@ -35,28 +35,25 @@ extern "C" {
 #define CMD_ERROR 0xFF /* error in command */
 
 void readMessage(void); // Reads the message
-void processMessage (uint8_t *); // Processes the command and calls fucntions to handle command
+void processMessage (void); // Processes the command and calls fucntions to handle command
 void sendError (uint8_t); // Sends a reply with ok or error
 /* Handlers for commands */
 void readClock(void);
-void setClock(uint8_t*);
+void setClock(void);
 void readTempLumin(void);
 void readParam(void);
-void modifyPMONITOR(uint8_t);
-void modifyTimeAlarm(uint8_t);
+void modifyPMONITOR(void);
+void modifyTimeAlarm(void);
 void readAlarm (void);
-void setAlarmClock(uint8_t*);
-void setAlarmTempLumin(uint8_t*);
-void setAlarmCom(uint8_t*);
+void setAlarmClock(void);
+void setAlarmTempLumin(void);
+void setAlarmCom(void);
 void readReg(void);
-void transferCurrent(uint8_t*);
-void transferIndex (uint8_t*);
-void memNotification(void);
+void transferCurrent(void);
+void transferIndex (void);
+//void memNotification(void);
+//void checkMem(void);
 
-
-
-// Command from message received
-uint8_t msg_cmd;
 
 #ifdef	__cplusplus
 }

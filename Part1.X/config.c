@@ -64,15 +64,15 @@ uint8_t addChecksum (void)
             DATAEE_ReadByte(EEAddr_TALA));
 } 
 
-uint8_t checkChecksum (void)
+unsigned char checkChecksum (void)
 {
-    uint8_t checksum = DATAEE_ReadByte(EEAddr_CHECKSUM);
-    if(checksum != addChecksum())
-    {
+    //uint8_t checksum = DATAEE_ReadByte(EEAddr_CHECKSUM);
+    return (DATAEE_ReadByte(EEAddr_CHECKSUM) != addChecksum() ? 1 : 0);
+    /*{
         return 1;
     }
     else
     {
         return 0;
-    }
+    }*/
 }
