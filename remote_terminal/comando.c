@@ -615,6 +615,10 @@ void cmd_proc_check_period_transfer (int argc, char** argv)
 }
 
 extern cyg_alarm transfer_alarm;
+extern cyg_handle_t alarm_handle;
+
+extern int time_to_ticks(int m, int s);
+
 
 // Change the transfer period for registers
 void cmd_proc_mod_period_tranfer (int argc, char** argv)
