@@ -59,10 +59,19 @@ void rtcTick(rtc_t* clk)
 void rtcIncrement(rtc_t* clk, uint8_t h, uint8_t m, uint8_t s)
 {
     if (h)
-        clk->h = (clk->h + 1 >= 24 ? 0 : clk->h + 1);
+        if(clk->h + 1 >= 24)
+            clk->h = 0;
+        else
+            clk->h = clk->h + 1;
     if (m)
-        clk->m = (clk->m + 1 >= 60 ? 0 : clk->m + 1);
+        if(clk->m + 1 >= 60)
+            clk->m =0;
+        else
+            clk->m =clk->m + 1;
     if (s)
-        clk->s = (clk->s + 1 >= 60 ? 0 : clk->s + 1);
+        if(clk->s + 1 >= 60)
+            clk->s = 0;
+        else
+            clk->s = clk->s + 1;
 }
 

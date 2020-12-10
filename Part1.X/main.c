@@ -46,11 +46,27 @@ void generateAlarmString(unsigned char* alarm_buf)
 {
     if (alarms & ALARM_A)
     {
-    alarm_buf[0] = (alarms & ALARM_C ? 'C' : ' ');
-    alarm_buf[1] = (alarms & ALARM_T ? 'T' : ' ');
-    alarm_buf[2] = (alarms & ALARM_L ? 'L' : ' ');
-    alarm_buf[3] = ' ';
-    alarm_buf[4] = (alarms & ALARM_A ? 'A' : ' ');
+        if(alarms & ALARM_C)
+            alarm_buf[0] = 'C';
+        else
+            alarm_buf[0] = ' ';
+            
+        if(alarms & ALARM_T)
+            alarm_buf[1] = 'T';
+        else
+            alarm_buf[1] = ' ';
+            
+        if(alarms & ALARM_L)
+            alarm_buf[2] = 'L';
+        else
+            alarm_buf[2] = ' ';
+        
+        alarm_buf[3] = ' ';
+        
+        if(alarms & ALARM_A )
+            alarm_buf[4] ='A';
+        else
+            alarm_buf[4] =' ';
     } 
     else 
     {
@@ -68,11 +84,20 @@ void updateLCD(void)
     unsigned char buf[9];
     // Display the time
     LCDcmd(0x80);
-    rtc_t display_clk = (mode == M_ALARM_H || mode == M_ALARM_M || mode == M_ALARM_S ? ALA_CLK : clk);
+    rtc_t display_clk;
+    if(mode == M_ALARM_H || mode == M_ALARM_M || mode == M_ALARM_S )
+        display_clk = ALA_CLK;
+    else
+        display_clk = clk;
+    
     sprintf(buf, "%02d:%02d:%02d", display_clk.h, display_clk.m, display_clk.s);
     LCDstr(buf);
     // Display the temperature
-    uint8_t display_temp = (mode == M_THRESH_TEMP ? ALAT : temp);
+    uint8_t display_temp;
+    if (mode == M_THRESH_TEMP)
+        display_temp = ALAT;
+    else
+        display_temp = temp;
     LCDcmd(0xc0);
     sprintf(buf, "%02d C", display_temp);
     LCDstr(buf);
@@ -81,13 +106,21 @@ void updateLCD(void)
     LCDcmd(0x8b);
     LCDstr(buf);
     // Display the luminosity
-    uint8_t display_lum = (mode == M_THRESH_LUM ? ALAL : luminosity);
+    uint8_t display_lum;
+    if (mode == M_THRESH_LUM)
+        display_lum = ALAL;
+    else
+        display_lum = luminosity;
     LCDcmd(0xcd);
     sprintf(buf, "L %u", display_lum);
     LCDstr(buf);
     
     // Display the memory alarm
-    uint8_t display_mem = (half_reg ? 'M' : ' ');
+    unsigned char display_mem;
+    if(half_reg)
+        display_mem = 'M';
+    else
+        display_mem = ' ';
     LCDcmd(0xc7);
     sprintf(buf, "%c", display_mem);
     LCDstr(buf);
@@ -230,8 +263,8 @@ void* buttonS2Interrupt(void)
 
 uint8_t readLuminosity (void)
 {
-    adc_result_t res = ADCC_GetSingleConversion(POT_CHANNEL);
-    return (uint8_t)(res >> 13);
+//    adc_result_t res = ADCC_GetSingleConversion(POT_CHANNEL);
+    return (uint8_t)(ADCC_GetSingleConversion(POT_CHANNEL) >> 13);
 }
 
 
@@ -272,6 +305,45 @@ void checkTemperature(void)
         LED_D3_SetLow();
     }  
 }
+void memNotification(void) {
+    EUSART_Write(SOM);
+    EUSART_Write(NMFL);
+    EUSART_Write(NREG);
+    if (iread > nreg)
+        EUSART_Write((nreg / 5) + 25 - iread / 5);
+    else
+        EUSART_Write((nreg - iread) / 5);
+    EUSART_Write(iread / 5);
+    EUSART_Write(nreg / 5);
+    EUSART_Write(EOM);
+}
+
+void checkMem(void) {
+    if (nreg == iread) {
+        if ((iread + 5) >= 125)
+            iread = 0;
+        else
+            iread = iread + 5;
+    }
+//    else if (nreg > iread ) {
+//        if((nreg - iread) > 60){
+//            if(half_reg == false)
+//                memNotification();
+//            half_reg = true;
+//            return;
+//        }
+//        
+//    }
+//    if ( nreg < iread && (nreg+125-iread)>60 && half_reg == false)
+//    {
+//        memNotification();
+//        half_reg = true;
+//        return;
+//    }
+//    if((nreg/5+25-iread/5)<=12 || ((nreg/5-iread/5)<12 && (nreg/5-iread/5)>=0))
+//        half_reg = false;
+}
+
 
 void takeMeasurement(void)
 {
@@ -296,37 +368,16 @@ void takeMeasurement(void)
         if(!full_reg && nreg >=125)
             full_reg = true;
         
-        nreg = (nreg >= 125 ? '0' : nreg);
-        if(nreg > iread)
-        {
-            if((nreg/5-iread/5)>12)
-            {
-                if (half_reg == false)
-                    memNotification();
-                half_reg = true;
-            }
-            else
-                half_reg = false;
-        }   
-        else if (nreg == iread)
-        {
-            iread = ((iread+5)>=125 ? 0 : iread+5);
-        }
+        if((nreg+5)>=125)
+            nreg = 0;
         else
-        {
-            if((nreg/5+25-iread/5)>12)
-            {
-                if (half_reg == false)
-                    memNotification();
-                half_reg = true;
-            }
-            else
-                half_reg = false;
-        }
-            
+            nreg = nreg+5;
+        
+        checkMem();
         last_temp = temp;
         last_luminosity = luminosity;
     }
+    
 }
 
 void main(void)
@@ -335,7 +386,6 @@ void main(void)
     last_temp = 99;
     nreg = 0;
     mode = 0;
-    last_sent_index = 0;
     half_reg = false;
     full_reg = false;
     iread = 0;
@@ -383,7 +433,7 @@ void main(void)
             TMR3_StartTimer();
             alarm_trigger = 0;
         }
-        //EUSART_Write(EUSART_Read());
+        
         if (EUSART_is_rx_ready())
         {
             readMessage();
