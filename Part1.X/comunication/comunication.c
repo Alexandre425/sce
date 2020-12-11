@@ -271,7 +271,7 @@ void transferCurrent(void)
             EUSART_Write(DATAEE_ReadByte(EEAddr_reg + iread+j));
         }
         iread += 5;
-        if((iread+5)>=125)
+        if((iread)>=125)
             iread = 0;
     }
     EUSART_Write(EOM);
@@ -308,7 +308,7 @@ void transferIndex (void)
                     EUSART_Write(DATAEE_ReadByte(EEAddr_reg + index+j));
                 }
                 index += 5;
-                if((index+5)>=125)
+                if((index)>=125)
                     index = 0;
             }
         }
@@ -328,7 +328,7 @@ void transferIndex (void)
             EUSART_Write(DATAEE_ReadByte(EEAddr_reg + index+j));
         }
         index += 5;
-        if((index+5)>=125)
+        if((index)>=125)
             index = 0;
     }
     EUSART_Write(EOM);
