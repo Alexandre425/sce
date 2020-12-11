@@ -25,7 +25,7 @@ cyg_handle_t comm_handle, proc_handle, alrt_handle;
 cyg_thread comm_thread, proc_thread, alrt_thread;
 
 // Variables for the semaphores
-cyg_sem_t comm_semaph, proc_semaph, term_semaph;
+cyg_sem_t comm_semaph, proc_semaph, proc_semaph_ret, term_semaph;
 
 // Communication mutex (so messages don't get interleaved)
 cyg_mutex_t comm_mutex;
@@ -90,6 +90,9 @@ void add_register(reg_t* src)
 // Max message size received is 25 registers (5 bytes each) plus SOM, EOM, msg code, n and i 
 unsigned char received_message [5*25 + 5];
 
+int temperature_threshold;
+int luminosity_threshold;
+
 // Adds all the received registers to the buffer
 // from_index should be 1 if reading from a tri, 0 otherwise
 void add_received_registers(int from_index)
@@ -104,6 +107,15 @@ void add_received_registers(int from_index)
 		reg.temperature = received_message[i*5 + 6+from_index];
 		reg.luminosity 	= received_message[i*5 + 7+from_index];
 		add_register(&reg);
+
+		if (reg.temperature >= temperature_threshold || reg.luminosity <= luminosity_threshold)
+		{
+			printf("Register data past thresholds!\n");
+			printf("    Time:        %02dh%02dm%02ds\n", reg.h, reg.m, reg.s);
+			printf("    Temperature: %dC\n", reg.temperature);
+			printf("    Luminosity:  %d\n", reg.luminosity);
+		}
+
 	}
 }
 
@@ -292,6 +304,8 @@ static void comm_entry (cyg_addrword_t data)
 		{
 			add_received_registers(0);
 			transfer = 0;
+			cyg_semaphore_post(&proc_semaph_ret);
+			cyg_semaphore_wait(&comm_semaph);	// Don't allow received_message to change until reg processing
 		}
 		else
 		{
@@ -330,8 +344,6 @@ static void mem_alert_entry (cyg_addrword_t data)
 }
 
 int transfer_period;
-int temperature_threshold;
-int luminosity_threshold;
 
 void periodic_alarm_callback(cyg_handle_t alarm, cyg_addrword_t data)
 {
@@ -344,6 +356,27 @@ int time_to_ticks(int m, int s)	// Seconds used as a debugging tool, not really 
 	// 1s to number of ticks conversion
 	int tick_conv = (1000000000 / res.dividend) * res.divisor;
 	return tick_conv*(60*m + s);
+}
+
+void process_new_registers(int from_index)
+{
+	for (i = 0; i < received_message[2]; i++)	// For every register
+	{
+		reg_t reg;
+		reg.temperature = received_message[i*5 + 6+from_index];
+		reg.luminosity 	= received_message[i*5 + 7+from_index];
+		{
+			reg.h 			= received_message[i*5 + 3+from_index];
+			reg.m 			= received_message[i*5 + 4+from_index];
+			reg.s 			= received_message[i*5 + 5+from_index];
+
+			printf("Register data past thresholds!\n");
+			printf("Time:        %02dh%02dm%02ds\n", reg.h, reg.m, reg.s);
+			printf("Temperature: %dC\n", reg.temperature);
+			printf("Luminosity:  %d\n", reg.luminosity);
+		}
+
+	}
 }
 
 cyg_handle_t periodic_counter, alarm_handle;
@@ -370,6 +403,11 @@ static void proc_entry (cyg_addrword_t data)
 		cyg_semaphore_wait(&proc_semaph);
 		transfer = 1;
 		cyg_semaphore_post(&comm_semaph);
+		cyg_semaphore_wait(&proc_semaph_ret);
+
+		// Process the new registers
+
+		cyg_semaphore_post(&comm_semaph);
 	}
 	
 }
@@ -384,6 +422,7 @@ int main(void)
 	// Creating the semaphores
 	cyg_semaphore_init(&comm_semaph, 0);
 	cyg_semaphore_init(&proc_semaph, 0);
+	cyg_semaphore_init(&proc_semaph_ret, 0);
 	cyg_semaphore_init(&term_semaph, 0);
 	// Creating the comm mutex
 	cyg_mutex_init(&comm_mutex);
