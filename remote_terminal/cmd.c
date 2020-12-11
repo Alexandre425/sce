@@ -360,6 +360,7 @@ int time_to_ticks(int m, int s)	// Seconds used as a debugging tool, not really 
 
 void process_new_registers(int from_index)
 {
+	int i = 0;
 	for (i = 0; i < received_message[2]; i++)	// For every register
 	{
 		reg_t reg;
