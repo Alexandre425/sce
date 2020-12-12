@@ -254,14 +254,10 @@ void transferCurrent(void)
     }
 
     if(iread > nreg){
-        if(!full_reg)
-            EUSART_Write(0);
-        else {
-            if((nreg/5)+25-iread/5 > msg_data[0])
-                EUSART_Write(msg_data[0]);
-            else
-                EUSART_Write((nreg/5)+25-iread/5);
-        }
+        if((nreg/5)+25-iread/5 > msg_data[0])
+            EUSART_Write(msg_data[0]);
+        else
+            EUSART_Write((nreg/5)+25-iread/5);
     } else {    
         if((nreg/5) - iread/5 > msg_data[0])
             EUSART_Write(msg_data[0]);
@@ -275,10 +271,8 @@ void transferCurrent(void)
             EUSART_Write(DATAEE_ReadByte(EEAddr_reg + iread+j));
         }
         iread += 5;
-        if((iread+5)>=125)
+        if((iread)>=125)
             iread = 0;
-        else
-            iread = iread+5;
     }
     EUSART_Write(EOM);
     
@@ -288,6 +282,11 @@ void transferIndex (void)
 {
     unsigned char i, j, index;
 
+    if(msg_data[0] > 25 || msg_data[1] > 24)
+    {
+        sendError(CMD_ERROR);
+        return;
+    }
     index = msg_data[1]*5;
     
     if(!full_reg){
@@ -309,15 +308,14 @@ void transferIndex (void)
                     EUSART_Write(DATAEE_ReadByte(EEAddr_reg + index+j));
                 }
                 index += 5;
-                if((index+5)>=125)
+                if((index)>=125)
                     index = 0;
-                else
-                    index = index+5;
             }
         }
         EUSART_Write(EOM);
         return;
     }
+    
     EUSART_Write(msg_data[0]);
     if ((index/5 + msg_data[0]) > 24)
         EUSART_Write((index/5 + msg_data[0])-24 );
@@ -330,10 +328,8 @@ void transferIndex (void)
             EUSART_Write(DATAEE_ReadByte(EEAddr_reg + index+j));
         }
         index += 5;
-        if((index+5)>=125)
+        if((index)>=125)
             index = 0;
-        else
-            index = index+5;
     }
     EUSART_Write(EOM);
 }

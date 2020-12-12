@@ -78,6 +78,19 @@ void generateAlarmString(unsigned char* alarm_buf)
     }
 }
 
+//void memNotification(void) {
+//    EUSART_Write(SOM);
+//    EUSART_Write(NMFL);
+//    EUSART_Write(NREG);
+//    if (iread > nreg)
+//        EUSART_Write((nreg / 5) + 25 - iread / 5);
+//    else
+//        EUSART_Write((nreg - iread) / 5);
+//    EUSART_Write(iread / 5);
+//    EUSART_Write(nreg / 5);
+//    EUSART_Write(EOM);
+//}
+
 // Updates the LCD (every second and when there's a button press)
 void updateLCD(void)
 {
@@ -117,9 +130,22 @@ void updateLCD(void)
     
     // Display the memory alarm
     unsigned char display_mem;
-    if(half_reg)
+    if(half_reg){
         display_mem = 'M';
-    else
+        if(first_reg){
+            EUSART_Write(SOM);
+            EUSART_Write(NMFL);
+            EUSART_Write(NREG);
+            if (iread > nreg)
+                EUSART_Write((nreg / 5) + 25 - iread / 5);
+            else
+                EUSART_Write((nreg - iread) / 5);
+            EUSART_Write(iread / 5);
+            EUSART_Write(nreg / 5);
+            EUSART_Write(EOM);
+            first_reg = false;
+        }
+    } else
         display_mem = ' ';
     LCDcmd(0xc7);
     sprintf(buf, "%c", display_mem);
@@ -276,15 +302,16 @@ void checkLuminosity(void)
         {
             setAlarm(ALARM_L);
             LED_D2_SetHigh();
+            return;
         }
-        else
-        {
-            LED_D2_SetLow();
-        }
+//        else
+//        {
+//            LED_D2_SetLow();
+//        }
     }
-    else {
+//    else {
         LED_D2_SetLow();
-    }  
+//    }  
 }
 
 // Light LED D3 when temperature is above threshold
@@ -295,55 +322,41 @@ void checkTemperature(void)
         {
             setAlarm(ALARM_T);
             LED_D3_SetHigh();
+            return;
         }
-        else
-        {
-            LED_D3_SetLow();
-        }
+//        else
+//        {
+//            LED_D3_SetLow();
+//        }
     }
-    else {
+//    else {
         LED_D3_SetLow();
-    }  
-}
-void memNotification(void) {
-    EUSART_Write(SOM);
-    EUSART_Write(NMFL);
-    EUSART_Write(NREG);
-    if (iread > nreg)
-        EUSART_Write((nreg / 5) + 25 - iread / 5);
-    else
-        EUSART_Write((nreg - iread) / 5);
-    EUSART_Write(iread / 5);
-    EUSART_Write(nreg / 5);
-    EUSART_Write(EOM);
+//    }  
 }
 
 void checkMem(void) {
-    if (nreg == iread) {
-        if ((iread + 5) >= 125)
-            iread = 0;
+    if (nreg > iread ) {
+        if((nreg - iread) > 60){
+            if(!half_reg)
+                first_reg = true;
+            half_reg = true;
+        }
         else
-            iread = iread + 5;
+            half_reg = false;
     }
-//    else if (nreg > iread ) {
-//        if((nreg - iread) > 60){
-//            if(half_reg == false)
-//                memNotification();
-//            half_reg = true;
-//            return;
-//        }
-//        
-//    }
-//    if ( nreg < iread && (nreg+125-iread)>60 && half_reg == false)
-//    {
-//        memNotification();
-//        half_reg = true;
-//        return;
-//    }
-//    if((nreg/5+25-iread/5)<=12 || ((nreg/5-iread/5)<12 && (nreg/5-iread/5)>=0))
-//        half_reg = false;
+    else if ( nreg < iread)
+    {
+        if(nreg+125-iread>60){
+            if(!half_reg)
+                first_reg = true;
+            half_reg = true;
+        }
+        else 
+            half_reg = false;
+    }
+    else
+        half_reg = false;
 }
-
 
 void takeMeasurement(void)
 {
@@ -368,16 +381,20 @@ void takeMeasurement(void)
         if(!full_reg && nreg >=125)
             full_reg = true;
         
-        if((nreg+5)>=125)
+        if((nreg)>=125)
             nreg = 0;
-        else
-            nreg = nreg+5;
         
-        checkMem();
+        if (nreg == iread) {
+            iread = iread + 5;
+            if ((iread) >= 125)
+                iread = 0;
+        }
+        
         last_temp = temp;
         last_luminosity = luminosity;
     }
     
+    checkMem();
 }
 
 void main(void)
@@ -388,6 +405,7 @@ void main(void)
     mode = 0;
     half_reg = false;
     full_reg = false;
+    first_reg = false;
     iread = 0;
     
     // initialize the device

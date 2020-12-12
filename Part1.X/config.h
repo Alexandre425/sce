@@ -46,6 +46,7 @@ uint8_t pwm_max_count;
 uint8_t nreg;
 unsigned char half_reg;
 unsigned char full_reg;
+unsigned char first_reg;
 uint8_t iread;
 
 typedef uint8_t alarm_t;
