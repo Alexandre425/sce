@@ -242,18 +242,13 @@ void recv_message (void)
 	int i = 1;
 	int j = 0;
 	unsigned char* recv;
-	printf("TEST: Received message ");
 	do
 	{
 		i = 1;
 		cyg_io_read(serial_handle, recv, &i);
 		received_message[j++] = *recv;
-		printf("%x ", *recv);
 	}
-	while (*recv != EOM);
-
-	printf("\n");
-	
+	while (*recv != EOM);	
 }
 
 void send_message (void)
@@ -281,15 +276,7 @@ void send_message (void)
 		i++;									// i becomes the message length
 	}
 	
-
-	printf("Sent message: ");
-	int j = 0;
-	for (j = 0; j < i; j++) printf("%x ", stream[j]);
-	printf("\n"); 
-
 	cyg_io_write(serial_handle, stream, &i);
-	printf("TEST: Sent message with code %x and length %i\n", stream[1], i);
-	
 }
 
 
@@ -303,7 +290,7 @@ static void comm_entry (cyg_addrword_t data)
 		cyg_semaphore_wait(&comm_semaph);	// Wait for new messages to be sent
 		cyg_mutex_lock(&comm_mutex);
 		send_message();						// Send the stored message
-		printf("TEST: Waiting for response\n");
+		printf("Waiting for response\n");
 		recv_message();						// Receive and interpret the response
 		cyg_mutex_unlock(&comm_mutex);
 		if (transfer)
