@@ -697,10 +697,67 @@ void cmd_proc_define_thresh_temp_lum (int argc, char** argv)
 	}
 }
 
+extern unsigned char proc_time[6];
+
 // Process the local registers
 void cmd_proc_process_reg (int argc, char** argv)
 {
-	return;
+	if (argc == 7 || argc == 4 || argc == 1)
+	{
+		if (argc == 7)
+		{
+			if 
+			(
+				!sscanf(argv[1], "%hhu", &proc_time[0])||
+				proc_time[0] > 23 ||
+				!sscanf(argv[2], "%hhu", &proc_time[1])||
+				proc_time[1] > 59 ||
+				!sscanf(argv[3], "%hhu", &proc_time[2])||
+				proc_time[2] > 59 ||
+				!sscanf(argv[4], "%hhu", &proc_time[3])||
+				proc_time[3] > 23 ||
+				!sscanf(argv[5], "%hhu", &proc_time[4])||
+				proc_time[4] > 59 ||
+				!sscanf(argv[6], "%hhu", &proc_time[5])||
+				proc_time[5] > 59 
+			)
+			{
+				printf(ERR_BAD_ARG);
+				return;
+			}
+		}
+		else if (argc == 4)
+		{
+			if 
+			(
+				!sscanf(argv[1], "%hhu", &proc_time[0])||
+				proc_time[0] > 23 ||
+				!sscanf(argv[2], "%hhu", &proc_time[1])||
+				proc_time[1] > 59 ||
+				!sscanf(argv[3], "%hhu", &proc_time[2])
+				proc_time[2] > 59
+			)
+			{
+				printf(ERR_BAD_ARG);
+				return;
+			}
+			proc_time[3] = 0;	// Set the second time instant as the end of the day
+			proc_time[4] = 0;
+			proc_time[5] = 0;
+		}
+		else
+		{
+			proc_time[0] = 255;	// Signal that all registers should be processed
+		}
+
+		cyg_semaphore_post(&proc_semaph);
+		cyg_semaphore_wait(&term_semaph);
+	}
+	else
+	{
+		printf(ERR_WRONG_ARG_NUM);
+		return;
+	}	
 }
 
 extern reg_t random_register(void);

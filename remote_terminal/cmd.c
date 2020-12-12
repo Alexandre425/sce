@@ -4,6 +4,7 @@
 #include <cyg/hal/hal_arch.h>
 
 #define max(a,b) ((a) > (b) ? (a) : (b))
+#define max(a,b) ((a) < (b) ? (a) : (b))
 
 #define TRGC  		0xCB  /* transfer registers (curr. position)*/
 #define NMFL  		0xCD  /* notification memory (half) full */
@@ -93,6 +94,14 @@ unsigned char received_message [5*25 + 5];
 int temperature_threshold;
 int luminosity_threshold;
 
+void print_alarm_register (reg_t reg)
+{
+	printf("Register data past thresholds!\n");
+	printf("    Time:        %02dh%02dm%02ds\n", reg.h, reg.m, reg.s);
+	printf("    Temperature: %dC\n", reg.temperature);
+	printf("    Luminosity:  %d\n", reg.luminosity);
+}
+
 // Adds all the received registers to the buffer
 // from_index should be 1 if reading from a tri, 0 otherwise
 void add_received_registers(int from_index)
@@ -110,10 +119,7 @@ void add_received_registers(int from_index)
 
 		if (reg.temperature >= temperature_threshold || reg.luminosity <= luminosity_threshold)
 		{
-			printf("Register data past thresholds!\n");
-			printf("    Time:        %02dh%02dm%02ds\n", reg.h, reg.m, reg.s);
-			printf("    Temperature: %dC\n", reg.temperature);
-			printf("    Luminosity:  %d\n", reg.luminosity);
+			print_alarm_register(reg);
 		}
 
 	}
@@ -304,8 +310,6 @@ static void comm_entry (cyg_addrword_t data)
 		{
 			add_received_registers(0);
 			transfer = 0;
-			cyg_semaphore_post(&proc_semaph_ret);
-			cyg_semaphore_wait(&comm_semaph);	// Don't allow received_message to change until reg processing
 		}
 		else
 		{
@@ -347,7 +351,8 @@ int transfer_period;
 
 void periodic_alarm_callback(cyg_handle_t alarm, cyg_addrword_t data)
 {
-	cyg_semaphore_post(&proc_semaph);
+	transfer = 1;
+	cyg_semaphore_post(&comm_semaph);
 }
 
 int time_to_ticks(int m, int s)	// Seconds used as a debugging tool, not really necessary
@@ -358,25 +363,38 @@ int time_to_ticks(int m, int s)	// Seconds used as a debugging tool, not really 
 	return tick_conv*(60*m + s);
 }
 
-void process_new_registers(int from_index)
+unsigned char proc_time[6];
+
+int between_time_instants (int h1, int m1, int s1, int h, int m, int s, int h2, int m2, int s2)
+{
+	// If no parameters are provided
+	if (h1 == 255)	// char max
+		return 1;
+	// Convert to seconds
+	s1 += (m1 + h1*60)*60;
+	s2 += (m2 + h2*60)*60;
+	s += (m + h*60)*60;
+
+	if (s2 > s1)	// Ex: 14h00 and 18h00
+		return s >= s1 && s <= s2;
+	else			// Ex: 18h00 and 06h00
+		return s <= s1 && s >= s2;
+}
+
+// Process registers between time 1 and 2
+void process_registers(int h1, int m1, int s1, int h2, int m2, int s2,)
 {
 	int i = 0;
-	for (i = 0; i < received_message[2]; i++)	// For every register
+	for (i = 0; i < ring_buffer.n_reg; i++)
 	{
-		reg_t reg;
-		reg.temperature = received_message[i*5 + 6+from_index];
-		reg.luminosity 	= received_message[i*5 + 7+from_index];
+		reg_t reg = ring_buffer.registers[i];
+		if (between_time_instants(h1, m1, s1, reg.h, reg.m, reg.s, h2, m2, s2))
 		{
-			reg.h 			= received_message[i*5 + 3+from_index];
-			reg.m 			= received_message[i*5 + 4+from_index];
-			reg.s 			= received_message[i*5 + 5+from_index];
-
-			printf("Register data past thresholds!\n");
-			printf("Time:        %02dh%02dm%02ds\n", reg.h, reg.m, reg.s);
-			printf("Temperature: %dC\n", reg.temperature);
-			printf("Luminosity:  %d\n", reg.luminosity);
+			if (reg.temperature >= temperature_threshold || reg.luminosity <= luminosity_threshold)
+			{
+				print_alarm_register(reg);
+			}
 		}
-
 	}
 }
 
@@ -402,13 +420,11 @@ static void proc_entry (cyg_addrword_t data)
 	while (1)
 	{
 		cyg_semaphore_wait(&proc_semaph);
-		transfer = 1;
-		cyg_semaphore_post(&comm_semaph);
-		cyg_semaphore_wait(&proc_semaph_ret);
 
 		// Process the new registers
+		process_registers(proc_time[0], proc_time[1], proc_time[2], proc_time[3], proc_time[4], proc_time[5]);
 
-		cyg_semaphore_post(&comm_semaph);
+		cyg_semaphore_post(&term_semaph);
 	}
 	
 }
