@@ -382,7 +382,7 @@ int between_time_instants (int h1, int m1, int s1, int h, int m, int s, int h2, 
 }
 
 // Process registers between time 1 and 2
-void process_registers(int h1, int m1, int s1, int h2, int m2, int s2,)
+void process_registers(int h1, int m1, int s1, int h2, int m2, int s2)
 {
 	int i = 0;
 	for (i = 0; i < ring_buffer.n_reg; i++)
