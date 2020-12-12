@@ -378,7 +378,7 @@ int between_time_instants (int h1, int m1, int s1, int h, int m, int s, int h2, 
 	if (s2 > s1)	// Ex: 14h00 and 18h00
 		return s >= s1 && s <= s2;
 	else			// Ex: 18h00 and 06h00
-		return s <= s1 && s >= s2;
+		return s >= s1 || s <= s2;
 }
 
 // Process registers between time 1 and 2
@@ -393,6 +393,12 @@ void process_registers(int h1, int m1, int s1, int h2, int m2, int s2)
 			if (reg.temperature >= temperature_threshold || reg.luminosity <= luminosity_threshold)
 			{
 				print_alarm_register(reg);
+		        printf("Press RETURN to continue, press Q and RETURN to quit: ");
+				char c = getchar();
+				if (c == 'q' || c == 'Q')
+				{
+					return;
+				}
 			}
 		}
 	}
