@@ -397,7 +397,7 @@ void cmd_comm_define_temp_lum (int argc, char** argv)
 {
 	if (argc == 3)
 	{
-		next_message.code = DAC;
+		next_message.code = DATL;
 		next_message.argc = 3;
 		if 
 		(
