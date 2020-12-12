@@ -138,7 +138,7 @@ void readParam (void)
 
 void modifyPMONITOR(void)
 {
-    if( msg_data[0] < 0 || msg_data[0] > 99)
+    if(msg_data[0] > 99)
     {
         sendError(CMD_ERROR);
         return;
@@ -151,7 +151,7 @@ void modifyPMONITOR(void)
 
 void modifyTimeAlarm(void)
 {
-    if(msg_data[0] < 0 || msg_data[0] > 59 )
+    if( msg_data[0] > 60 )
     {
         sendError(CMD_ERROR);
         return;

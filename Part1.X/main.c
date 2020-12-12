@@ -24,7 +24,7 @@ uint8_t last_luminosity;
 
 // PWM variables
 const uint8_t duty_cycle_inc = 60;
-uint8_t pwm_count;
+uint16_t pwm_count;
 uint16_t duty_cycle;
 int8_t sign;
 
@@ -297,7 +297,7 @@ uint8_t readLuminosity (void)
 //Light LED D2 when luminosity is above threshold
 void checkLuminosity(void)
 {
-    if (luminosity >= ALAL){
+    if (luminosity <= ALAL){
         if (alarms & ALARM_A)   // If alarms are on
         {
             setAlarm(ALARM_L);

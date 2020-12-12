@@ -40,7 +40,7 @@ rtc_t clk;
 // Measurement variables
 uint8_t temp;
 uint8_t luminosity;
-uint8_t pwm_max_count;
+uint16_t pwm_max_count;
 
 // Number of data registers
 uint8_t nreg;
