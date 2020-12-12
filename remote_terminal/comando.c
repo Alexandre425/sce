@@ -734,7 +734,7 @@ void cmd_proc_process_reg (int argc, char** argv)
 				proc_time[0] > 23 ||
 				!sscanf(argv[2], "%hhu", &proc_time[1])||
 				proc_time[1] > 59 ||
-				!sscanf(argv[3], "%hhu", &proc_time[2])
+				!sscanf(argv[3], "%hhu", &proc_time[2])||
 				proc_time[2] > 59
 			)
 			{
