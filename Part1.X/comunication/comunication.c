@@ -287,14 +287,15 @@ void transferIndex (void)
         sendError(CMD_ERROR);
         return;
     }
-    index = msg_data[1]*5;
-    
+    index = iread+msg_data[1]*5;
+    if ((index) >= 125)
+        index = iread+msg_data[1]*5 - 120;
     if(!full_reg){
         if(index > nreg){
             EUSART_Write(0); // no reg sent
             EUSART_Write(0); // index
         } else {   
-            if((nreg/5) - index/5 > msg_data[0] ){
+            if((nreg/5) - (index)/5 > msg_data[0] ){
                 EUSART_Write(msg_data[0]);
                 EUSART_Write((nreg/5));
             }else{
