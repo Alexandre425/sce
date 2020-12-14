@@ -255,7 +255,7 @@ void cmd_comm_read_temp_lum (int argc, char** argv)
 		cyg_semaphore_post(&comm_semaph);
 		cyg_semaphore_wait(&term_semaph);
 
-		printf("Temperature: %dC\nLuminosity: %d", received_message[2], received_message[3]);
+		printf("Temperature: %dC\nLuminosity: %d\n", received_message[2], received_message[3]);
 		return;
 	}
 	else
@@ -275,7 +275,7 @@ void cmd_comm_read_param (int argc, char** argv)
 		cyg_semaphore_post(&comm_semaph);
 		cyg_semaphore_wait(&term_semaph);
 
-		printf("PMON: %ds\nTALA: %ds", received_message[2], received_message[3]);
+		printf("PMON: %ds\nTALA: %ds\n", received_message[2], received_message[3]);
 		return;
 	}
 	else
@@ -539,10 +539,10 @@ void cmd_local_info_local_reg (int argc, char** argv)
 {
 	if (argc == 1)
 	{
-		printf("NRBUF:       %d", ring_buffer.NRBUF);
-		printf("Registers:   %d", ring_buffer.n_reg);
-		printf("Read index:  %d", ring_buffer.i_read);
-		printf("Write index: %d", ring_buffer.i_write);
+		printf("NRBUF:       %d\n", ring_buffer.NRBUF);
+		printf("Registers:   %d\n", ring_buffer.n_reg);
+		printf("Read index:  %d\n", ring_buffer.i_read);
+		printf("Write index: %d\n", ring_buffer.i_write);
 
 		return;
 	}
